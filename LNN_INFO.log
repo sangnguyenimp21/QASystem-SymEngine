@@ -1,0 +1,18 @@
+INFO:root:********************** Model 2024-08-21 02:15:39.916265 **********************
+INFO:root:----------------------
+INFO:root:REASONING STEP:0
+INFO:root:↑ BOUNDS UPDATED TIGHTENED:1.0 FOR:'(Bon_Canh(0) ∧ Cap_canh_song_song(0))' FORMULA:9 
+INFO:root:↑ BOUNDS UPDATED TIGHTENED:1.0 FOR:'((Bon_Canh(0) ∧ Cap_canh_song_song(0)) → Hinh_thoi(0))' FORMULA:8 
+INFO:root:UPWARD INFERENCE RESULT:2.0
+INFO:root:↓ BOUNDS UPDATED TIGHTENED:1.0 FOR:'Chu_Nhat' FROM:'(Chu_Nhat(0) → Bon_Canh(0))' FORMULA:3 PARENT:5 
+INFO:root:DOWNWARD INFERENCE RESULT:2.0
+INFO:root:----------------------
+INFO:root:REASONING STEP:1
+INFO:root:↓ BOUNDS UPDATED TIGHTENED:1.0 FOR:'Hinh_Vuong' FROM:'(Hinh_Vuong(0) → Chu_Nhat(0))' FORMULA:2 PARENT:1 
+INFO:root:DOWNWARD INFERENCE RESULT:2.0
+INFO:root:----------------------
+INFO:root:REASONING STEP:2
+INFO:root:NO UPDATES AVAILABLE, TRYING A NEW AXIOM
+INFO:root:======================
+INFO:root:INFERENCE CONVERGED WITH 6.0 BOUNDS UPDATES IN 3 REASONING STEPS 
+INFO:root:******************************************************************************
