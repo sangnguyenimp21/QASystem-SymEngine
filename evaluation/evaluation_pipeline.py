@@ -2,6 +2,8 @@ import json
 from abc import ABC, abstractmethod
 from test_dataset import TestDataset
 from chatbot import ChatBot
+from lnn import *
+from utils import *
 
 class EvaluationPipeline(ABC):
     def __init__(self, dataset: TestDataset, chatbot: ChatBot) -> None:
@@ -46,10 +48,10 @@ class EvaluationPipeline(ABC):
             ],
             'premises': [
                 "NetflixShow(strangerThings) ∧ Popular(strangerThings)", 
-                "∀x (NetflixShow(x) ∧ Popular(x) → BingeWatch(karen, x))", 
-                "∀x (NetflixShow(x) ∧ BingeWatch(karen, x) ↔ Download(karen, x))", 
+                "∀x, ((NetflixShow(x) ∧ Popular(x)) → BingeWatch(karen, x))", 
+                "∀x, ((NetflixShow(x) ∧ BingeWatch(karen, x)) ↔ Download(karen, x))", 
                 "NetflixShow(blackMirror) ∧ ¬Download(karen, blackMirror)", 
-                "∀x (NetflixShow(x) ∧ BingeWatch(karen, x) → Share(karen, x, lisa))"
+                "∀x, ((NetflixShow(x) ∧ BingeWatch(karen, x)) → Share(karen, x, lisa))"
             ],
             'answer_premises': [
                 "Popular(blackMirror)", 
@@ -100,6 +102,8 @@ class EvaluationPipeline(ABC):
         * Always check for number of parentheses and ensure each open parenthesis should have a corresponding close parenthesis.
         * Nested predicates e.g., `P1(P2(x))` are invalid. Instead, you should define new variable and/or predicate to represent the natural language statement.
         * Make sure the premises are logically consistent and use the provided predicates.
+
+        RETURN ONLY THE JSON OUTPUT
         """
 
         correct_messages = [
@@ -119,15 +123,23 @@ class EvaluationPipeline(ABC):
 
         correct_response = correct_content.replace('```json\n', '').replace('```', '')
 
+        correct_response = correct_response[correct_response.find('{'):correct_response.rfind('}')+1]
+
         return correct_response
     
     def fol_to_lnn(self, data):
         response = self.get_prompt_response(data)
         json_response = json.loads(response)
 
-        print(json_response)
+        # predicates = json_response['predicates']
+        premises = json_response['premises']
+        answer_premises = json_response['answer_premises']
 
-        return json_response
+        return {
+            # 'predicates': predicates,
+            'premises': premises,
+            'answer_premises': answer_premises
+        }
 
     def evaluate(self):
         true_labels = []
@@ -135,10 +147,37 @@ class EvaluationPipeline(ABC):
         for index in range(len(self.dataset)):
             data = self.dataset[index]
             true_labels.append(data['label'])
+            model = Model()
 
             try:
                 response = self.fol_to_lnn(data)
-                # pred_labels.append(response['label'])
+                fol_premises = response['premises']
+
+                for fol_answer_premise in response['answer_premises']:
+                    fol_premises = fol_premises + [fol_answer_premise]
+                    # example of fol_premises
+                    # fol_premises = [
+                    #     '∃x,Participant(x)', 
+                    #     '∃x,(Young(x) ∧ Teacher(x) ∧ Female(x))', 
+                    #     '∃x,(MiddleAge(x) ∧ Teacher(x) ∧ Female(x))', 
+                    #     '∃x,(Young(x) ∧ Teacher(x) ∧ Female(x))'
+                    # ]
+
+                    variables, predicates, formulaes = setup_input_lnn(fol_premises)
+
+                    predicate_objects = {name: Predicate(name, arity) for name, arity in predicates}
+                    variable_objects = {var: Variable(var) for var in variables}
+
+                    transformed_formulae = replace_predicates_and_variables(
+                        formulaes, predicate_objects, variable_objects
+                    )
+
+                    model.add_knowledge(*transformed_formulae, world=World.AXIOM)
+
+                    # Running inference
+                    model.infer()
+
+                    model.print()
             except Exception as e:
                 print(f"Failed to get response for index {index}: {e}")
                 pred_labels.append('None')
