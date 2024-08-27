@@ -120,10 +120,10 @@ class ChatBot(ABC):
             ],
             'premises': [
                 "NetflixShow(strangerThings) ∧ Popular(strangerThings)", 
-                "∀x, ((NetflixShow(x) ∧ Popular(x)) → BingeWatch(karen, x))", 
-                "∀x, ((NetflixShow(x) ∧ BingeWatch(karen, x)) ↔ Download(karen, x))", 
+                "∀x,((NetflixShow(x) ∧ Popular(x)) → BingeWatch(karen, x))", 
+                "∀x,((NetflixShow(x) ∧ BingeWatch(karen, x)) ↔ Download(karen, x))", 
                 "NetflixShow(blackMirror) ∧ ¬Download(karen, blackMirror)", 
-                "∀x, ((NetflixShow(x) ∧ BingeWatch(karen, x)) → Share(karen, x, lisa))"
+                "∀x,((NetflixShow(x) ∧ BingeWatch(karen, x)) → Share(karen, x, lisa))"
             ],
             'answer_premises': [
                 "Popular(blackMirror)", 
@@ -133,6 +133,45 @@ class ChatBot(ABC):
             ]
         }}
         --- End of Example 1 ---
+
+        --- Start of Example 2 ---
+        # NL:
+        Context: The 2008 Summer Olympics were held in Beijing, China.
+        The 2008 Summer Olympics were the second Summer Olympic Games to be held in a communist state.
+        China won the most gold medals (48) in the 2008 Summer Olympics.
+        The United States placed second in the gold medal tally but won the highest number of medals overall (112) in the 2008 Summer Olympics.
+        The third place in the gold medal tally was achieved by Russia in the 2008 Summer Olympics.
+        If a country places third in gold medals, then they had fewer gold medals than the team that won the most gold medals.
+        87 countries won at least one medal during the 2008 Games.
+
+        Question: According to the above information, which of the following can be true?
+
+        Answer 1: Russia did not win fewer gold medals than China.
+
+        # FOL translation:
+        {{
+            'predicates': [
+                "HeldIn(x, y)",
+                "SecondToBe(x, y)",
+                "Won(x, y)",
+                "Placed(x, y)",
+                "FewerGoldMedalsThan(x, y)",
+                "Country(x)"
+            ],
+            'premises': [
+                "HeldIn(summer2008olympics, beijingchina)", 
+                "SecondToBe(summer2008olympics, heldincommuniststate)", 
+                "Won(china, mostgoldmedals)", 
+                "Placed(unitedstates, secondingoldmedals) ∧ Won(unitedstates, highestnumberofmedals)", 
+                "Placed(russia, thirdingoldmedals)", 
+                "∀x∀y,(Placed(x, thirdingoldmedals) ∧ Won(y, mostgoldmedals) → FewerGoldMedalsThan(x, y))", 
+                "∃x,(Country(x) ∧ Won(x, medal))",
+            ],
+            'answer_premises': [
+                "¬FewerGoldMedalsThan(russia, china)"
+            ]
+        }}
+        --- End of Example 2 ---
 
         Return only output as JSON, don't include any explaination.
 
