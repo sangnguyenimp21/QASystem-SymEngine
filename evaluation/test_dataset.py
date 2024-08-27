@@ -4,6 +4,9 @@ from typing import List
 import requests
 import pandas as pd
 from dotenv import load_dotenv
+from chatbot import ChatBot
+from lnn import *
+from utils import *
 
 load_dotenv()
 
@@ -20,6 +23,10 @@ class TestDataset(ABC):
 
     @abstractmethod
     def __len__(self):
+        pass
+
+    @abstractmethod
+    def run_symbolic_prediction(self, chatbot: ChatBot):
         pass
 
 class LogiQADataset(TestDataset):
@@ -91,3 +98,51 @@ class LogiQADataset(TestDataset):
         if self.max_size:
             return self.max_size
         return len(self.data)
+    
+    def run_symbolic_prediction(self, chatbot: ChatBot):
+        """
+        Runs symbolic prediction using the provided chatbot.
+
+        Args:
+            chatbot (ChatBot): The chatbot object used for prediction.
+
+        Returns:
+            tuple: A tuple containing the true labels and predicted labels.
+
+        Raises:
+            Exception: If there is an error while getting the response for a specific index.
+        """
+        true_labels = []
+        predict_labels = []
+        for index in range(len(self.data)):
+            data = self.data[index]
+            model = Model()
+            true_labels.append(data['label'])
+
+            try:
+                response = chatbot.fol_to_lnn(data)
+                fol_premises = response['premises']
+
+                for fol_answer_premise in response['answer_premises']:
+                    fol_premises = fol_premises + [fol_answer_premise]
+
+                    variables, predicates, formulaes = setup_input_lnn(fol_premises)
+
+                    predicate_objects = {name: Predicate(name, arity) for name, arity in predicates}
+                    variable_objects = {var: Variable(var) for var in variables}
+
+                    transformed_formulae = replace_predicates_and_variables(
+                        formulaes, predicate_objects, variable_objects
+                    )
+
+                    model.add_knowledge(*transformed_formulae, world=World.AXIOM)
+
+                    # Running inference
+                    model.infer()
+
+                    model.print()
+            except Exception as e:
+                predict_labels.append('None')
+                print(f"Failed to get response for index {index}: {e}")
+
+        return true_labels, predict_labels

@@ -6,6 +6,6 @@ if __name__ == '__main__':
     dataset = LogiQADataset(max_size=2)
     chatbot = OpenAIChatBot(key=os.getenv('OPENAI_API_KEY'), model='gpt-4o-mini')
     pipeline = EvaluationPipeline(dataset, chatbot)
-    true_labels, pred_labels = pipeline.evaluate()
+    true_labels, pred_labels = pipeline.fol_symbolic_prediction()
 
     print(f"True labels: {true_labels}", f"Predicted labels: {pred_labels}", sep='\n')
