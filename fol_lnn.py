@@ -1,12 +1,13 @@
 import re
-from input import get_fol_expressions
+from save_load_fol import get_fol_expressions
 
 
 # Tách các vị từ và trả về dictionary
 def extract_predicates(fol):
     fol = fol.replace(" ", "")
     # Sử dụng regex để tìm tất cả các vị từ bao gồm cả biến bên trong ngoặc
-    predicates = re.findall(r"[A-Za-z_]+\([^()]*\)", fol)
+    # predicates = re.findall(r"[A-Za-z_]+\([^()]*\)", fol)
+    predicates = re.findall(r"[A-Za-z_][A-Za-z_0-9]*\([^()]*\)", fol)
 
     # Loại bỏ các phần tử trùng lặp
     unique_predicates = list(set(predicates))
@@ -148,7 +149,7 @@ def find_and_indices(expression, connective):
                         if not check_open and check_close:
                             valid = False
                         parentheses_level -= 1
-                    elif char == "→":
+                    elif char == "→" or char == "↔":
                         found_implication = True
                     elif (
                         char == "∧"
@@ -182,7 +183,7 @@ def find_and_indices(expression, connective):
                         if not check_open and check_close:
                             valid = False
                         parentheses_level -= 1
-                    elif char == "→":
+                    elif char == "→" or char == "↔":
                         found_implication = True
                     elif (
                         char == "∨"
@@ -265,7 +266,7 @@ def And(left, right):
 
 
 # Chuyển đổi ∧ , ∨ của FOL thành biểu thức And() Or() của LNN
-def replace_expression(original_expression, predicate_list):
+def replace_connectives(original_expression, predicate_list):
     """
     Thay thế phần bên trái và bên phải của dấu ∧ trong biểu thức gốc.
     """
@@ -362,7 +363,9 @@ def replace_negation(expression):
 def extract_substring_left_of_arrow(expression):
     arrow_index = expression.find("→")
     if arrow_index == -1:
-        return None  # Không tìm thấy ký tự →
+        arrow_index = expression.find("↔")
+        if arrow_index == -1:
+            return None  # Không tìm thấy ký tự
 
     open_count = 0
     first_open_index = None
@@ -378,7 +381,7 @@ def extract_substring_left_of_arrow(expression):
                 break
 
     if first_open_index is not None:
-        # Trả về chuỗi từ dấu ngoặc mở đầu tiên đến ký tự →
+        # Trả về chuỗi từ dấu ngoặc mở đầu tiên đến ký tự → hoạc "↔"
         return expression[first_open_index:arrow_index]
     else:
         return None
@@ -387,7 +390,9 @@ def extract_substring_left_of_arrow(expression):
 def extract_substring_after_arrow(expression):
     arrow_index = expression.find("→")
     if arrow_index == -1:
-        return None  # Không tìm thấy ký tự →
+        arrow_index = expression.find("↔")
+        if arrow_index == -1:
+            return None  # Không tìm thấy ký tự → hoac "↔"
 
     open_count = 0
     close_count = 0
@@ -405,7 +410,7 @@ def extract_substring_after_arrow(expression):
             break
 
     if first_unpaired_close_index is not None:
-        # Trả về chuỗi từ ký tự → cho đến dấu ngoặc đóng đầu tiên
+        # Trả về chuỗi từ ký tự → hoac "↔" cho đến dấu ngoặc đóng đầu tiên
         return expression[arrow_index + 1 : first_unpaired_close_index + 1]
     else:
         return None
@@ -413,12 +418,36 @@ def extract_substring_after_arrow(expression):
 
 # Thay thế → của FOL thành implies của LNN
 def replace_implies(expression):
-    before = extract_substring_left_of_arrow(expression)
-    after = extract_substring_after_arrow(expression)
-    format_fol = before + "→" + after
-    format_lnn = f"Implies{before},{after}"
-    # Tìm chuỗi cũ và thay thế bằng chuỗi And mới
-    return expression.replace(format_fol, format_lnn)
+    if "→" in expression:
+        before = extract_substring_left_of_arrow(expression)
+        after = extract_substring_after_arrow(expression)
+        # First-order logic
+        # x, y = Variables('x', 'y')
+        # A = Predicate('A')
+        # B = Predicate('B', arity=2)
+        # Implies(A(x), B(x, y)))
+        format_fol = before + "→" + after
+        format_lnn = f"Implies{before},{after}"
+        # Tìm chuỗi cũ và thay thế bằng chuỗi And mới
+        return expression.replace(format_fol, format_lnn)
+    else:
+        return expression
+
+
+def replace_equivalence(expression):
+    if "↔" in expression:
+        before = extract_substring_left_of_arrow(expression)
+        after = extract_substring_after_arrow(expression)
+        format_fol = before + "↔" + after
+        # First-order logic
+        # x, y = Variables('x', 'y')
+        # A = Predicate('A')
+        # B = Predicate('B', arity=2)
+        # Iff(A(x), B(x, y)))
+        format_lnn = f"Iff{before},{after}"
+        # Tìm chuỗi cũ và thay thế bằng chuỗi And mới
+        return expression.replace(format_fol, format_lnn)
+    return expression
 
 
 # Thay thế predicates trước
@@ -493,7 +522,6 @@ def count_commas_in_parentheses(expression):
 
 def get_input_lnn():
     # Note:
-    # + predicate không được chứa số, Ví dụ: ThuocMuc3(x)
     # + Phải có dấu ',' phía sau các biến, Ví dụ: ∀x,(...
     # + Chỉ sử dụng dấu ngoặc tròn trong FOL
     # + Nếu như có 2 lượng từ ∀ trở lên thì gộp thành 1 ∀, ví dụ: ∀x,hk
@@ -537,7 +565,7 @@ def get_input_lnn():
         predicate_list = list(predicate_dict.keys())
 
         # Chuyển đổi ∧ , ∨ của FOL thành biểu thức And() Or() của LNN
-        lnn_expression = replace_expression(new_fol_expression, predicate_list)
+        lnn_expression = replace_connectives(new_fol_expression, predicate_list)
 
         # Thay thế ∀ của FOL thành Forall() của LNN
         lnn_expression = replace_forall(lnn_expression)
@@ -550,6 +578,9 @@ def get_input_lnn():
 
         # Thay thế → của FOL thành implies của LNN
         format_lnn = replace_implies(format_lnn)
+
+        # Thay thế ↔ của FOL thành equivalence của LNN
+        format_lnn = replace_equivalence(format_lnn)
 
         # Trả về LNN hoàn chỉnh bằng cách thay key bằng value
         formulae_lnn = convert_keys_to_value_lnn(
