@@ -58,7 +58,7 @@ class ChatBot(ABC):
         * Nested predicates e.g., `P1(P2(x))` are invalid. Instead, you should define new variable and/or predicate to represent the natural language statement.
         * Make sure the premises are logically consistent and use the provided predicates.
 
-        RETURN ONLY THE JSON OUTPUT
+        RETURN ONLY THE JSON OUTPUT, DO NOT INCLUDE ANY EXPLANATION.
         """
 
         correct_messages = [
@@ -180,14 +180,17 @@ class ChatBot(ABC):
 
         Question: {data['question']}
 
-        Answer 1: {data['options'][0]}
-        Answer 2: {data['options'][1]}
-        Answer 3: {data['options'][2]}
-        Answer 4: {data['options'][3]}
+        {{Answers}}
 
         # FOL translation:
 
         """
+
+        answers_str = ""
+        for i, option in enumerate(data['options'], start=1):
+            answers_str += f"Answer {i}: {option}\n"
+
+        prompt = prompt.replace('{Answers}', answers_str)
 
         return prompt
 
