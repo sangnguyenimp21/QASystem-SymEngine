@@ -3,9 +3,14 @@ from test_dataset import *
 from evaluation_pipeline import *
     
 if __name__ == '__main__':
-    dataset = LogiQADataset(max_size=1)
-    chatbot = OpenAIChatBot(key=os.getenv('OPENAI_API_KEY'), model='gpt-4o-mini')
-    pipeline = EvaluationPipeline(dataset, chatbot)
-    true_labels, pred_labels = pipeline.fol_symbolic_prediction()
+    max_size = evaluation_size = 1
 
-    print(f"True labels: {true_labels}", f"Predicted labels: {pred_labels}", sep='\n')
+    dataset = LogiQADataset(max_size=max_size)
+
+    chatbot = OpenAIChatBot(key=os.getenv('OPENAI_API_KEY'), model_name='gpt-4o-mini')
+
+    pipeline = EvaluationPipeline(dataset, chatbot)
+    labels, predictions = pipeline.fol_symbolic_prediction(max_size=max_size)
+
+    print('Labels:', labels, 'Predictions:', predictions)
+
