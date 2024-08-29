@@ -1,5 +1,5 @@
 import re
-from save_load_fol import get_fol_expressions
+from fol.save_load_fol import get_fol_expressions
 
 
 # Tách các vị từ và trả về dictionary
@@ -520,13 +520,23 @@ def count_commas_in_parentheses(expression):
     return comma_count, stripped_expression
 
 
-def get_input_lnn():
-    # Note:
-    # + Phải có dấu ',' phía sau các biến, Ví dụ: ∀x,(...
-    # + Chỉ sử dụng dấu ngoặc tròn trong FOL
-    # + Nếu như có 2 lượng từ ∀ trở lên thì gộp thành 1 ∀, ví dụ: ∀x,hk
-    # Biểu thức FOL
-    fol_expressions = get_fol_expressions()
+def parse_fol_to_lnn(fol_expressions):
+    """
+    Hàm này phân tích các biểu thức First-Order Logic (FOL) và chuyển đổi chúng sang định dạng Logic Neural Networks (LNN), bao gồm các biến, vị từ và công thức.
+
+    Parameters:
+    fol_expressions (list): Danh sách các chuỗi chứa các biểu thức FOL cần phân tích.
+                            Các biểu thức phải tuân theo các quy tắc định dạng:
+                            - Biến phải có dấu phẩy sau, ví dụ: ∀x,(...
+                            - Chỉ sử dụng dấu ngoặc tròn trong FOL.
+                            - Nếu có nhiều lượng từ ∀, hãy gộp chúng lại thành một, ví dụ: ∀x,hk.
+
+    Returns:
+    tuple:
+        - list: Danh sách các biến (variables) trong định dạng LNN.
+        - list: Danh sách các vị từ (predicates) trong định dạng LNN, với mỗi vị từ là một tuple chứa tên vị từ và số lượng biến (arity).
+        - list: Danh sách các công thức (formulas) trong định dạng LNN, được chuyển đổi từ biểu thức FOL.
+    """
 
     variables_lnn = []
     predicates_lnn = []
@@ -587,5 +597,18 @@ def get_input_lnn():
             format_lnn, predicate_dict, variables_dict
         )
         formulas_lnn.append(formulae_lnn)
+
+    # Kiểm tra xem các mảng có phải là không rỗng
+    if not variables_lnn:
+        print("Error: 'variables' array is empty.")
+        return
+
+    if not predicates_lnn:
+        print("Error: 'predicates' array is empty.")
+        return
+
+    if not formulas_lnn:
+        print("Error: 'formulaes' array is empty.")
+        return
 
     return variables_lnn, predicates_lnn, formulas_lnn
