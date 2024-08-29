@@ -1,6 +1,4 @@
 import re
-from fol.save_load_fol import get_fol_expressions
-
 
 # Tách các vị từ và trả về dictionary
 def extract_predicates(fol):

@@ -4,3 +4,8 @@ data/
 .env
 __pycache__/
 *.log
+*.pyc
+*.pyo
+*.pyd
+*.db
+**/__pycache__/
