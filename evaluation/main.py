@@ -3,7 +3,7 @@ from test_dataset import *
 from evaluation_pipeline import *
     
 if __name__ == '__main__':
-    max_size = evaluation_size = 1
+    max_size = evaluation_size = 10
 
     dataset = LogiQADataset(max_size=max_size)
 

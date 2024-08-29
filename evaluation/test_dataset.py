@@ -23,12 +23,17 @@ class TestDataset(ABC):
         pass
 
     @abstractmethod
+    def get_data_directory(self):
+        pass
+
+    @abstractmethod
     def build_initial_prompt(self, data):
         pass
 
 class LogiQADataset(TestDataset):
     def __init__(self, max_size=None, destination='./data', file_names: List[str] = ['test_fol.jsonl']):
         super().__init__(max_size, destination, file_names)
+        self.data_directory = f'{destination}/logiQA_2.0'
         self.download_dataset()
         self.data = self.read_dataset()
 
@@ -48,7 +53,7 @@ class LogiQADataset(TestDataset):
         Raises:
             None
         """
-        destination = f'{self.destination}/logiQA_2.0'
+        destination = self.data_directory
         os.makedirs(destination, exist_ok=True)
         for file_name in self.file_names:
             if os.path.exists(f"{destination}/{file_name}"):
@@ -180,5 +185,8 @@ class LogiQADataset(TestDataset):
         prompt = prompt.replace('{Answers}', answers_str)
 
         return prompt
+    
+    def get_data_directory(self):
+        return self.data_directory
     
     

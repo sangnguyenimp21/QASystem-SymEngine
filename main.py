@@ -1,12 +1,13 @@
 # Ví dụ sử dụng hàm
 from lnn.api_reasoning_lnn import lnn_infer_from_facts_rules
-from fol.save_load_fol import get_facts, get_fol_expressions, get_question
+from fol.save_load_fol import *
 
 
 def main():
-    rules = get_fol_expressions()
-    facts = get_facts()
-    questions = get_question()
+    fol_dataloader = FOLDataLoader()
+    rules = fol_dataloader.get_fol_expressions()
+    facts = fol_dataloader.get_facts()
+    questions = fol_dataloader.get_question()
     result = lnn_infer_from_facts_rules(facts, rules, questions)
     print(result)
 

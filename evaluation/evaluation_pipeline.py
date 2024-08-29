@@ -1,7 +1,14 @@
+import sys
 from abc import ABC
 from test_dataset import TestDataset
 from chatbot import ChatBot
 import json
+
+sys.path.append('../')
+
+from fol import save_load_fol
+from lnn import api_reasoning_lnn
+
 
 class EvaluationPipeline(ABC):
     def __init__(self, dataset: TestDataset, chatbot: ChatBot) -> None:
@@ -42,8 +49,22 @@ class EvaluationPipeline(ABC):
 
         return json.loads(response_text)
 
-    def fol_to_lnn(self, fol):
-        pass
+    def fol_to_lnn(self, fol, filename: str='fol', file_type: str='json'):
+        formatted_fol = dict()
+        formatted_fol['expression'] = fol['premises']
+        formatted_fol['facts'] = fol['facts']
+        formatted_fol['question'] = fol['answer_premises'][0]
+
+        filename = f'{self.dataset.get_data_directory()}/{filename}.{file_type}'
+        with open(filename, 'w') as f:
+            json.dump(formatted_fol, f)
+
+        fol_dataloader = save_load_fol.FOLDataLoader(json_file_path=filename)
+        rules = fol_dataloader.get_fol_expressions()
+        facts = fol_dataloader.get_facts()
+        questions = fol_dataloader.get_question()
+
+        return rules, facts, questions
 
     def fol_symbolic_prediction(self, max_size: int) -> None:
 
@@ -61,8 +82,15 @@ class EvaluationPipeline(ABC):
 
             try:
                 fol = self.nl_to_fol(initial_prompt=initial_prompt, recorrect=True)
-                print(f"FOL: {fol}")
-                print('-------------------------------------')
+                
+                try:
+                    facts, rules, questions = self.fol_to_lnn(fol, filename=f'fol_{i}')
+                    result = api_reasoning_lnn.lnn_infer_from_facts_rules(facts, rules, questions)
+                    print(f"Result: {result}")
+                except Exception as e:
+                    print(f"Failed to infer from FOL: {e}")
+                    predictions.append('Fail_FOL_to_LNN')
+                    continue
             except Exception as e:
                 print(f"Failed to convert NL to FOL: {e}")
                 predictions.append('Fail_NL_to_FOL')

@@ -6,27 +6,25 @@
 import json
 import os
 
-# Đường dẫn đến tệp JSON trong cùng thư mục với tệp Python
-current_directory = os.path.dirname(__file__)
-json_file_path = os.path.join(current_directory, "fol_expressions_input.json")
+class FOLDataLoader:
+    def __init__(self, json_file_path: str = "fol/fol_expressions_input.json"):
+        self.json_file_path = json_file_path
+        self.load_data()
 
-# Đọc dữ liệu từ tệp JSON
-with open(json_file_path, "r") as file:
-    data = json.load(file)
+    def load_data(self):
+        # Đọc dữ liệu từ tệp JSON
+        with open(self.json_file_path, "r") as file:
+            data = json.load(file)
 
-fol_expressions = data["expression"]
+        self.fol_expressions = data["expression"]
+        self.facts = data["facts"]
+        self.question = data["question"]
 
-facts = data["facts"]
-question = data["question"]
+    def get_fol_expressions(self):
+        return self.fol_expressions
 
+    def get_facts(self):
+        return self.facts
 
-def get_fol_expressions():
-    return fol_expressions
-
-
-def get_facts():
-    return facts
-
-
-def get_question():
-    return question
+    def get_question(self):
+        return self.question
