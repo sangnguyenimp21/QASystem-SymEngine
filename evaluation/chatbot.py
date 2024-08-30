@@ -1,9 +1,5 @@
 from abc import ABC, abstractmethod
 from openai import OpenAI
-from dotenv import load_dotenv
-
-load_dotenv()
-
 
 class ChatBot(ABC):
     def __init__(self, key: str='', base_url: str='', model_name: str='') -> None:
@@ -26,7 +22,7 @@ class OpenAIChatBot(ChatBot):
         self.client = self.init_client()
 
     def init_client(self):
-        return OpenAI(api_key=self.key)
+        return OpenAI(api_key=self.key, base_url=self.base_url)
 
     def get_response(self, messages, temperature=0):
         response = self.client.chat.completions.create(
@@ -38,3 +34,21 @@ class OpenAIChatBot(ChatBot):
         text = response.choices[0].message.content
 
         return text
+
+class OllamaChatbot(OpenAIChatBot):
+    def __init__(self, key: str='ollama', base_url: str='http://localhost:11434/v1', model_name='mistral:7b') -> None:
+        super().__init__(key, base_url, model_name)
+    
+class ChatBotFactory:
+    @staticmethod
+    def create_chatbot(chatbot_type: str, key: str='', base_url: str='', model_name: str='') -> ChatBot:
+        if chatbot_type == 'openai':
+            return OpenAIChatBot(key, base_url, model_name)
+        elif chatbot_type == 'ollama':
+            key = 'ollama'
+            base_url = 'http://localhost:11434/v1'
+            model_name = 'mistral:7b'
+            
+            return OllamaChatbot(key, base_url, model_name)
+        else:
+            raise ValueError(f'Invalid chatbot type: {chatbot_type}')
