@@ -25,12 +25,12 @@ class EvaluationPipeline(ABC):
             
         if recorrect:
             correct_prompt = f"""
-            Given the following FOL translation:
+            Given the following JSON of FOL logic:
 
             {response_text}
 
             Please check, correct them and provide a new translation in the correct format (no further explanation needed). You can redefine the predicates if needed. Some tips:
-            * In FOL logic, there are no mathematic operators like <, >, =, ∑, +, -, *, /, etc. For example, `Joe has age less than 30 years old` can be translated as `LessThan30YearsOld(joe)`.
+            * In FOL logic, there are no mathematic operators like <, >, ≥, ≤, =, ∑, +, -, *, /, etc. For example, `Joe has age less than 30 years old` can be translated as `LessThan30YearsOld(joe)`.
             * Always check for number of parentheses and ensure each open parenthesis should have a corresponding close parenthesis.
             * Nested predicates e.g., `P1(P2(x))` are invalid. Instead, you should define new variable and/or predicate to represent the natural language statement.
             * Make sure the premises are logically consistent and use the provided predicates.
