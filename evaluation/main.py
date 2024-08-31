@@ -1,15 +1,19 @@
+import os
 from chatbot import *
 from test_dataset import *
 from evaluation_pipeline import *
+from dotenv import load_dotenv
 
-if __name__ == "__main__":
-    max_size = evaluation_size = 10
+load_dotenv()
+    
+if __name__ == '__main__':
+    max_size = evaluation_size = int(os.getenv('MAX_SIZE'))
 
     dataset = LogiQADataset(max_size=max_size)
 
-    chatbot = OpenAIChatBot(key=os.getenv("OPENAI_API_KEY"), model_name="gpt-4o-mini")
+    chatbot = ChatBotFactory.create_chatbot(chatbot_type='ollama')
 
     pipeline = EvaluationPipeline(dataset, chatbot)
     labels, predictions = pipeline.fol_symbolic_prediction(max_size=max_size)
 
-    print("Labels:", labels, "Predictions:", predictions)
+    print('Labels:', labels, 'Predictions:', predictions)
