@@ -1,5 +1,7 @@
 # Ví dụ sử dụng hàm
-from lnn.api_reasoning_lnn import lnn_infer_from_facts_rules
+from lnn.api_reasoning_lnn import (
+    lnn_infer_from_facts_rules_result_only,
+)
 from fol.save_load_fol import *
 
 
@@ -8,7 +10,7 @@ def main():
     rules = fol_dataloader.get_fol_expressions()
     facts = fol_dataloader.get_facts()
     questions = fol_dataloader.get_question()
-    result = lnn_infer_from_facts_rules(facts, rules, questions)
+    result = lnn_infer_from_facts_rules_result_only(facts, rules, questions)
     print(result)
 
 

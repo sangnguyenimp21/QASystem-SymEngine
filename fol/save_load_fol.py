@@ -6,6 +6,7 @@
 import json
 import os
 
+
 class FOLDataLoader:
     def __init__(self, json_file_path: str = "fol/fol_expressions_input.json"):
         self.json_file_path = json_file_path
@@ -24,7 +25,15 @@ class FOLDataLoader:
         return self.fol_expressions
 
     def get_facts(self):
-        return self.facts
+        def process_item(item):
+            if isinstance(item, dict):
+                return {
+                    tuple(k.split("-")) if "-" in k else k: process_item(v)
+                    for k, v in item.items()
+                }
+            return item
+
+        return {key: process_item(value) for key, value in self.facts.items()}
 
     def get_question(self):
         return self.question
