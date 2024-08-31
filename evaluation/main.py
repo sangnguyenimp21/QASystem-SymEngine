@@ -17,4 +17,3 @@ if __name__ == '__main__':
     labels, predictions = pipeline.fol_symbolic_prediction(max_size=max_size)
 
     print('Labels:', labels, 'Predictions:', predictions)
-

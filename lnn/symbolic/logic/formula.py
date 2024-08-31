@@ -544,10 +544,10 @@ class Formula(ABC):
         graph_node.neighbor_node = self.operands_by_number
         graph_node.label = f"{self.name}"
         graph_node.type = f"{self.__class__.__name__}"
-        
+
         if graph_node.type == "Forall" or graph_node.type == "Exists":
             return 0
-        
+
         if graph_node.type == "Predicate":
             graph_node.key = f"{self.name}"
 
@@ -575,19 +575,16 @@ class Formula(ABC):
 
         # print FOL node - table of bounds
         else:
-            facts = []
-            if self.grounding_table is None:
-                facts.append("")
-            else:
-                for g in self.grounding_table:
-                    state_name = self.state(g).name
-                    graph_node.state = f"{state_name}"
-                    fact = (
-                        f"{state_wrapper(g):{header_len}} "
-                        f"{state_name:>13} "
-                        f"{round_bounds(g)}\n"
-                    )
-                    facts.append(fact)
+            facts = (
+                {}
+                if self.grounding_table is None
+                else {
+                    # f"{state_wrapper(g)} : "
+                    # f"{self.state(g).name}"
+                    state_wrapper(g): self.state(g).name
+                    for g in self.grounding_table
+                }
+            )
             binder = list()
             for op_idx, op in enumerate(self.operands):
                 if not self.propositional and self._has_bindings(op_idx):
@@ -602,7 +599,14 @@ class Formula(ABC):
                             )
             bind_str = ("\nBindings: " + ", ".join(binder)) if binder else ""
             header = f"{header} {bind_str}"
-            result = f"{header}\n" + "".join(facts)
+            if graph_node.state == None:
+                graph_node.state = facts
+            if (
+                graph_node.type == "Forall"
+                or graph_node.type == "Exists"
+                or graph_node.type == "Implies"
+            ):
+                graph_node.state = None
         return graph_node
 
     def project_params(self):

@@ -67,8 +67,8 @@ def inference(variables, predicates, formulaes, facts):
         data[predicate_objects[predicate]] = {
             variable: (
                 Fact.TRUE
-                if truth_value == "True" or truth_value == "TRUE"
-                else Fact.FALSE
+                if truth_value.upper() == "TRUE"
+                else Fact.FALSE if truth_value.upper() == "FALSE" else Fact.UNKNOWN
             )
             for variable, truth_value in variables.items()
         }

@@ -1,12 +1,16 @@
 {
     "expression": [
-        "∀x,(Hinh_Vuong(x)→ Chu_Nhat(x))",
-        "∀x,(Chu_Nhat(x)→ Bon_Canh(x))",
-        "∀x,(Bon_Canh(x)∧Cap_canh_song_song(x) → Hinh_thoi(x))"
+        "∀x,Karen,(NetflixShow(x) ∧ Popular(x) → BingeWatch(Karen, x))",
+        "∀x,Karen,(NetflixShow(x) ∧ IsBlackMirror(x) → ¬Download(Karen, x))",
+        "∀x,Karen,Lisa,(NetflixShow(x) ∧ BingeWatch(Karen, x) → Share(x, Lisa) ∧ Download(Karen, x))"
     ],
     "facts": {
-        "Hinh_Vuong": {"S": "True"},
-        "Cap_canh_song_song": {"S": "True"}
+        "NetflixShow": {"strangerThings": "TRUE", "blackMirror": "TRUE"},
+        "Popular": {"strangerThings": "TRUE", "blackMirror": "UNKNOWN"},
+        "BingeWatch": {"karen-strangerThings": "UNKNOWN"},
+        "Download": {"karen-strangerThings": "UNKNOWN", "karen-blackMirror": "UNKNOWN"},
+        "Share": {"strangerThings-lisa": "UNKNOWN", "blackMirror-lisa": "UNKNOWN"},
+        "IsBlackMirror": {"blackMirror": "TRUE"}
     },
-    "question": ["Hinh_thoi", "Chu_Nhat"]
+    "question": {"Popular": "blackMirror", "¬Popular": "blackMirror", "Download": "karen-blackMirror", "Share": "strangerThings-lisa"}
 }
