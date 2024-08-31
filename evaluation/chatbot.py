@@ -1,9 +1,6 @@
 from abc import ABC, abstractmethod
+import requests
 from openai import OpenAI
-from dotenv import load_dotenv
-
-load_dotenv()
-
 
 class ChatBot(ABC):
     def __init__(self, key: str='', base_url: str='', model_name: str='') -> None:
@@ -26,7 +23,7 @@ class OpenAIChatBot(ChatBot):
         self.client = self.init_client()
 
     def init_client(self):
-        return OpenAI(api_key=self.key)
+        return OpenAI(api_key=self.key, base_url=self.base_url)
 
     def get_response(self, messages, temperature=0):
         response = self.client.chat.completions.create(
@@ -38,3 +35,47 @@ class OpenAIChatBot(ChatBot):
         text = response.choices[0].message.content
 
         return text
+
+class OllamaChatbot(OpenAIChatBot):
+    def __init__(self, key: str='ollama', base_url: str='http://localhost:11434/v1', model_name='mistral:7b') -> None:
+        super().__init__(key, base_url, model_name)
+
+class GemsuraChatbot(ChatBot):
+    def __init__(self, key: str='', base_url: str='', model_name: str='') -> None:
+        super().__init__(key, base_url, model_name)
+
+    def init_client(self):
+        pass
+
+    def get_response(self, messages):
+        prompt = ''
+        for message in messages:
+            prompt += f"{message['content']}\n"
+        response = requests.post(
+            'https://ws.gvlab.org/fablab/ura/llama/api/generate',
+            headers={
+                'Content-Type': 'application/json'
+            },
+            json={
+                "inputs": f"user.{prompt}.model\n",
+            }
+        )
+
+        text = response.json()['generated_text']
+
+        return text
+    
+class ChatBotFactory:
+    @staticmethod
+    def create_chatbot(chatbot_type: str, key: str='', base_url: str='', model_name: str='') -> ChatBot:
+        if chatbot_type == 'openai':
+            return OpenAIChatBot(key, base_url, model_name)
+        elif chatbot_type == 'ollama':
+            key = 'ollama' if key == '' else key
+            base_url = 'http://localhost:11434/v1' if base_url == '' else base_url
+            model_name = 'mistral:7b' if model_name == '' else model_name
+            return OllamaChatbot(key, base_url, model_name)
+        elif chatbot_type == 'gemsura':
+            return GemsuraChatbot(key, base_url, model_name)
+        else:
+            raise ValueError(f'Invalid chatbot type: {chatbot_type}')
