@@ -6,11 +6,17 @@
 import json
 import os
 
-
 class FOLDataLoader:
-    def __init__(self, json_file_path: str = "fol/fol_expressions_input.json"):
+    def __init__(self, data_source: str = "file",
+                 json_file_path: str = "fol/fol_expressions_input.json", request_data = None):
         self.json_file_path = json_file_path
-        self.load_data()
+        self.data_source = data_source
+
+        if self.data_source == "file" and os.path.exists(self.json_file_path):
+            self.load_data()
+
+        if self.data_source == "api_request" and request_data is not None:
+            self.load_request_data(request_data)
 
     def load_data(self):
         # Đọc dữ liệu từ tệp JSON
@@ -20,6 +26,11 @@ class FOLDataLoader:
         self.fol_expressions = data["expression"]
         self.facts = data["facts"]
         self.question = data["question"]
+
+    def load_request_data(self, request_data):
+        self.fol_expressions = request_data["expression"]
+        self.facts = request_data["facts"]
+        self.question = request_data["question"]
 
     def get_fol_expressions(self):
         return self.fol_expressions
