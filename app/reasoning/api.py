@@ -18,4 +18,14 @@ async def reasoning_lnn(item: LNNReasoningModel):
 
     return result
 
+@router.post("/reasoning-lnn-explanation", status_code=status.HTTP_200_OK)
+async def reasoning_lnn_explanation(item: LNNReasoningModel):
+    # Call the service
+    try:
+        result = lnn_reasoning(item, using_explanation=True)
+    except Exception as e:
+        return {"error": str(e)}
+
+    return result
+
     
