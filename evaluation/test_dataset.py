@@ -106,14 +106,18 @@ class LogiQADataset(TestDataset):
 
         The output must be in JSON format and has the following fields:
         * `predicates`: array of predicates based on context, in camel case with no space, and number of variables it takes e.g., `CamelCase(x,y)`
-        * `premises`: array of premises constructed from the context, in FOL format
-        * `facts`: object of facts constructed from the context (key is the predicate and value is the object of entities), if any
-        * `answer_premises`: array of premises constructed from the answers and question, in FOL format
+        * `premises`: array of premises in FOL logic based on the predicates
+        * `facts`: dictionary like `{{"Predicate": {{"variable": "value"}}}}` (value can be "TRUE", "FALSE", or "UNKNOWN")
+        * `answers`: dictionary `{{"Predicate": "variable"}}` (variable here is the same as the one in the facts)
 
         IMPORTANT NOTES:
         * In FOL, use `→`, `↔`, `∧`, `¬`, `∨` only
-        * If a sentence from the context is not necessary or not related to the question, do not include it in the FOL translation.
-        * Do NOT always try to convert all NL sentences to FOL, only convert the necessary ones.
+        * In FOL logic, there are no mathematic operators like <, >, ≥, ≤, =, ∑, +, -, *, /, etc. For example, `Joe has age less than 30 years old` can be translated as `LessThan30YearsOld(joe)`.
+        * Nested predicates e.g., `P1(P2(x))` are invalid. Instead, you should define new variable and/or predicate to represent the natural language statement.
+        * Make sure the premises are logically consistent and use the provided predicates.
+        * DO NOT always try to convert all sentences to FOL, only convert the necessary ones.
+        * For predicate with multiple variables, use hyphen `-` to separate the variables e.g., 'karen-strangerThings' means Karen and Stranger Things.
+        * In premises, use `∃x,y,z,`, `∀x,y,z,`, instead of `∃x, ∃y, ∃z,`, `∀x, ∀y, ∀z,`. For example, `∀x,∀y,∀z,` = `∀x,y,z,`
 
         --- Start of Example ---
         # NL:
@@ -135,33 +139,28 @@ class LogiQADataset(TestDataset):
                 "Popular(x)", 
                 "BingeWatch(x, y)",
                 "Download(x, y)", 
-                "Share(x, y, z)"
+                "Share(x, y)",
+                "IsBlackMirror(x)",
             ],
             'premises': [
-                "NetflixShow(strangerThings) ∧ Popular(strangerThings)", 
-                "∀x, ((NetflixShow(x) ∧ Popular(x)) → BingeWatch('karen', x))", 
-                "∀x, ((NetflixShow(x) ∧ BingeWatch('karen', x)) ↔ Download('karen', x))", 
-                "∀x, ((NetflixShow(x) ∧ BingeWatch('karen', x)) → Share('karen', x, 'lisa'))"
+                "∀x,y, (NetflixShow(x) ∧ Popular(x) → BingeWatch(y, x))",
+                "∀x,y, (NetflixShow(x) ∧ IsBlackMirror(x) → ¬Download(y, x))",
+                "∀x,y,z, (NetflixShow(x) ∧ BingeWatch(y, x) → Share(x, z) ∧ Download(y, x))"
             ],
             'facts': {{
-                'NetflixShow': {{
-                    'strangerThings': 'True',
-                    'blackMirror': 'True',
-                }},
-                'Popular': {{
-                    'strangerThings': 'True',
-                }},
-                'Download': {{
-                    ('karen', 'blackMirror'): 'False',
-                }},
-                
-            }} 
-            'answer_premises': [
-                "Popular('blackMirror')", 
-                "¬Popular('blackMirror')", 
-                "Download('karen', 'blackMirror')",
-                "Share('karen', 'blackMirror', 'lisa')"
-            ]
+                "NetflixShow": {{"strangerThings": "TRUE", "blackMirror": "TRUE"}},
+                "Popular": {{"strangerThings": "TRUE", "blackMirror": "UNKNOWN"}},
+                "BingeWatch": {{"karen-strangerThings": "UNKNOWN"}},
+                "Download": {{"karen-strangerThings": "UNKNOWN", "karen-blackMirror": "UNKNOWN"}},
+                "Share": {{"strangerThings-lisa": "UNKNOWN", "blackMirror-lisa": "UNKNOWN"}},
+                "IsBlackMirror": {{"blackMirror": "TRUE"}}
+            }},
+            'answers': {{
+                "Popular": "blackMirror", 
+                "¬Popular": "blackMirror", 
+                "Download": "karen-blackMirror", // karen and blackMirror are the variables
+                "Share": "strangerThings-lisa"
+            }}
         }}
         --- End of Example ---
 

@@ -22,44 +22,18 @@ class EvaluationPipeline(ABC):
         ]
 
         response_text = self.chatbot.get_response(messages)
-            
-        if recorrect:
-            correct_prompt = f"""
-            Given the following JSON of FOL logic:
-
-            {response_text}
-
-            Please check, correct them and provide a new translation in the correct format (no further explanation needed). You can redefine the predicates if needed. Some tips:
-            * In FOL logic, there are no mathematic operators like <, >, ≥, ≤, =, ∑, +, -, *, /, etc. For example, `Joe has age less than 30 years old` can be translated as `LessThan30YearsOld(joe)`.
-            * Always check for number of parentheses and ensure each open parenthesis should have a corresponding close parenthesis.
-            * Nested predicates e.g., `P1(P2(x))` are invalid. Instead, you should define new variable and/or predicate to represent the natural language statement.
-            * Make sure the premises are logically consistent and use the provided predicates.
-
-            RETURN ONLY THE JSON OUTPUT, DO NOT INCLUDE ANY EXPLANATION.
-            """
-
-            correct_messages = [
-                {'role': 'system', 'content': 'You are a mathematician who is expert in first order logic (FOL) representation'},
-                {'role': 'user', 'content': correct_prompt}
-            ]
-
-            response_text = self.chatbot.get_response(correct_messages)
 
         response_text = response_text.replace('```json\n', '').replace('```', '').strip()
-
+        
         return json.loads(response_text)
 
-    def fol_to_lnn(self, fol, filename: str='fol', file_type: str='json'):
+    def fol_to_lnn(self, fol):
         formatted_fol = dict()
         formatted_fol['expression'] = fol['premises']
         formatted_fol['facts'] = fol['facts']
-        formatted_fol['question'] = fol['answer_premises'][0]
+        formatted_fol['question'] = fol['answers']
 
-        filename = f'{self.dataset.get_data_directory()}/{filename}.{file_type}'
-        with open(filename, 'w') as f:
-            json.dump(formatted_fol, f)
-
-        fol_dataloader = save_load_fol.FOLDataLoader(json_file_path=filename)
+        fol_dataloader = save_load_fol.FOLDataLoader(data_source='api_request', request_data=formatted_fol)
         rules = fol_dataloader.get_fol_expressions()
         facts = fol_dataloader.get_facts()
         questions = fol_dataloader.get_question()
@@ -79,22 +53,28 @@ class EvaluationPipeline(ABC):
             labels.append(data['label'])
 
             initial_prompt = self.dataset.build_initial_prompt(data)
+            fol = self.nl_to_fol(initial_prompt=initial_prompt, recorrect=False)
 
-            try:
-                fol = self.nl_to_fol(initial_prompt=initial_prompt, recorrect=True)
+            rules, facts, questions = self.fol_to_lnn(fol)
+            result = api_reasoning_lnn.lnn_infer_from_facts_rules_result_only(facts=facts, rules=rules, questions=questions)
+            print(f"Result: {result}")   
+
+            # try:
+            #     initial_prompt = self.dataset.build_initial_prompt(data)
+            #     fol = self.nl_to_fol(initial_prompt=initial_prompt, recorrect=False)
                 
-                try:
-                    facts, rules, questions = self.fol_to_lnn(fol, filename=f'fol_{i}')
-                    result = api_reasoning_lnn.lnn_infer_from_facts_rules(facts, rules, questions)
-                    print(f"Result: {result}")
-                except Exception as e:
-                    print(f"Failed to infer from FOL: {e}")
-                    predictions.append('Fail_FOL_to_LNN')
-                    continue
-            except Exception as e:
-                print(f"Failed to convert NL to FOL: {e}")
-                predictions.append('Fail_NL_to_FOL')
-                continue
+            #     try:
+            #         facts, rules, questions = self.fol_to_lnn(fol)
+            #         result = api_reasoning_lnn.lnn_infer_from_facts_rules(facts, rules, questions)
+            #         print(f"Result: {result}")    
+            #     except Exception as e:
+            #         print(f"Failed to infer from FOL: {e}")
+            #         predictions.append('Fail_FOL_to_LNN')
+            #         continue
+            # except Exception as e:
+            #     print(f"Failed to convert NL to FOL: {e}")
+            #     predictions.append('Fail_NL_to_FOL')
+            #     continue
 
         return labels, predictions
         
