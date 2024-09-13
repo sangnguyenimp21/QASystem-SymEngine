@@ -59,6 +59,7 @@ class EvaluationPipeline(ABC):
                 try:
                     rules, facts, questions = self.fol_to_lnn(fol)
                     result = api_reasoning_lnn.lnn_infer_from_facts_rules_result_only(facts=facts, rules=rules, questions=questions)
+                    predictions.append(result)
                     print(f"Result: {result}")     
                 except Exception as e:
                     print(f"Failed to infer from FOL: {e}")
