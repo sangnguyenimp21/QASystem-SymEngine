@@ -52,29 +52,22 @@ class EvaluationPipeline(ABC):
             data = self.dataset[i]
             labels.append(data['label'])
 
-            initial_prompt = self.dataset.build_initial_prompt(data)
-            fol = self.nl_to_fol(initial_prompt=initial_prompt, recorrect=False)
-
-            rules, facts, questions = self.fol_to_lnn(fol)
-            result = api_reasoning_lnn.lnn_infer_from_facts_rules_result_only(facts=facts, rules=rules, questions=questions)
-            print(f"Result: {result}")   
-
-            # try:
-            #     initial_prompt = self.dataset.build_initial_prompt(data)
-            #     fol = self.nl_to_fol(initial_prompt=initial_prompt, recorrect=False)
+            try:
+                initial_prompt = self.dataset.build_initial_prompt(data)
+                fol = self.nl_to_fol(initial_prompt=initial_prompt, recorrect=False)
                 
-            #     try:
-            #         facts, rules, questions = self.fol_to_lnn(fol)
-            #         result = api_reasoning_lnn.lnn_infer_from_facts_rules(facts, rules, questions)
-            #         print(f"Result: {result}")    
-            #     except Exception as e:
-            #         print(f"Failed to infer from FOL: {e}")
-            #         predictions.append('Fail_FOL_to_LNN')
-            #         continue
-            # except Exception as e:
-            #     print(f"Failed to convert NL to FOL: {e}")
-            #     predictions.append('Fail_NL_to_FOL')
-            #     continue
+                try:
+                    rules, facts, questions = self.fol_to_lnn(fol)
+                    result = api_reasoning_lnn.lnn_infer_from_facts_rules_result_only(facts=facts, rules=rules, questions=questions)
+                    print(f"Result: {result}")     
+                except Exception as e:
+                    print(f"Failed to infer from FOL: {e}")
+                    predictions.append('Fail_FOL_to_LNN')
+                    continue
+            except Exception as e:
+                print(f"Failed to convert NL to FOL: {e}")
+                predictions.append('Fail_NL_to_FOL')
+                continue
 
         return labels, predictions
         
