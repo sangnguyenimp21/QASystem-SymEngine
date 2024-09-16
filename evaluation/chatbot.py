@@ -1,6 +1,7 @@
 from abc import ABC, abstractmethod
 import requests
 from openai import OpenAI
+import google.generativeai as genai
 
 class ChatBot(ABC):
     def __init__(self, key: str='', base_url: str='', model_name: str='') -> None:
@@ -71,19 +72,14 @@ class GeminiChatbot(ChatBot):
         self.client = self.init_client()
 
     def init_client(self):
-        import google.generativeai as genai
         genai.configure(api_key=self.key)
         model = genai.GenerativeModel(self.model_name)
         return model
 
     def get_response(self, messages):
-        prompt = ''
-        for message in messages:
-            prompt += f"{message['content']}\n"
-        response = self.client.generate_content(prompt)
-
+        response = self.client.generate_content(messages)
         return response.text
-    
+
 class ChatBotFactory:
     @staticmethod
     def create_chatbot(chatbot_type: str, key: str='', base_url: str='', model_name: str='') -> ChatBot:
@@ -96,7 +92,9 @@ class ChatBotFactory:
             return OllamaChatbot(key, base_url, model_name)
         elif chatbot_type == 'gemsura':
             return GemsuraChatbot(key, base_url, model_name)
-        elif chatbot_type == 'gemini':
+        elif chatbot_type == "gemini":
+            key = "gemini" if key == "" else key
+            model_name = "gemini-1.0-pro" if model_name == "" else model_name
             return GeminiChatbot(key, base_url, model_name)
         else:
-            raise ValueError(f'Invalid chatbot type: {chatbot_type}')
+            raise ValueError(f"Invalid chatbot type: {chatbot_type}")
