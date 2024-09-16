@@ -24,7 +24,7 @@ class EvaluationPipeline(ABC):
         response_text = self.chatbot.get_response(messages)
 
         response_text = response_text.replace('```json\n', '').replace('```', '').strip()
-        
+
         return json.loads(response_text)
 
     def fol_to_lnn(self, fol):
