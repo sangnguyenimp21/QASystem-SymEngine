@@ -1,10 +1,10 @@
-from fol.fol import parse_fol_to_lnn
-from lnn.infer_answer import (
+from fol.first_order_logic import parse_fol_to_lnn
+from reasoning.infer_answer import (
     infer_answer_include_explanation,
     infer_answer_result_only,
     print_generalized_result,
 )
-from lnn.inference import inference
+from reasoning.inference import inference
 
 
 def lnn_infer_from_facts_rules(facts, rules, questions):

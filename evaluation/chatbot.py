@@ -1,6 +1,9 @@
 from abc import ABC, abstractmethod
 import requests
 from openai import OpenAI
+import google.generativeai as genai
+import os
+
 
 class ChatBot(ABC):
     def __init__(self, key: str='', base_url: str='', model_name: str='') -> None:
@@ -64,7 +67,28 @@ class GemsuraChatbot(ChatBot):
         text = response.json()['generated_text']
 
         return text
-    
+
+
+class GeminiChatbot(ChatBot):
+    def __init__(self, key: str = "", base_url: str = "", model_name: str = "") -> None:
+        super().__init__(key, base_url, model_name)
+
+    def init_client(self):
+        pass
+
+    def get_response(self, messages):
+        # genai.configure(self.key)
+        # model = genai.GenerativeModel(self.model_name)
+        # response = model.generate_content(messages)
+        # return response.text
+        key = self.key
+        model_name = self.model_name
+        genai.configure(api_key=key)
+        model = genai.GenerativeModel(model_name)
+        response = model.generate_content(messages)
+        return response.text
+
+
 class ChatBotFactory:
     @staticmethod
     def create_chatbot(chatbot_type: str, key: str='', base_url: str='', model_name: str='') -> ChatBot:
@@ -77,5 +101,10 @@ class ChatBotFactory:
             return OllamaChatbot(key, base_url, model_name)
         elif chatbot_type == 'gemsura':
             return GemsuraChatbot(key, base_url, model_name)
+        elif chatbot_type == "gemini":
+            key = "gemini" if key == "" else key
+            base_url = "http://localhost:11434/v1" if base_url == "" else base_url
+            model_name = "gemini-1.0-pro" if model_name == "" else model_name
+            return GeminiChatbot(key, base_url, model_name)
         else:
-            raise ValueError(f'Invalid chatbot type: {chatbot_type}')
+            raise ValueError(f"Invalid chatbot type: {chatbot_type}")

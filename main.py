@@ -1,5 +1,5 @@
 # Ví dụ sử dụng hàm
-from lnn.api_reasoning_lnn import (
+from reasoning.api_reasoning_lnn import (
     lnn_infer_from_facts_rules_result_only,
 )
 from fol.save_load_fol import *

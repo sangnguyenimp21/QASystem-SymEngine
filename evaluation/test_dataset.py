@@ -1,3 +1,4 @@
+import json
 import os
 from abc import ABC, abstractmethod
 from typing import List
@@ -187,5 +188,209 @@ class LogiQADataset(TestDataset):
     
     def get_data_directory(self):
         return self.data_directory
-    
-    
+
+
+class FOLIODataset(TestDataset):
+    def __init__(
+        self,
+        max_size=None,
+        destination="./data",
+        file_names: List[str] = ["folio-validation.jsonl"],
+    ):
+        super().__init__(max_size, destination, file_names)
+        self.data_directory = f"{destination}/FOLIO"
+        # self.download_dataset()
+        self.data = self.read_dataset()
+
+    def __getitem__(self, index):
+        return self.data[index]
+
+    def __len__(self):
+        if self.max_size:
+            return self.max_size
+        return len(self.data)
+
+    def download_dataset(self):
+        """
+        Downloads the dataset from a remote location and saves it to the specified destination.
+        Returns:
+            None
+        Raises:
+            None
+        """
+        destination = self.data_directory
+        os.makedirs(destination, exist_ok=True)
+        for file_name in self.file_names:
+            if os.path.exists(f"{destination}/{file_name}"):
+                continue
+
+            # https://github.com/Yale-LILY/FOLIO/blob/main/data/v0.0/folio-train.jsonl
+            url = f"https://github.com/Yale-LILY/FOLIO/blob/main/data/v0.0/{file_name}"
+            output_path = f"{destination}/{file_name}"
+            response = requests.get(url, allow_redirects=True)
+
+            if response.status_code != 200:
+                print(f"Failed to download {file_name}")
+                continue
+
+            with open(output_path, mode="wb") as file:
+                file.write(response.content)
+
+    def read_dataset(self):
+        """
+        Reads the dataset from the specified destination.
+        Returns:
+            data: List of dictionaries containing the question, answer1, answer2, answer3, answer4, and label.
+        Raises:
+            ValueError: If the file type is not supported
+        """
+        destination = f"{self.destination}/FOLIO"
+        data = []
+        for file_name in self.file_names:
+            # check type is jsonl or txt
+            if file_name.endswith(".jsonl"):
+                current_file_path = os.path.abspath(__file__)
+                current_directory = os.path.dirname(current_file_path)
+                parent_directory = os.path.dirname(current_directory)
+                jsonl_data = pd.read_json(
+                    f"{parent_directory}/{destination}/{file_name}", lines=True
+                )
+                for index, row in jsonl_data.iterrows():
+                    data.append(
+                        {
+                            "premises": row["premises"],
+                            "premises-FOL": row["premises-FOL"],
+                            "question": row["conclusion"],
+                            "question-FOL": row["conclusion-FOL"],
+                            "label": row["label"],
+                        }
+                    )
+                    if self.max_size and len(data) >= self.max_size:
+                        break
+                if self.max_size and len(data) >= self.max_size:
+                    break
+            else:
+                raise ValueError(f"Unsupported file type: {file_name}")
+        return data
+
+    def build_initial_prompt(self, data):
+        prompt1 = f"""
+                This is a mission related to First Order Logic.
+                Based on the provided "premises", "premises-FOL", "Question", "Question-FOL". Create facts.
+
+                The output must be in JSON format and has the following fields:
+                * `facts`: dictionary like `{{"Predicate": {{"variable": "value"}}}}` (value can be "TRUE", "FALSE", or "UNKNOWN")
+                
+                IMPORTANT NOTES:
+                * Facts are taken from both "premises", "premises-FOL", "Question", "Question-FOL".
+                * Facts must contain all predicates specified in "premises-FOL" and "Question-FOL". 
+                * The negation symbol in a query is denoted by "¬"
+
+                --- Start of Example ---
+                # NL:
+                "premises": [
+                    "William Dickinson là một chính trị gia người Anh đã ngồi trong Hạ viện",
+                    "William Dickinson học trung học tại trường Westminster và sau đó học Đại học Edinburgh.",
+                    "Đại học Edinburgh là một trường đại học nằm ở Vương quốc Anh.",
+                    "William Dickinson ủng hộ Portland Whigs.",
+                    "Những người ủng hộ Portland Whigs không giành được ghế trong Quốc hội.",
+                ],
+                
+                "premises-FOL": [
+                    "BritishPolitician(williamdickinson) ∧ SatInHouseOfCommons(williamdickinson)",
+                    "Attended(williamdickinson, westminster) ∧ Highschool(westminster) ∧ Attended(williamdickinson, universityofedinburgh)",
+                    "LocatedIn(universityofedinburgh, unitedkingdom) ∧ University(universityofedinburgh)",
+                    "Supported(williamdickinson, portlandwhigs)",
+                    "∀x (Supported(x, portlandwhigs) → ¬SeatInParliament(x))",
+                ],
+
+                "Question": "William Dickinson đã học tại các trường nằm ở Vương quốc Anh cho cả trung học và đại học."
+                "Question-FOL": "Attended(williamdickinson, universityofedinburgh) ∧ LocatedIn(universityofedinburgh, unitedkingdom) ∧ University(universityofedinburgh)"
+
+                # FOL translation:
+                {{
+                    'facts': {{
+                        BritishPolitician: {{"williamdickinson": "TRUE"}},
+                        SatInHouseOfCommons: {{"williamdickinson": "TRUE"}},
+                        Attended: {{
+                            ("williamdickinson", "westminster"): "TRUE",
+                            ("williamdickinson", "universityofedinburgh"): "TRUE",
+                        }},
+                        Highschool: {{"westminster": "TRUE"}},
+                        University: {{"universityofedinburgh": "TRUE"}},
+                        LocatedIn: {{("universityofedinburgh", "unitedkingdom"): "TRUE"}},
+                        Supported: {{("williamdickinson", "portlandwhigs"): "TRUE"}},
+                        SeatInParliament: {{
+                            ("williamdickinson",): "FALSE"
+                        }}
+                    }}
+                }}
+                --- End of Example ---
+
+                Return only output as JSON format, don't include any explaination.
+                
+        # NL:
+        Context: {data['premises']}
+
+        Question: {data['premises-FOL']}
+
+        Context: {data['question']}
+
+        Question: {data['question-FOL']}
+
+        # FOL translation:
+
+        """
+
+        prompt = f"""
+                This is a mission related to First Order Logic.
+                Please create facts for the FOL below.
+
+                Note: Facts should be in a dictionary format like {{"Predicate": {{"variable": "value"}}}} (where value can be "TRUE", "FALSE", or "UNKNOWN"). If the facts for a predicate have more than two arguments, they must be in the form {{"Predicate": {{"(variable1, variable2)": "value"}}}}.
+
+                Variables in statements with quantifiers should not be added to the facts. For example, in "∀x (Rabbit(x) → Cute(x))", x does not need to be listed in the facts.
+
+                Add to the facts only when there is specific information available.
+                
+                                --- Start of Example ---
+                # NL:
+                "premises": [
+                    "A Japanese game company created the game the Legend of Zelda.",
+                    "All games in the Top 10 list are made by Japanese game companies.",
+                    "[BG] If a game sells more than one million copies, then it will be selected into the Top 10 list.",
+                    "The Legend of Zelda sold more than one million copies.",
+                ],
+                
+                "premises-FOL": [
+                    "∃x (Japanese(x) ∧ VideoGameCompany(x) ∧ Game(thelegendofzelda) ∧ Created(x, thelegendofzelda))",
+                    "∀x ∀y (Game(x) ∧ InTop10(x) ∧ Created(x, y) → Japanese(y))",
+                    "∀x (Game(x) ∧ SellsMoreThan(x, onemillioncopies) → Top10(x))",
+                    "SellsMoreThan(thelegendofzelda, onemillioncopies)"
+                ],
+
+                # Facts translation:
+                {{
+                    'facts' = {{
+                        "Japanese": {{}},  # No information on specific Japanese companies
+                        "VideoGameCompany": {{}},  # No information about specific game company
+                        "Game": {{("thelegendofzelda"): "TRUE"}},  # The Legend of Zelda is a game
+                        "Created": {{("x", "thelegendofzelda"): "TRUE"}}, # From "A Japanese game company that created the game The Legend of Zelda."
+                        "InTop10": {{}},  # No specific information about the game in the Top 10
+                        "SellsMoreThan": {{("thelegendofzelda", "onemillioncopies"): "TRUE"}}  # The Legend of Zelda sells over a million copies
+                    }}
+                }}
+                --- End of Example ---
+
+                Return only output as JSON format, don't include any explaination.
+                
+        # NL:
+        Context: {data['premises']}
+
+        Question: {data['premises-FOL']}
+
+        # Facts translation:
+        """
+        return prompt
+
+    def get_data_directory(self):
+        return self.data_directory
