@@ -24,6 +24,8 @@ class EvaluationPipeline(ABC):
         response_text = self.chatbot.get_response(messages)
 
         response_text = response_text.replace('```json\n', '').replace('```', '').strip()
+
+        print(response_text)
         
         return json.loads(response_text)
 

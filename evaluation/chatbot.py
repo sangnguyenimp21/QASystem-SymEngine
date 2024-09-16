@@ -65,6 +65,25 @@ class GemsuraChatbot(ChatBot):
 
         return text
     
+class GeminiChatbot(ChatBot):
+    def __init__(self, key: str='', base_url: str='', model_name: str='') -> None:
+        super().__init__(key, base_url, model_name)
+        self.client = self.init_client()
+
+    def init_client(self):
+        import google.generativeai as genai
+        genai.configure(api_key=self.key)
+        model = genai.GenerativeModel(self.model_name)
+        return model
+
+    def get_response(self, messages):
+        prompt = ''
+        for message in messages:
+            prompt += f"{message['content']}\n"
+        response = self.client.generate_content(prompt)
+
+        return response.text
+    
 class ChatBotFactory:
     @staticmethod
     def create_chatbot(chatbot_type: str, key: str='', base_url: str='', model_name: str='') -> ChatBot:
@@ -77,5 +96,7 @@ class ChatBotFactory:
             return OllamaChatbot(key, base_url, model_name)
         elif chatbot_type == 'gemsura':
             return GemsuraChatbot(key, base_url, model_name)
+        elif chatbot_type == 'gemini':
+            return GeminiChatbot(key, base_url, model_name)
         else:
             raise ValueError(f'Invalid chatbot type: {chatbot_type}')
