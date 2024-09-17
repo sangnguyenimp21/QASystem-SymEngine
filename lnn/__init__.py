@@ -15,7 +15,6 @@ from .utils import (
     pretty_truth_table,
 )
 
-from ..reasoning.api_reasoning_lnn import lnn_infer_from_facts_rules_result_only
 from . import symbolic
 from .symbolic.logic import (
     And,
