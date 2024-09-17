@@ -1,5 +1,5 @@
 from fol.save_load_fol import FOLDataLoader
-from lnn.api_reasoning_lnn import *
+from reasoning.api_reasoning_lnn import *
 from .models import LNNReasoningModel
 
 def lnn_reasoning(item: LNNReasoningModel, using_explanation: bool = False):
