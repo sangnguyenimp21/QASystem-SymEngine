@@ -1,0 +1,614 @@
+[
+    {
+        "question-FOL": "Engaged(bonnie)"
+    },
+    {
+        "question-FOL": "AcademicCareer(bonnie) ∨ Chaperone(bonnie) → AcademicCareer(bonnie) ∨ Inactive(bonnie)"
+    },
+    {
+        "question-FOL": "Chaperone(bonnie) ∨ TalentShows(bonnie) → AcademicCareer(bonnie) ∧ Inactive(bonnie)"
+    },
+    {
+        "question-FOL": "LunchInCompany(james)"
+    },
+    {
+        "question-FOL": "¬LunchInCompany(james)"
+    },
+    {
+        "question-FOL": "(Manager(james) ∧ InOtherCountries(james)) → (LunchAtHome(james) ∧ WorkRemotelyFromHome(james))"
+    },
+    {
+        "question-FOL": "∃x Animal(x)"
+    },
+    {
+        "question-FOL": "∀x Human(x) → ¬Flu(x)"
+    },
+    {
+        "question-FOL": "∃x GetMonkeypox(x) ∧ Coughing(x)"
+    },
+    {
+        "question-FOL": "Ocellated(tom)"
+    },
+    {
+        "question-FOL": "Eastern(tom)"
+    },
+    {
+        "question-FOL": "WildTurkey(joey)"
+    },
+    {
+        "question-FOL": "Top10(thelegendofzelda)"
+    },
+    {
+        "question-FOL": "∀x Created(fifa22, x) → Japanese(x) ∧ VideoGameCompany(x)"
+    },
+    {
+        "question-FOL": "¬Top10(thelegendofzelda)"
+    },
+    {
+        "question-FOL": "∀x Square(x) → IsShape(x)"
+    },
+    {
+        "question-FOL": "Turtle(rock)"
+    },
+    {
+        "question-FOL": "¬Turtle(rock)"
+    },
+    {
+        "question-FOL": "Turtle(rock) ∨ Cute(rock)"
+    },
+    {
+        "question-FOL": "¬(Turtle(rock) ∧ Squirrel(rock)) → Cute(rock) ∨ Skittish(rock)"
+    },
+    {
+        "question-FOL": "Cute(rock) ∧ Still(rock) → Turtle(rock) ∧ Skittish(rock)"
+    },
+    {
+        "question-FOL": "Share(strangerThings, lisa)"
+    },
+    {
+        "question-FOL": "Popular(blackMirror)"
+    },
+    {
+        "question-FOL": "Share(blackMirror, lisa)"
+    },
+    {
+        "question-FOL": "Hosted(beijing, summer2008olympic) ∧ Hosted(beijing, winterolympic)"
+    },
+    {
+        "question-FOL": "InSouthernChina(beijing)"
+    },
+    {
+        "question-FOL": "SecondLargestChineseCity(beijing)"
+    },
+    {
+        "question-FOL": "Alien(marvin)"
+    },
+    {
+        "question-FOL": "¬Human(marvin) ∧ ¬FromMars(marvin)"
+    },
+    {
+        "question-FOL": "¬FromMars(marvin) → Human(marvin)"
+    },
+    {
+        "question-FOL": "GrandSlamChampion(djokovic)"
+    },
+    {
+        "question-FOL": "LivesInTaxHaven(djokovic)"
+    },
+    {
+        "question-FOL": "¬LivesInTaxHaven(djokovic)"
+    },
+    {
+        "question-FOL": "∃x Leads(roderickstrong, x) ∧ ProfessionalWrestlingStable(x)"
+    },
+    {
+        "question-FOL": "Leads(roderickstrong, creedbrothers)"
+    },
+    {
+        "question-FOL": "∀x ProfessionalWrestlingStable(x) ∧ Includes(x, ivynile) → ¬HasFeud(imperium, x)"
+    },
+    {
+        "question-FOL": "Composer(beethoven)"
+    },
+    {
+        "question-FOL": "∃x ∃y Orchestra(x) ∧ MusicPiece(y) ∧ Premiered(x, y)"
+    },
+    {
+        "question-FOL": "¬Conductor(beethoven)"
+    },
+    {
+        "question-FOL": "MassProductDesign(aDesignByMax)"
+    },
+    {
+        "question-FOL": "Evocative(aDesignByMax) ∧ Dreamy(aDesignByMax)"
+    },
+    {
+        "question-FOL": "Evocative(aDesignByMax) ∨ Dreamy(aDesignByMax)"
+    },
+    {
+        "question-FOL": "AmongMostActivePlayersInMajorTennis(cocoGauff)"
+    },
+    {
+        "question-FOL": "LostToRafaelNadal(cocoGauff)"
+    },
+    {
+        "question-FOL": "¬LostToIgaŚwiątek(cocoGauff) ∨ ¬AmongMostActivePlayersInMajorTennis(cocoGauff)"
+    },
+    {
+        "question-FOL": "∀x Pet(x) → ¬Cat(x)"
+    },
+    {
+        "question-FOL": "Love(james, summer)"
+    },
+    {
+        "question-FOL": "Love(james, fall)"
+    },
+    {
+        "question-FOL": "Love(mia, spring)"
+    },
+    {
+        "question-FOL": "PrintedText(y1984)"
+    },
+    {
+        "question-FOL": "StreamingService(y1984)"
+    },
+    {
+        "question-FOL": "¬StreamingService(y1984)"
+    },
+    {
+        "question-FOL": "RomanceLanguage(basque)"
+    },
+    {
+        "question-FOL": "RomanceLanguage(german)"
+    },
+    {
+        "question-FOL": "IndoEuropeanLanguage(french)"
+    },
+    {
+        "question-FOL": "IsSoccerPlayer(robertLewandowski)"
+    },
+    {
+        "question-FOL": "PlaysForTeam(robertLewandowski, bayernMunchen)"
+    },
+    {
+        "question-FOL": "IsSoccerStar(robertLewandowski)"
+    },
+    {
+        "question-FOL": "∃x CityIn(butte, x) ∧ CityIn(pierre, x)"
+    },
+    {
+        "question-FOL": "∃x CityIn(pierre, x) ∧ CityIn(bismarck, x)"
+    },
+    {
+        "question-FOL": "CityIn(missoula, montana)"
+    },
+    {
+        "question-FOL": "F1(mike)"
+    },
+    {
+        "question-FOL": "J1(mike)"
+    },
+    {
+        "question-FOL": "Pet(ted)"
+    },
+    {
+        "question-FOL": "Pet(ted) ∧ Cow(ted)"
+    },
+    {
+        "question-FOL": "Cow(ted) → ¬Pet(ted)"
+    },
+    {
+        "question-FOL": "∃x PrivateIvyLeagueResearchUniversity(x) ∧ MovedTo(x, newhaven)"
+    },
+    {
+        "question-FOL": "LargestUniversityEndowmentOf(yale, anyeducationalinstitution)"
+    },
+    {
+        "question-FOL": "ResidentialCollege(piersoncollege) ∧ AtYale(piersoncollege)"
+    },
+    {
+        "question-FOL": "∃x ScriptEditorFor(andrewcollins, x) ∧ Series(x) ∧ WorkingTitle(thesecretdudesociety, x)"
+    },
+    {
+        "question-FOL": "∀x ∀y MemberOf(x, pappys) ∧ Starring(y, x) → ¬(PilotedOn(y, bbctwo) ∨ PilotedOn(y, bbcthree))"
+    },
+    {
+        "question-FOL": "Companies’Stocks(kO)"
+    },
+    {
+        "question-FOL": "Companies’Stocks(kO) ∧ GrowthCompanies’Stocks(kO)"
+    },
+    {
+        "question-FOL": "GrowthCompanies’Stocks(kO) ∨ PriceVolatile(kO) → ¬Companies’Stocks(kO) ∨ ¬PriceVolatile(kO)"
+    },
+    {
+        "question-FOL": "Beginwith(joe, number34)"
+    },
+    {
+        "question-FOL": "Vehicleregistrationplate(tom, istanbul)"
+    },
+    {
+        "question-FOL": "Tuition(mary)"
+    },
+    {
+        "question-FOL": "NotPicky(mary) ∧ Eating(mary)"
+    },
+    {
+        "question-FOL": "NotPicky(mary) ∨ Eating(mary)"
+    },
+    {
+        "question-FOL": "ProductsOfBakedByMelissa(driedThaiChilies)"
+    },
+    {
+        "question-FOL": "¬ProductsOfBakedByMelissa(driedThaiChilies)"
+    },
+    {
+        "question-FOL": "Hotpot(driedThaiChilies)"
+    },
+    {
+        "question-FOL": "¬ProductsOfBakedByMelissa(driedThaiChilies) ∧ ¬Bakery(driedThaiChilies)"
+    },
+    {
+        "question-FOL": "Cupcake(driedThaiChilies) ∧ ProductsOfBakedByMelissa(driedThaiChilies)"
+    },
+    {
+        "question-FOL": "NoTakeOutService(subway)"
+    },
+    {
+        "question-FOL": "¬(NoTakeOutService(subway) ∧ NegativeReview(subway))"
+    },
+    {
+        "question-FOL": "¬(NoTakeOutService(subway) ∧ NegativeReview(subway)) → PopularAmongLocalResidents(subway) ∧ NoTakeOutService(subway)"
+    },
+    {
+        "question-FOL": "∀x ∀y SuperheroMovie(x) ∧ AppearsIn(y, x) → GoodGuy(y)"
+    },
+    {
+        "question-FOL": "Knowledge(walden)"
+    },
+    {
+        "question-FOL": "Smarter(harry)"
+    },
+    {
+        "question-FOL": "∀x Smarter(x) → GainKnowledge(x)"
+    },
+    {
+        "question-FOL": "NLG(machineTranslation)"
+    },
+    {
+        "question-FOL": "NLU(machineTranslation)"
+    },
+    {
+        "question-FOL": "TomRent(oliveGarden)"
+    },
+    {
+        "question-FOL": "AllowPet(oliveGarden)"
+    },
+    {
+        "question-FOL": "DepositNoLessThan2000(oliveGarden)"
+    },
+    {
+        "question-FOL": "LoveToSleep(koala)"
+    },
+    {
+        "question-FOL": "LoveToSleep(koala) ∧ Quokka(koala)"
+    },
+    {
+        "question-FOL": "Quokka(koala) → LoveToSleep(koala) ∨ VeryFluffy(koala)"
+    },
+    {
+        "question-FOL": "CEO(harry)"
+    },
+    {
+        "question-FOL": "Kind(harry) ∨ CEO(harry)"
+    },
+    {
+        "question-FOL": "(Evil(harry) ∧ Ugly(harry)) ∨ (¬Evil(harry) ∧ ¬Ugly(harry)) → ¬Kind(harry) ∧ ¬CEO(harry)"
+    },
+    {
+        "question-FOL": "Playing(luke)"
+    },
+    {
+        "question-FOL": "Complain(luke)"
+    },
+    {
+        "question-FOL": "¬(TwinTriplet(luke) ∨ Complain(luke))"
+    },
+    {
+        "question-FOL": "FinancialAid(tom)"
+    },
+    {
+        "question-FOL": "CostBelow300(gre)"
+    },
+    {
+        "question-FOL": "¬(∃x FinancialAid(x))"
+    },
+    {
+        "question-FOL": "Tidy(peter)"
+    },
+    {
+        "question-FOL": "Foodie(peter) ∨ HighIncome(peter)"
+    },
+    {
+        "question-FOL": "(Foodie(peter) ∧ HighIncome(peter)) ∨ (¬Foodie(peter) ∧ ¬HighIncome(peter))"
+    },
+    {
+        "question-FOL": "∃x Evergreen(x) ∧ ¬ObjectOfWorship(x)"
+    },
+    {
+        "question-FOL": "∃x Visited(juandeonate, x) ∧ MountainRange(x) ∧ In(x, newmexico)"
+    },
+    {
+        "question-FOL": "∃x Visited(juandeonate, x) ∧ MountainRange(x) ∧ In(x, texas)"
+    },
+    {
+        "question-FOL": "∀x MountainRange(x) ∧ In(hardingpegmatitemine, x) → ¬In(x, newmexico)"
+    },
+    {
+        "question-FOL": "∃x IsMan(x) ∧ SameClass(x, michael) ∧ ¬Be(x, michael) ∧ ¬Taller(peter, x)"
+    },
+    {
+        "question-FOL": "GreatShooter(windy)"
+    },
+    {
+        "question-FOL": "CanBlock(peter, windy)"
+    },
+    {
+        "question-FOL": "∀x Locate(x, antarctica) → NameAfter(barutin, x)"
+    },
+    {
+        "question-FOL": "∃x ∃y Cove(x) ∧ NameAfter(x, y) ∧ Locate(y, bulgaria)"
+    },
+    {
+        "question-FOL": "¬Locate(barutin, antarctica)"
+    },
+    {
+        "question-FOL": "∃x Affection(x) ∧ Positive(x)"
+    },
+    {
+        "question-FOL": "Airline(greyhound)"
+    },
+    {
+        "question-FOL": "Boeing707(greyhound)"
+    },
+    {
+        "question-FOL": "¬Boeing707(greyhound)"
+    },
+    {
+        "question-FOL": "Monkey(rock)"
+    },
+    {
+        "question-FOL": "HaveWings(rock)"
+    },
+    {
+        "question-FOL": "¬HaveWings(rock)"
+    },
+    {
+        "question-FOL": "WellAttended(john)"
+    },
+    {
+        "question-FOL": "¬WellAttended(john)"
+    },
+    {
+        "question-FOL": "Child(john)"
+    },
+    {
+        "question-FOL": "¬(WellAttended(john) ∨ July(john))"
+    },
+    {
+        "question-FOL": "Mammal(platypus) ∧ ¬Have(platypus, teeth)"
+    },
+    {
+        "question-FOL": "Reptile(platypus)"
+    },
+    {
+        "question-FOL": "Mammal(humans)"
+    },
+    {
+        "question-FOL": "Suck(space)"
+    },
+    {
+        "question-FOL": "Vampire(space)"
+    },
+    {
+        "question-FOL": "∀x HouseHoldApp(x) → Suck(x)"
+    },
+    {
+        "question-FOL": "TrainTextSumModel(supervisedLearning)"
+    },
+    {
+        "question-FOL": "TrainTextSumModel(unsupervisedLearning)"
+    },
+    {
+        "question-FOL": "Love(children, ben)"
+    },
+    {
+        "question-FOL": "Ugly(ben) ∨ Yellow(ben)"
+    },
+    {
+        "question-FOL": "(Yellow(ben) ∧ Ugly(ben)) ∨ (¬Yellow(ben) ∧ ¬Ugly(ben))"
+    },
+    {
+        "question-FOL": "∃x HeckCattle(x) ∧ ArtificiallySelect(x)"
+    },
+    {
+        "question-FOL": "∀x Aurochs(x) → Extinct(x)"
+    },
+    {
+        "question-FOL": "Young(jerry)"
+    },
+    {
+        "question-FOL": "¬Young(jerry)"
+    },
+    {
+        "question-FOL": "Human(rose) ∨ Manager(rose)"
+    },
+    {
+        "question-FOL": "Human(rose) ∨ Manager(jerry)"
+    },
+    {
+        "question-FOL": "¬(Student(rose) ∧ Human(jerry))"
+    },
+    {
+        "question-FOL": "Book(neapolitanchronicles) ∧ In(neapolitanchronicles, english)"
+    },
+    {
+        "question-FOL": "PublishedBy(harrrypotter, newvesselpress)"
+    },
+    {
+        "question-FOL": "TranslatedFrom(palaceofflies, italian)"
+    },
+    {
+        "question-FOL": "OfficeStore(remy)"
+    },
+    {
+        "question-FOL": "HomeOffice(remy) ∧ OfficeStore(remy)"
+    },
+    {
+        "question-FOL": "Late(remy) ∨ OfficeStore(remy) → ¬(Tidying(remy) ∨ HomeOffice(remy))"
+    },
+    {
+        "question-FOL": "∃x Greek(x) ∧ Mortal(x)"
+    },
+    {
+        "question-FOL": "PartTime(james)"
+    },
+    {
+        "question-FOL": "¬PartTime(james)"
+    },
+    {
+        "question-FOL": "Database(james) ∨ PartTime(james)"
+    },
+    {
+        "question-FOL": "Database(jack)"
+    },
+    {
+        "question-FOL": "(LikesMusic(george) ∧ AccesstoProgram(george)) → WillCompose(george)"
+    },
+    {
+        "question-FOL": "¬WantsToCompose(george) → ¬WillCompose(george)"
+    },
+    {
+        "question-FOL": "∀x Bird(x) → Lands(x)"
+    },
+    {
+        "question-FOL": "Mondayat8(breakingbad)"
+    },
+    {
+        "question-FOL": "Mondayat8(breakingbad) ∧ RoseGivenOutOnTv(breakingbad)"
+    },
+    {
+        "question-FOL": "RoseGivenOutOnTv(breakingbad) → Mondayat8(breakingbad)"
+    },
+    {
+        "question-FOL": "From(heinrichScmidt, naziGermany) ∨ From(heinrichScmidt, russia)"
+    },
+    {
+        "question-FOL": "∃x From(x, naziGermany) ∧ Politician(x) ∧ Member(x, prussianStateParliament) ∧ Member(x, naziReichstag)"
+    },
+    {
+        "question-FOL": "∀x Politician(x) → ¬Member(x, naziReichstag)"
+    },
+    {
+        "question-FOL": "SevereCancer(colorectalCancer)"
+    },
+    {
+        "question-FOL": "BileDuctCancer(colorectalCancer) ∨ Cholangiocarcinoma(colorectalCancer) → BileDuctCancer(colorectalCancer) ∧ MildFlu(colorectalCancer)"
+    },
+    {
+        "question-FOL": "¬MildFlu(colorectalCancer) ∨ ¬Cholangiocarcinoma(colorectalCancer) → BileDuctCancer(colorectalCancer) ∨ Cholangiocarcinoma(colorectalCancer)"
+    },
+    {
+        "question-FOL": "Salad(taylor)"
+    },
+    {
+        "question-FOL": "Gym(taylor)"
+    },
+    {
+        "question-FOL": "¬(HealthyChildhood(taylor) ∨ Gym(taylor))"
+    },
+    {
+        "question-FOL": "SportingEvent(champs)"
+    },
+    {
+        "question-FOL": "¬LastOlympics(tokyo)"
+    },
+    {
+        "question-FOL": "∃x LastOlympics(x) ∧ MostMedals(unitedStates, x)"
+    },
+    {
+        "question-FOL": "∃x Human(x) ∧ Horse(x)"
+    },
+    {
+        "question-FOL": "FlyFrom(susan, lga)"
+    },
+    {
+        "question-FOL": "FlyTo(john, lga)"
+    },
+    {
+        "question-FOL": "Grumpy(tom)"
+    },
+    {
+        "question-FOL": "¬(Grumpy(tom) ∧ Mean(tom))"
+    },
+    {
+        "question-FOL": "¬(Grumpy(tom) ∧ Mean(tom)) → ¬(Grumpy(tom) ∨ AnimalLover(tom))"
+    },
+    {
+        "question-FOL": "WritesNovel(dani_Shapiro)"
+    },
+    {
+        "question-FOL": "IsNovel(family_Secrets)"
+    },
+    {
+        "question-FOL": "BornIn(dani_Shapiro, boston)"
+    },
+    {
+        "question-FOL": "American(yuri)"
+    },
+    {
+        "question-FOL": "¬(American(yuri) ∧ BasketballPlayer(yuri))"
+    },
+    {
+        "question-FOL": "American(yuri) ∧ BasketballPlayer(yuri)"
+    },
+    {
+        "question-FOL": "¬WearLargeShoes(yuri) → (American(yuri) ∧ BasketballPlayer(yuri))"
+    },
+    {
+        "question-FOL": "¬(American(yuri) ∧ BasketballPlayer(yuri)) → BasketballPlayer(yuri)"
+    },
+    {
+        "question-FOL": "∀x Event(x) → Sad(x)"
+    },
+    {
+        "question-FOL": "¬Winner(maurier, steinhauer)"
+    },
+    {
+        "question-FOL": "SixWayTie(descampe)"
+    },
+    {
+        "question-FOL": "Terricolous(kiki)"
+    },
+    {
+        "question-FOL": "Bark(kiki) ∧ Dog(kiki)"
+    },
+    {
+        "question-FOL": "¬Bark(kiki) ∧ ¬Dog(kiki)"
+    },
+    {
+        "question-FOL": "∀x PlaysFor(x, nautico) → ¬Brazilian(x)"
+    },
+    {
+        "question-FOL": "∀x FootballClub(x) → ¬PlaysFor(ailtonsilva, x)"
+    },
+    {
+        "question-FOL": "∀x FootballClub(x) → ¬LoanedTo(ailton, x)"
+    },
+    {
+        "question-FOL": "PlaysFor(ailtonsilva, fluminense)"
+    },
+    {
+        "question-FOL": "∃x FootballClub(x) ∧ LoanedTo(ailtonsilva, x)"
+    }
+]
