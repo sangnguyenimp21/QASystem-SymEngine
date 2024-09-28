@@ -1,16 +1,30 @@
-{
-    "expression": [
-        "∀x,Karen,(NetflixShow(x) ∧ Popular(x) → BingeWatch(Karen, x))",
-        "∀x,Karen,(NetflixShow(x) ∧ IsBlackMirror(x) → ¬Download(Karen, x))",
-        "∀x,Karen,Lisa,(NetflixShow(x) ∧ BingeWatch(Karen, x) → Share(x, Lisa) ∧ Download(Karen, x))"
-    ],
-    "facts": {
-        "NetflixShow": {"strangerThings": "TRUE", "blackMirror": "TRUE"},
-        "Popular": {"strangerThings": "TRUE", "blackMirror": "UNKNOWN"},
-        "BingeWatch": {"karen-strangerThings": "UNKNOWN"},
-        "Download": {"karen-strangerThings": "UNKNOWN", "karen-blackMirror": "UNKNOWN"},
-        "Share": {"strangerThings-lisa": "UNKNOWN", "blackMirror-lisa": "UNKNOWN"},
-        "IsBlackMirror": {"blackMirror": "TRUE"}
-    },
-    "question": {"Popular": "blackMirror", "¬Popular": "blackMirror", "Download": "karen-blackMirror", "Share": "strangerThings-lisa"}
-}
+    {
+        "premises": [
+            "All vehicle registration plates in Istanbul begin with the number 34.",
+            "Plates that do not begin with the number 34 are not from Istanbul. ",
+            "Joe's vehicle registration plate is from Istanbul. ",
+            "Tom's license plate begins with the number 35. ",
+            "[BG] If a license plate begins with the number 35, then it does not begin with the number 34."
+        ],
+        "expression": [
+            "∀x,(Vehicleregistrationplate(x, istanbul) → Beginwith(x, number34))",
+            "∀x, (¬Beginwith(x, number34) → ¬FromIstanbul(x))",
+            "Vehicleregistrationplate(joe, istanbul)",
+            "Beginwith(tom, number35)",
+            "∀x,(Beginwith(x, number35) → ¬Beginwith(x, number34))"
+        ],
+        "conclusion": "Joe's license plate begins with the number 34.",
+        "question": "Beginwith(joe, number34)",
+        "label": "True",
+        "facts": {
+            "Vehicleregistrationplate": {
+                "(joe, istanbul)": "TRUE",
+                "(x, istanbul)": "UNKNOWN"
+            },
+            "Beginwith": {
+                "(tom, number35)": "TRUE",
+                "(x, number34)": "UNKNOWN",
+                "(x, number35)": "UNKNOWN"
+            }
+        }
+    }

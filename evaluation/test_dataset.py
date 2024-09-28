@@ -10,7 +10,7 @@ load_dotenv()
 
 
 class TestDataset(ABC):
-    def __init__(self, max_size=None, destination='./data', file_names: List[str] = []):
+    def __init__(self, max_size=None, destination="./data", file_names: List[str] = []):
         self.max_size = max_size
         self.destination = destination
         self.file_names = file_names
@@ -28,13 +28,23 @@ class TestDataset(ABC):
         pass
 
     @abstractmethod
+    def get_data_record(self):
+        pass
+
+    @abstractmethod
     def build_initial_prompt(self, data):
         pass
 
+
 class LogiQADataset(TestDataset):
-    def __init__(self, max_size=None, destination='./data', file_names: List[str] = ['test_fol.jsonl']):
+    def __init__(
+        self,
+        max_size=None,
+        destination="./data",
+        file_names: List[str] = ["test_fol.jsonl"],
+    ):
         super().__init__(max_size, destination, file_names)
-        self.data_directory = f'{destination}/logiQA_2.0'
+        self.data_directory = f"{destination}/logiQA_2.0"
         self.download_dataset()
         self.data = self.read_dataset()
 
@@ -45,7 +55,7 @@ class LogiQADataset(TestDataset):
         if self.max_size:
             return self.max_size
         return len(self.data)
-        
+
     def download_dataset(self):
         """
         Downloads the dataset from a remote location and saves it to the specified destination.
@@ -64,7 +74,7 @@ class LogiQADataset(TestDataset):
             url = f"https://raw.githubusercontent.com/csitfun/LogiQA2.0/main/logiqa/DATA/LOGIQA/{file_name}"
             output_path = f"{destination}/{file_name}"
             response = requests.get(url, allow_redirects=True)
-            
+
             if response.status_code != 200:
                 print(f"Failed to download {file_name}")
                 continue
@@ -80,19 +90,21 @@ class LogiQADataset(TestDataset):
         Raises:
             ValueError: If the file type is not supported
         """
-        destination = f'{self.destination}/logiQA_2.0'
+        destination = f"{self.destination}/logiQA_2.0"
         data = []
         for file_name in self.file_names:
             # check type is jsonl or txt
-            if file_name.endswith('.jsonl'):
-                jsonl_data = pd.read_json(f'{destination}/{file_name}', lines=True)
+            if file_name.endswith(".jsonl"):
+                jsonl_data = pd.read_json(f"{destination}/{file_name}", lines=True)
                 for index, row in jsonl_data.iterrows():
-                    data.append({
-                        'text': row['text'],
-                        'question': row['question'],
-                        'options': row['options'],
-                        'label': row['label']
-                    })
+                    data.append(
+                        {
+                            "text": row["text"],
+                            "question": row["question"],
+                            "options": row["options"],
+                            "label": row["label"],
+                        }
+                    )
                     if self.max_size and len(data) >= self.max_size:
                         break
                 if self.max_size and len(data) >= self.max_size:
@@ -100,7 +112,7 @@ class LogiQADataset(TestDataset):
             else:
                 raise ValueError(f"Unsupported file type: {file_name}")
         return data
-    
+
     def build_initial_prompt(self, data):
         prompt = f"""
         Your task is to convert the following natural language (NL) question and answers to first order logic (FOL) representation.
@@ -179,13 +191,13 @@ class LogiQADataset(TestDataset):
         """
 
         answers_str = ""
-        for i, option in enumerate(data['options'], start=1):
+        for i, option in enumerate(data["options"], start=1):
             answers_str += f"Answer {i}: {option}\n"
 
-        prompt = prompt.replace('{Answers}', answers_str)
+        prompt = prompt.replace("{Answers}", answers_str)
 
         return prompt
-    
+
     def get_data_directory(self):
         return self.data_directory
 
@@ -253,18 +265,23 @@ class FOLIODataset(TestDataset):
                 current_directory = os.path.dirname(current_file_path)
                 parent_directory = os.path.dirname(current_directory)
                 jsonl_data = pd.read_json(
-                    f"{parent_directory}/{destination}/{file_name}", lines=True
+                    f"{parent_directory}/{destination}/{file_name}", lines=False
                 )
                 for index, row in jsonl_data.iterrows():
-                    data.append(
-                        {
-                            "premises": row["premises"],
-                            "premises-FOL": row["premises-FOL"],
-                            "question": row["conclusion"],
-                            "question-FOL": row["conclusion-FOL"],
-                            "label": row["label"],
-                        }
-                    )
+                    # Khởi tạo dict với các trường bắt buộc
+                    data_entry = {
+                        "premises": row["premises"],
+                        "premises-FOL": row["premises-FOL"],
+                        "conclusion": row["conclusion"],
+                        "conclusion-FOL": row["conclusion-FOL"],
+                        "label": row["label"],
+                    }
+                    # Thêm trường 'facts' nếu nó tồn tại
+                    if "facts" in row:
+                        data_entry["facts"] = row["facts"]
+                    # Thêm entry vào data
+                    data.append(data_entry)
+
                     if self.max_size and len(data) >= self.max_size:
                         break
                 if self.max_size and len(data) >= self.max_size:
@@ -274,74 +291,6 @@ class FOLIODataset(TestDataset):
         return data
 
     def build_initial_prompt(self, data):
-        prompt1 = f"""
-                This is a mission related to First Order Logic.
-                Based on the provided "premises", "premises-FOL", "Question", "Question-FOL". Create facts.
-
-                The output must be in JSON format and has the following fields:
-                * `facts`: dictionary like `{{"Predicate": {{"variable": "value"}}}}` (value can be "TRUE", "FALSE", or "UNKNOWN")
-                
-                IMPORTANT NOTES:
-                * Facts are taken from both "premises", "premises-FOL", "Question", "Question-FOL".
-                * Facts must contain all predicates specified in "premises-FOL" and "Question-FOL". 
-                * The negation symbol in a query is denoted by "¬"
-
-                --- Start of Example ---
-                # NL:
-                "premises": [
-                    "William Dickinson là một chính trị gia người Anh đã ngồi trong Hạ viện",
-                    "William Dickinson học trung học tại trường Westminster và sau đó học Đại học Edinburgh.",
-                    "Đại học Edinburgh là một trường đại học nằm ở Vương quốc Anh.",
-                    "William Dickinson ủng hộ Portland Whigs.",
-                    "Những người ủng hộ Portland Whigs không giành được ghế trong Quốc hội.",
-                ],
-                
-                "premises-FOL": [
-                    "BritishPolitician(williamdickinson) ∧ SatInHouseOfCommons(williamdickinson)",
-                    "Attended(williamdickinson, westminster) ∧ Highschool(westminster) ∧ Attended(williamdickinson, universityofedinburgh)",
-                    "LocatedIn(universityofedinburgh, unitedkingdom) ∧ University(universityofedinburgh)",
-                    "Supported(williamdickinson, portlandwhigs)",
-                    "∀x (Supported(x, portlandwhigs) → ¬SeatInParliament(x))",
-                ],
-
-                "Question": "William Dickinson đã học tại các trường nằm ở Vương quốc Anh cho cả trung học và đại học."
-                "Question-FOL": "Attended(williamdickinson, universityofedinburgh) ∧ LocatedIn(universityofedinburgh, unitedkingdom) ∧ University(universityofedinburgh)"
-
-                # FOL translation:
-                {{
-                    'facts': {{
-                        BritishPolitician: {{"williamdickinson": "TRUE"}},
-                        SatInHouseOfCommons: {{"williamdickinson": "TRUE"}},
-                        Attended: {{
-                            ("williamdickinson", "westminster"): "TRUE",
-                            ("williamdickinson", "universityofedinburgh"): "TRUE",
-                        }},
-                        Highschool: {{"westminster": "TRUE"}},
-                        University: {{"universityofedinburgh": "TRUE"}},
-                        LocatedIn: {{("universityofedinburgh", "unitedkingdom"): "TRUE"}},
-                        Supported: {{("williamdickinson", "portlandwhigs"): "TRUE"}},
-                        SeatInParliament: {{
-                            ("williamdickinson",): "FALSE"
-                        }}
-                    }}
-                }}
-                --- End of Example ---
-
-                Return only output as JSON format, don't include any explaination.
-                
-        # NL:
-        Context: {data['premises']}
-
-        Question: {data['premises-FOL']}
-
-        Context: {data['question']}
-
-        Question: {data['question-FOL']}
-
-        # FOL translation:
-
-        """
-
         prompt = f"""
                 This is a mission related to First Order Logic.
                 Please create facts for the FOL below.
@@ -394,3 +343,6 @@ class FOLIODataset(TestDataset):
 
     def get_data_directory(self):
         return self.data_directory
+
+    def get_data_record(self):
+        return self.data

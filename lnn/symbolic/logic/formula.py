@@ -545,9 +545,6 @@ class Formula(ABC):
         graph_node.label = f"{self.name}"
         graph_node.type = f"{self.__class__.__name__}"
 
-        if graph_node.type == "Forall" or graph_node.type == "Exists":
-            return 0
-
         if graph_node.type == "Predicate":
             graph_node.key = f"{self.name}"
 
@@ -556,23 +553,9 @@ class Formula(ABC):
             f"{self.__class__.__name__}"
             f": {self.name}"
         )
-
-        # number = (
-        #     f"{self.formula_number} {self.operands_by_number}: "
-        #     if self.formula_number is not None and numbering
-        #     else ""
-        # )
-
         # print propositional node - single bounds
         if self.propositional:
             graph_node.state = f"{self.state().name}"
-            # states = (
-            #     f"{header:<{header_len}} "
-            #     f"{self.state().name:>13} "
-            #     f"{round_bounds()}\n"
-            # )
-            # print(f"{number}{states}")
-
         # print FOL node - table of bounds
         else:
             facts = (
@@ -601,12 +584,6 @@ class Formula(ABC):
             header = f"{header} {bind_str}"
             if graph_node.state == None:
                 graph_node.state = facts
-            if (
-                graph_node.type == "Forall"
-                or graph_node.type == "Exists"
-                or graph_node.type == "Implies"
-            ):
-                graph_node.state = None
         return graph_node
 
     def project_params(self):

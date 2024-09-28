@@ -6,9 +6,14 @@
 import json
 import os
 
+
 class FOLDataLoader:
-    def __init__(self, data_source: str = "file",
-                 json_file_path: str = "fol/fol_expressions_input.json", request_data = None):
+    def __init__(
+        self,
+        data_source: str = "file",
+        json_file_path: str = "fol/fol_expressions_input.json",
+        request_data=None,
+    ):
         self.json_file_path = json_file_path
         self.data_source = data_source
 
@@ -26,6 +31,7 @@ class FOLDataLoader:
         self.fol_expressions = data["expression"]
         self.facts = data["facts"]
         self.question = data["question"]
+        self.label = data.get("label", "")
 
     def load_request_data(self, request_data):
         self.fol_expressions = request_data["expression"]
@@ -36,15 +42,10 @@ class FOLDataLoader:
         return self.fol_expressions
 
     def get_facts(self):
-        def process_item(item):
-            if isinstance(item, dict):
-                return {
-                    tuple(k.split("-")) if "-" in k else k: process_item(v)
-                    for k, v in item.items()
-                }
-            return item
-
-        return {key: process_item(value) for key, value in self.facts.items()}
+        return {key: value for key, value in self.facts.items()}
 
     def get_question(self):
         return self.question
+
+    def get_label(self):
+        return self.label

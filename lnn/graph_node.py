@@ -1,5 +1,7 @@
 class GraphNode:
-    def __init__(self, label=None, state=None, current=None, neighbor=None, type=None, key=None):
+    def __init__(
+        self, label=None, state=None, current=None, neighbor=None, type=None, key=None
+    ):
         self.label = label
         self.state = state
         self.current_node = current
