@@ -9,6 +9,7 @@ class ChatBot(ABC):
         self.key = key
         self.base_url = base_url
         self.model_name = model_name
+        self.single_message = False
 
     @abstractmethod
     def init_client(self):
@@ -17,6 +18,16 @@ class ChatBot(ABC):
     @abstractmethod
     def get_response(self, messages):
         pass
+
+    def transform_messages(self, messages):
+        formatted_message = ''
+        if type(messages) == list:
+            for message in messages:
+                formatted_message += f"{message['content']}\n"
+        else:
+            formatted_message = messages
+
+        return formatted_message
 
 class OpenAIChatBot(ChatBot):
     def __init__(self, key: str='', base_url: str='', model_name='gpt-3.5-turbo-1106') -> None:
@@ -44,14 +55,13 @@ class OllamaChatbot(OpenAIChatBot):
 class GemsuraChatbot(ChatBot):
     def __init__(self, key: str='', base_url: str='', model_name: str='') -> None:
         super().__init__(key, base_url, model_name)
+        self.single_message = True
 
     def init_client(self):
         pass
 
     def get_response(self, messages):
-        prompt = ''
-        for message in messages:
-            prompt += f"{message['content']}\n"
+        prompt = self.transform_messages(messages) if self.single_message else messages
         response = requests.post(
             'https://ws.gvlab.org/fablab/ura/llama/api/generate',
             headers={
@@ -69,6 +79,7 @@ class GemsuraChatbot(ChatBot):
 class GeminiChatbot(ChatBot):
     def __init__(self, key: str='', base_url: str='', model_name: str='') -> None:
         super().__init__(key, base_url, model_name)
+        self.single_message = True
         self.client = self.init_client()
 
     def init_client(self):
@@ -77,6 +88,7 @@ class GeminiChatbot(ChatBot):
         return model
 
     def get_response(self, messages):
+        messages = self.transform_messages(messages) if self.single_message else messages
         response = self.client.generate_content(messages)
         return response.text
 
