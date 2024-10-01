@@ -31,8 +31,10 @@ class PremiseClassifier:
     @staticmethod
     def classify(premise: str) -> TypePremise:
         """Phân loại một premise."""
-        if re.search(r"∃|∀", premise):
-            return TypePremise.FOL
+        if re.search(r"∀", premise):
+            return TypePremise.FOL_FORALL
+        if re.search(r"∃", premise):
+            return TypePremise.FOL_EXISTS
         elif re.search(r"↔|→", premise):
             return TypePremise.PROPOSITIONAL_IMPLICATION
         elif re.search(r"∨|∧|⊕", premise):

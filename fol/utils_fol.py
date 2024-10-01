@@ -36,9 +36,11 @@ class TypePremise(Enum):
     # Cụm 2: [2] Propositional implication cluster
     PROPOSITIONAL_IMPLICATION = 6
     # Cụm 3: [3, 4, 5] First-order logic cluster
-    FOL = 7
+    FOL_FORALL = 7
     # Cụm 4: [6] Propositional logic cluster
     PROPOSITIONAL_LOGIC = 8
+    # Cụm 3: [3, 4, 5] First-order logic cluster
+    FOL_EXISTS = 9
 
 
 class UtilsFOL:
