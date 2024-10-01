@@ -49,11 +49,11 @@
         "label": "True",
         "facts": {
             "TalentShows": {},
-            "Engaged": {},
-            "Inactive": {},
-            "Chaperone": {},
-            "Students": {},
-            "AcademicCareer": {}
+            "Engaged": {"bonnie": "FALSE"},
+            "Inactive": {"bonnie": "UNKNOWN"},
+            "Chaperone": {"bonnie": "UNKNOWN"},
+            "Students": {"bonnie": "FALSE"},
+            "AcademicCareer": {"bonnie": "UNKNOWN"}
         }
     },
     {
@@ -79,12 +79,6 @@
         "conclusion-FOL": "LunchInCompany(james)",
         "label": "Uncertain",
         "facts": {
-            "Meeting": {},
-            "AppearInCompany": {},
-            "LunchInCompany": {},
-            "LunchAtHome": {},
-            "WorkRemotelyFromHome": {},
-            "InOtherCountries": {},
             "Manager": {
                 "james": "UNKNOWN"
             }
@@ -120,7 +114,7 @@
             "WorkRemotelyFromHome": {},
             "InOtherCountries": {},
             "Manager": {
-                "james": "TRUE"
+                "james": "UNKNOWN"
             }
         }
     },
@@ -146,24 +140,8 @@
         "label": "True",
         "facts": {
             "Animal": {
-                "human": "TRUE"
-            },
-            "Mammal": {
-                "human": "TRUE"
-            },
-            "OccurMonkeypoxVirus": {
-                "human": "FALSE"
-            },
-            "GetMonkeypox": {
-                "human": "FALSE"
-            },
-            "Fever": {},
-            "Headache": {},
-            "MusclePain": {},
-            "Tired": {
-                "human": "FALSE"
-            },
-            "Flu": {}
+                "x": "UNKNOWN"
+            }
         }
     },
     {
@@ -191,15 +169,12 @@
                 "Humans": "TRUE"
             },
             "Mammal": {
-                "Humans": "TRUE"
+                "Humans": "TRUE",
+                "x": "UNKNOWN"
             },
-            "OccurMonkeypoxVirus": {},
-            "GetMonkeypox": {},
-            "Fever": {},
-            "Headache": {},
-            "MusclePain": {},
-            "Tired": {},
-            "Flu": {}
+            "Flu": {
+                "x": "UNKNOWN"
+            }
         }
     },
     {
@@ -223,15 +198,14 @@
         "conclusion-FOL": "∃x,(GetMonkeypox(x) ∧ Coughing(x))",
         "label": "Uncertain",
         "facts": {
-            "OccurMonkeypoxVirus": {},
-            "GetMonkeypox": {},
+            "Coughing": {"x": "UNKNOWN"},
+            "GetMonkeypox": {"x": "UNKNOWN"},
             "Animal": {
-                "Human": "TRUE",
-                "(certain animals)": "TRUE"
+                "x": "UNKNOWN"
             },
             "Human": {},
             "Mammal": {
-                "Human": "TRUE"
+                "x": "UNKNOWN"
             },
             "Fever": {},
             "Headache": {},
@@ -263,11 +237,12 @@
                 "thelegendofzelda": "TRUE"
             },
             "Created": {
-                "x, thelegendofzelda": "TRUE"
+                "(x, thelegendofzelda)": "TRUE"
             },
             "InTop10": {},
             "SellsMoreThan": {
-                "thelegendofzelda, onemillioncopies": "TRUE"
+                "(thelegendofzelda, onemillioncopies)": "TRUE",
+                "(x, onemillioncopies)": "TRUE"
             }
         }
     },
@@ -294,11 +269,12 @@
                 "thelegendofzelda": "TRUE"
             },
             "Created": {
-                "x, thelegendofzelda": "TRUE"
+                "(x, thelegendofzelda)": "TRUE"
             },
             "InTop10": {},
             "SellsMoreThan": {
-                "thelegendofzelda, onemillioncopies": "TRUE"
+                "(thelegendofzelda, onemillioncopies)": "TRUE",
+                "(x, onemillioncopies)": "TRUE"
             }
         }
     },
@@ -319,30 +295,18 @@
         "conclusion-FOL": "¬Top10(thelegendofzelda)",
         "label": "False",
         "facts": {
-            "Japanese": {
-                "x": "TRUE"
-            },
-            "VideoGameCompany": {
-                "x": "TRUE"
-            },
+            "Japanese": {},
+            "VideoGameCompany": {},
             "Game": {
                 "thelegendofzelda": "TRUE"
             },
             "Created": {
-                "x": {
-                    "thelegendofzelda": "TRUE"
-                }
+                "(x, thelegendofzelda)": "TRUE"
             },
-            "InTop10": {
-                "x": "TRUE"
-            },
+            "InTop10": {},
             "SellsMoreThan": {
-                "thelegendofzelda": {
-                    "onemillioncopies": "TRUE"
-                }
-            },
-            "Top10": {
-                "x": "TRUE"
+                "(thelegendofzelda, onemillioncopies)": "TRUE",
+                "(x, onemillioncopies)": "TRUE"
             }
         }
     },
@@ -359,9 +323,9 @@
         "conclusion-FOL": "∀x,(Square(x) → IsShape(x))",
         "label": "True",
         "facts": {
-            "Square": {},
-            "FourSides": {},
-            "IsShape": {}
+            "Square": {"x": "UNKNOWN"},
+            "FourSides": {"x": "UNKNOWN"},
+            "IsShape": {"x": "UNKNOWN"}
         }
     },
     {
@@ -549,13 +513,8 @@
             "Popular": {
                 "strangerThings": "TRUE"
             },
-            "BingeWatch": {},
-            "Download": {
-                "karen": {
-                    "blackMirror": "FALSE"
-                }
-            },
-            "Share": {}
+            "BingeWatch": {"(karen, x)":  "UNKNOWN"},
+            "Share": {"(x, lisa)": "UNKNOWN"}
         }
     },
     {
@@ -586,17 +545,11 @@
             "Popular": {
                 "strangerThings": "TRUE"
             },
-            "BingeWatch": {
-                "karen": {
-                    "strangerThings": "TRUE"
-                }
-            },
+            "BingeWatch": {"(karen, x)":  "UNKNOWN"},
             "Download": {
-                "karen": {
-                    "blackMirror": "FALSE"
-                }
-            },
-            "Share": {}
+                "(karen, blackMirror)": "FALSE",
+                "(karen, x)": "TRUE"
+            }
         }
     },
     {
@@ -627,21 +580,18 @@
             "Popular": {
                 "strangerThings": "TRUE"
             },
-            "BingeWatch": {},
-            "Download": {
-                "karen, blackMirror": "FALSE"
-            },
-            "Share": {}
+            "BingeWatch": {"(karen, x)":  "UNKNOWN"},
+            "Share": {"(x, lisa)": "TRUE"}
         }
     },
     {
         "premises": [
-            "Beijing is the capital of the People's Republic of China. ",
-            "Beijing is the world's most populous national capital city.",
+            "Beijing is the capital of the Peoples Republic of China. ",
+            "Beijing is the worlds most populous national capital city.",
             "Beijing is located in Northern China.",
             "Beijing hosted the 2008 Summer Olympics and 2008 Summer Paralympics Games.",
             "Beijing has hosted both the Summer and Winter Olympics, along with the Summer and Winter Paralympics",
-            "Many of Beijing's 91 universities consistently rank among the best in the Asia-Pacific and the world."
+            "Many of Beijings 91 universities consistently rank among the best in the Asia-Pacific and the world."
         ],
         "premises-FOL": [
             "CapitalOf(beijing, prx)",
@@ -656,7 +606,7 @@
         "label": "True",
         "facts": {
             "CapitalOf": {
-                "beijing": "PRX"
+                "(beijing, prx)": "TRUE"
             },
             "MostPopulousNationalCapitalCity": {
                 "beijing": "TRUE"
@@ -665,21 +615,23 @@
                 "beijing": "TRUE"
             },
             "Hosted": {
-                "beijing": {
-                    "summer2008olympic": "TRUE",
-                    "summer2008paralympicgames": "TRUE"
-                }
+                "(beijing, summer2008olympic)": "TRUE",
+                "(beijing, summer2008paralympicgames)": "TRUE",
+                "(beijing, summerparalympicgames)": "TRUE",
+                "(beijing, winterparalympicgames)": "TRUE",
+                "(beijing, summerolympic)": "TRUE",
+                "(beijing, winterolympic)": "TRUE"
             }
         }
     },
     {
         "premises": [
-            "Beijing is the capital of the People's Republic of China. ",
-            "Beijing is the world's most populous national capital city.",
+            "Beijing is the capital of the Peoples Republic of China. ",
+            "Beijing is the worlds most populous national capital city.",
             "Beijing is located in Northern China.",
             "Beijing hosted the 2008 Summer Olympics and 2008 Summer Paralympics Games.",
             "Beijing has hosted both the Summer and Winter Olympics, along with the Summer and Winter Paralympics",
-            "Many of Beijing's 91 universities consistently rank among the best in the Asia-Pacific and the world."
+            "Many of Beijings 91 universities consistently rank among the best in the Asia-Pacific and the world."
         ],
         "premises-FOL": [
             "CapitalOf(beijing, prx)",
@@ -694,7 +646,7 @@
         "label": "Uncertain",
         "facts": {
             "CapitalOf": {
-                "beijing": "prx"
+                "(beijing, prx)": "TRUE"
             },
             "MostPopulousNationalCapitalCity": {
                 "beijing": "TRUE"
@@ -703,20 +655,23 @@
                 "beijing": "TRUE"
             },
             "Hosted": {
-                "beijing": "2008 Summer Paralympics Games"
-            },
-            "BeijingUniversity": {},
-            "ConsistentlyRankAmongTheBest": {}
+                "(beijing, summer2008olympic)": "TRUE",
+                "(beijing, summer2008paralympicgames)": "TRUE",
+                "(beijing, summerparalympicgames)": "TRUE",
+                "(beijing, winterparalympicgames)": "TRUE",
+                "(beijing, summerolympic)": "TRUE",
+                "(beijing, winterolympic)": "TRUE"
+            }
         }
     },
     {
         "premises": [
-            "Beijing is the capital of the People's Republic of China. ",
-            "Beijing is the world's most populous national capital city.",
+            "Beijing is the capital of the Peoples Republic of China. ",
+            "Beijing is the worlds most populous national capital city.",
             "Beijing is located in Northern China.",
             "Beijing hosted the 2008 Summer Olympics and 2008 Summer Paralympics Games.",
             "Beijing has hosted both the Summer and Winter Olympics, along with the Summer and Winter Paralympics",
-            "Many of Beijing's 91 universities consistently rank among the best in the Asia-Pacific and the world."
+            "Many of Beijings 91 universities consistently rank among the best in the Asia-Pacific and the world."
         ],
         "premises-FOL": [
             "CapitalOf(beijing, prx)",
@@ -734,17 +689,19 @@
                 "(beijing, prx)": "TRUE"
             },
             "MostPopulousNationalCapitalCity": {
-                "(beijing)": "TRUE"
+                "beijing": "TRUE"
             },
             "InNorthernChina": {
-                "(beijing)": "TRUE"
+                "beijing": "TRUE"
             },
             "Hosted": {
                 "(beijing, summer2008olympic)": "TRUE",
-                "(beijing, summer2008paralympicgames)": "TRUE"
-            },
-            "BeijingUniversity": {},
-            "ConsistentlyRankAmongTheBest": {}
+                "(beijing, summer2008paralympicgames)": "TRUE",
+                "(beijing, summerparalympicgames)": "TRUE",
+                "(beijing, winterparalympicgames)": "TRUE",
+                "(beijing, summerolympic)": "TRUE",
+                "(beijing, winterolympic)": "TRUE"
+            }
         }
     },
     {
@@ -768,14 +725,20 @@
         "conclusion-FOL": "¬Human(marvin) ∧ ¬FromMars(marvin)",
         "label": "True",
         "facts": {
-            "Alien": {},
-            "Extraterrestrial": {},
+            "Alien": {
+                "marvin": "UNKNOWN"
+            },
+            "Extraterrestrial": {
+                "marvin": "TRUE"
+            },
+            "FromEarth": {
+                "marvin": "FALSE"
+            },
             "FromMars": {
                 "marvin": "FALSE"
             },
-            "Human": {},
-            "FromEarth": {
-                "marvin": "FALSE"
+            "Human": {
+                "marvin": "UNKNOWN"
             }
         }
     },
@@ -804,13 +767,10 @@
         "conclusion-FOL": "GrandSlamChampion(djokovic)",
         "label": "Uncertain",
         "facts": {
-            "GrandSlamChampion": {},
-            "OscarNominatedActor": {},
-            "ProfessionalTennisPlayer": {},
-            "Celebrity": {},
-            "Athlete": {},
-            "WellPaid": {},
-            "LivesInTaxHaven": {}
+            "Famous": {"djokovic": "TRUE"},
+            "Athlete": {"djokovic": "TRUE"},
+            "LivesInTaxHaven": {"djokovic": "TRUE"},
+            "GrandSlamChampion":{"djokovic": "UNKNOWN"}
         }
     },
     {
@@ -837,16 +797,10 @@
         "conclusion-FOL": "LivesInTaxHaven(djokovic)",
         "label": "True",
         "facts": {
-            "GrandSlamChampion": {},
-            "OscarNominatedActor": {},
-            "ProfessionalTennisPlayer": {},
-            "Celebrity": {},
-            "Athlete": {},
-            "WellPaid": {},
-            "LivesInTaxHaven": {},
-            "Famous": {
-                "djokovic": "TRUE"
-            }
+            "Famous": {"djokovic": "TRUE"},
+            "Athlete": {"djokovic": "TRUE"},
+            "LivesInTaxHaven": {"djokovic": "TRUE"},
+            "GrandSlamChampion":{"djokovic": "UNKNOWN"}
         }
     },
     {
@@ -874,13 +828,9 @@
         "conclusion-FOL": "¬LivesInTaxHaven(djokovic)",
         "label": "False",
         "facts": {
-            "GrandSlamChampion": {},
-            "OscarNominatedActor": {},
-            "ProfessionalTennisPlayer": {},
-            "Celebrity": {},
-            "Athlete": {},
-            "WellPaid": {},
-            "LivesInTaxHaven": {}
+            "Famous": {"djokovic": "TRUE"},
+            "Athlete": {"djokovic": "TRUE"},
+            "LivesInTaxHaven": {"djokovic": "TRUE"}
         }
     },
     {
@@ -904,7 +854,7 @@
                 "diamondmine": "TRUE"
             },
             "FormedIn": {
-                "diamondmine": "wwe"
+                "(diamondmine, wwe)": "TRUE"
             },
             "Leads": {
                 "(roderickstrong, diamondmine)": "TRUE"
@@ -936,7 +886,7 @@
         "label": "Uncertain",
         "facts": {
             "ProfessionalWrestlingStable": {
-                "(diamondmine)": "TRUE"
+                "diamondmine": "TRUE"
             },
             "FormedIn": {
                 "(diamondmine, wwe)": "TRUE"
@@ -971,20 +921,24 @@
         "label": "False",
         "facts": {
             "ProfessionalWrestlingStable": {
+                "x": "TRUE",
                 "diamondmine": "TRUE"
             },
             "FormedIn": {
                 "(diamondmine, wwe)": "TRUE"
             },
             "Leads": {
-                "(roderickstrong, diamondmine)": "TRUE"
+                "(roderickstrong, diamondmine)": "TRUE",
+                "(roderickstrong, x)": "TRUE"
             },
             "Includes": {
                 "(diamondmine, creedbrothers)": "TRUE",
-                "(diamondmine, ivynile)": "TRUE"
+                "(diamondmine, ivynile)": "TRUE",
+                "(x, ivynile)": "TRUE"
             },
             "HasFeud": {
-                "(imperium, diamondmine)": "TRUE"
+                "(imperium, diamondmine)": "TRUE",
+                "(imperium, x)": "TRUE"
             }
         }
     },
@@ -1012,25 +966,19 @@
         "label": "True",
         "facts": {
             "MusicPiece": {
-                "symphony9": "TRUE"
-            },
-            "Composer": {
-                "beethoven": "TRUE"
+                "symphony": "TRUE"
             },
             "WrittenBy": {
-                "(symphony9, beethoven)": "TRUE"
+                "(symphony, beethoven)": "TRUE"
             },
             "Premiered": {
-                "(viennamusicsociety, symphony9)": "TRUE"
+                "(viennamusicsociety, symphony)": "TRUE"
             },
             "Orchestra": {
                 "viennamusicsociety": "TRUE"
             },
             "Lead": {
                 "(beethoven, viennamusicsociety)": "TRUE"
-            },
-            "Conductor": {
-                "beethoven": "TRUE"
             }
         }
     },
@@ -1054,29 +1002,9 @@
             "∀x,y,((Orchestra(x) ∧ Lead(y, x)) → Conductor(y))"
         ],
         "conclusion": "Some orchestras premiered music pieces.",
-        "conclusion-FOL": "∃x,y,((Orchestra(x) ∧ MusicPiece(y) ∧ Premiered(x, y)))",
+        "conclusion-FOL": "∃x,y,(Orchestra(x) ∧ MusicPiece(y) ∧ Premiered(x, y))",
         "label": "True",
-        "facts": {
-            "MusicPiece": {
-                "symphony9": "TRUE"
-            },
-            "Composer": {
-                "beethoven": "TRUE"
-            },
-            "WrittenBy": {
-                "(symphony9, beethoven)": "TRUE"
-            },
-            "Premiered": {
-                "(viennamusicsociety, symphony9)": "TRUE"
-            },
-            "Orchestra": {
-                "viennamusicsociety": "TRUE"
-            },
-            "Lead": {
-                "(beethoven, viennamusicsociety)": "TRUE"
-            },
-            "Conductor": {}
-        }
+        "facts": {}
     },
     {
         "premises": [
@@ -1102,19 +1030,16 @@
         "label": "False",
         "facts": {
             "MusicPiece": {
-                "(symphony9)": "TRUE"
+                "symphony": "TRUE"
             },
-            "Composer": {
-                "(beethoven)": "TRUE"
-            },
-            "Writtenby": {
-                "(symphony9, beethoven)": "TRUE"
+            "WrittenBy": {
+                "(symphony, beethoven)": "TRUE"
             },
             "Premiered": {
-                "(viennamusicsociety, symphony9)": "TRUE"
+                "(viennamusicsociety, symphony)": "TRUE"
             },
             "Orchestra": {
-                "(viennamusicsociety)": "TRUE"
+                "viennamusicsociety": "TRUE"
             },
             "Lead": {
                 "(beethoven, viennamusicsociety)": "TRUE"
@@ -1123,11 +1048,11 @@
     },
     {
         "premises": [
-            "All of Zaha Hadid's design styles are timeless.",
+            "All of Zaha Hadids design styles are timeless.",
             "No mass product design is timeless.",
-            "Either Zaha Hadid's design style or Kelly Wearstler's design style. ",
-            "All of Kelly Wearstler's design styles are evocative.",
-            "All of Kelly Wearstler's design styles are dreamy.",
+            "Either Zaha Hadids design style or Kelly Wearstlers design style. ",
+            "All of Kelly Wearstlers design styles are evocative.",
+            "All of Kelly Wearstlers design styles are dreamy.",
             "If a design by Max is timeless, then a design by Max is a mass product design and evocative."
         ],
         "premises-FOL": [
@@ -1136,56 +1061,50 @@
             "∀x,(ZahaHadidDesignStyle(x) ∨ KellyWearstlerDesignStyle(x))",
             "∀x,(KellyWearstlerDesignStyle(x) → Evocative(x))",
             "∀x,(KellyWearstlerDesignStyle(x) → Dreamy(x))",
-            "Timeless(aDesignByMax) → (MassProductDesign(aDesignByMax) ∧ Evocative(aDesignByMax))"
+            "Timeless(aDesignByMax) → MassProductDesign(aDesignByMax) ∧ Evocative(aDesignByMax)"
         ],
         "conclusion": "A design by Max is a mass product design.",
         "conclusion-FOL": "MassProductDesign(aDesignByMax)",
         "label": "Uncertain",
         "facts": {
-            "ZahaHadidDesignStyle": {},
-            "MassProductDesign": {},
-            "Timeless": {},
-            "KellyWearstlerDesignStyle": {},
-            "Evocative": {},
-            "Dreamy": {}
+            "MassProductDesign": {"aDesignByMax": "UNKNOWN"},
+            "Timeless": {"aDesignByMax": "UNKNOWN"},
+            "Evocative": {"aDesignByMax": "UNKNOWN"}
         }
     },
     {
         "premises": [
-            "All of Zaha Hadid's design styles are timeless.",
+            "All of Zaha Hadids design styles are timeless.",
             "No mass product design is timeless.",
-            "Either Zaha Hadid's design style or Kelly Wearstler's design style. ",
-            "All of Kelly Wearstler's design styles are evocative.",
-            "All of Kelly Wearstler's design styles are dreamy.",
+            "Either Zaha Hadids design style or Kelly Wearstlers design style. ",
+            "All of Kelly Wearstlers design styles are evocative.",
+            "All of Kelly Wearstlers design styles are dreamy.",
             "If a design by Max is timeless, then a design by Max is a mass product design and evocative."
         ],
         "premises-FOL": [
             "∀x,(ZahaHadidDesignStyle(x) → Timeless(x))",
-            "∀x, (MassProductDesign(x) → ¬Timeless(x))",
-            "∀x, (ZahaHadidDesignStyle(x) ∨ KellyWearstlerDesignStyle(x))",
-            "∀x, (KellyWearstlerDesignStyle(x) → Evocative(x))",
-            "∀x, (KellyWearstlerDesignStyle(x) → Dreamy(x))",
+            "∀x,(MassProductDesign(x) → ¬Timeless(x))",
+            "∀x,(ZahaHadidDesignStyle(x) ∨ KellyWearstlerDesignStyle(x))",
+            "∀x,(KellyWearstlerDesignStyle(x) → Evocative(x))",
+            "∀x,(KellyWearstlerDesignStyle(x) → Dreamy(x))",
             "Timeless(aDesignByMax) → MassProductDesign(aDesignByMax) ∧ Evocative(aDesignByMax)"
         ],
         "conclusion": "A design by Max is evocative and dreamy.",
         "conclusion-FOL": "Evocative(aDesignByMax) ∧ Dreamy(aDesignByMax)",
         "label": "True",
         "facts": {
-            "ZahaHadidDesignStyle": {},
-            "Timeless": {},
-            "MassProductDesign": {},
-            "KellyWearstlerDesignStyle": {},
-            "Evocative": {},
-            "Dreamy": {}
+            "MassProductDesign": {"aDesignByMax": "UNKNOWN"},
+            "Timeless": {"aDesignByMax": "FALSE"},
+            "Evocative": {"aDesignByMax": "UNKNOWN"}
         }
     },
     {
         "premises": [
-            "All of Zaha Hadid's design styles are timeless.",
+            "All of Zaha Hadids design styles are timeless.",
             "No mass product design is timeless.",
-            "Either Zaha Hadid's design style or Kelly Wearstler's design style. ",
-            "All of Kelly Wearstler's design styles are evocative.",
-            "All of Kelly Wearstler's design styles are dreamy.",
+            "Either Zaha Hadids design style or Kelly Wearstlers design style. ",
+            "All of Kelly Wearstlers design styles are evocative.",
+            "All of Kelly Wearstlers design styles are dreamy.",
             "If a design by Max is timeless, then a design by Max is a mass product design and evocative."
         ],
         "premises-FOL": [
@@ -1194,33 +1113,25 @@
             "∀x,(ZahaHadidDesignStyle(x) ∨ KellyWearstlerDesignStyle(x))",
             "∀x,(KellyWearstlerDesignStyle(x) → Evocative(x))",
             "∀x,(KellyWearstlerDesignStyle(x) → Dreamy(x))",
-            "∀ aDesignByMax,(Timeless(aDesignByMax) → MassProductDesign(aDesignByMax) ∧ Evocative(aDesignByMax))"
+            "Timeless(aDesignByMax) → MassProductDesign(aDesignByMax) ∧ Evocative(aDesignByMax)"
         ],
         "conclusion": "A design by Max is either evocative or dreamy.",
         "conclusion-FOL": "Evocative(aDesignByMax) ⊕ Dreamy(aDesignByMax)",
         "label": "False",
         "facts": {
-            "Timeless": {
-                "(aDesignByMax)": "UNKNOWN"
-            },
-            "MassProductDesign": {
-                "(aDesignByMax)": "UNKNOWN"
-            },
-            "Evocative": {
-                "(aDesignByMax)": "UNKNOWN"
-            },
-            "ZahaHadidDesignStyle": {},
-            "KellyWearstlerDesignStyle": {}
+            "MassProductDesign": {"aDesignByMax": "UNKNOWN"},
+            "Timeless": {"aDesignByMax": "FALSE"},
+            "Evocative": {"aDesignByMax": "UNKNOWN"}
         }
     },
     {
         "premises": [
-            "If a player is ranked highly by the Women's Tennis Association, then they are among the most active players in major tennis. ",
-            "Everyone who lost to Iga Świątek is ranked highly by the Women's Tennis Association.",
+            "If a player is ranked highly by the Womens Tennis Association, then they are among the most active players in major tennis. ",
+            "Everyone who lost to Iga Świątek is ranked highly by the Womens Tennis Association.",
             "All female tennis players at Roland Garros 2022 lost to Iga Świątek.",
             "Either female tennis players at Roland Garros 2022 or male tennis players at Roland Garros 2022. ",
             "All male tennis players at Roland Garros 2022 lost to Rafael Nadal.",
-            "If Coco Gauff is a player who is ranked highly by the Women's Tennis Association or a player who lost to Rafael Nadal, then Coco Gauff is not a male tennis player at Roland Garros 2022."
+            "If Coco Gauff is a player who is ranked highly by the Womens Tennis Association or a player who lost to Rafael Nadal, then Coco Gauff is not a male tennis player at Roland Garros 2022."
         ],
         "premises-FOL": [
             "∀x,(RankedHighlyByWomenTennisAssociation(x) → AmongMostActivePlayersInMajorTennis(x))",
@@ -1237,26 +1148,17 @@
             "RankedHighlyByWomenTennisAssociation": {
                 "cocoGauff": "TRUE"
             },
-            "LostToIgaŚwiątek": {
-                "cocoGauff": "TRUE"
-            },
-            "FemaleTennisPlayersAtRolandGarros2022": {
-                "cocoGauff": "TRUE"
-            },
-            "MaleTennisPlayersAtRolandGarros2022": {
-                "cocoGauff": "FALSE"
-            },
-            "LostToRafaelNadal": {}
+            "LostToRafaelNadal": {"cocoGauff": "UNKNOWN"}
         }
     },
     {
         "premises": [
-            "If a player is ranked highly by the Women's Tennis Association, then they are among the most active players in major tennis. ",
-            "Everyone who lost to Iga Świątek is ranked highly by the Women's Tennis Association.",
+            "If a player is ranked highly by the Womens Tennis Association, then they are among the most active players in major tennis. ",
+            "Everyone who lost to Iga Świątek is ranked highly by the Womens Tennis Association.",
             "All female tennis players at Roland Garros 2022 lost to Iga Świątek.",
             "Either female tennis players at Roland Garros 2022 or male tennis players at Roland Garros 2022. ",
             "All male tennis players at Roland Garros 2022 lost to Rafael Nadal.",
-            "If Coco Gauff is a player who is ranked highly by the Women's Tennis Association or a player who lost to Rafael Nadal, then Coco Gauff is not a male tennis player at Roland Garros 2022."
+            "If Coco Gauff is a player who is ranked highly by the Womens Tennis Association or a player who lost to Rafael Nadal, then Coco Gauff is not a male tennis player at Roland Garros 2022."
         ],
         "premises-FOL": [
             "∀x,(RankedHighlyByWomenTennisAssociation(x) → AmongMostActivePlayersInMajorTennis(x))",
@@ -1271,28 +1173,19 @@
         "label": "Uncertain",
         "facts": {
             "RankedHighlyByWomenTennisAssociation": {
-                "(cocoGauff)": "TRUE"
+                "cocoGauff": "TRUE"
             },
-            "LostToIgaŚwiątek": {
-                "(cocoGauff)": "TRUE"
-            },
-            "FemaleTennisPlayersAtRolandGarros2022": {
-                "(cocoGauff)": "TRUE"
-            },
-            "MaleTennisPlayersAtRolandGarros2022": {
-                "(cocoGauff)": "FALSE"
-            },
-            "LostToRafaelNadal": {}
+            "LostToRafaelNadal": {"cocoGauff": "UNKNOWN"}
         }
     },
     {
         "premises": [
-            "If a player is ranked highly by the Women's Tennis Association, then they are among the most active players in major tennis. ",
-            "Everyone who lost to Iga Świątek is ranked highly by the Women's Tennis Association.",
+            "If a player is ranked highly by the Womens Tennis Association, then they are among the most active players in major tennis. ",
+            "Everyone who lost to Iga Świątek is ranked highly by the Womens Tennis Association.",
             "All female tennis players at Roland Garros 2022 lost to Iga Świątek.",
             "Either female tennis players at Roland Garros 2022 or male tennis players at Roland Garros 2022. ",
             "All male tennis players at Roland Garros 2022 lost to Rafael Nadal.",
-            "If Coco Gauff is a player who is ranked highly by the Women's Tennis Association or a player who lost to Rafael Nadal, then Coco Gauff is not a male tennis player at Roland Garros 2022."
+            "If Coco Gauff is a player who is ranked highly by the Womens Tennis Association or a player who lost to Rafael Nadal, then Coco Gauff is not a male tennis player at Roland Garros 2022."
         ],
         "premises-FOL": [
             "∀x,(RankedHighlyByWomenTennisAssociation(x) → AmongMostActivePlayersInMajorTennis(x))",
@@ -1303,15 +1196,13 @@
             "(RankedHighlyByWomenTennisAssociation(cocoGauff) ∨ LostToRafaelNadal(cocoGauff) → ¬MaleTennisPlayersAtRolandGarros2022(cocoGauff))"
         ],
         "conclusion": "Coco Gauff is not a player who lost to Iga Świątek or one of the most active players in major tennis.",
-        "conclusion-FOL": "¬LostToIgaŚwiątek(cocoGauff) ∨ ¬AmongMostActivePlayersInMajorTennis(cocoGauff)",
+        "conclusion-FOL": "¬LostToIgaSwiatek(cocoGauff) ∨ ¬AmongMostActivePlayersInMajorTennis(cocoGauff)",
         "label": "False",
         "facts": {
-            "RankedHighlyByWomenTennisAssociation": {},
-            "AmongMostActivePlayersInMajorTennis": {},
-            "LostToIgaŚwiątek": {},
-            "FemaleTennisPlayersAtRolandGarros2022": {},
-            "MaleTennisPlayersAtRolandGarros2022": {},
-            "LostToRafaelNadal": {}
+            "RankedHighlyByWomenTennisAssociation": {
+                "cocoGauff": "TRUE"
+            },
+            "LostToRafaelNadal": {"cocoGauff": "UNKNOWN"}
         }
     },
     {
@@ -1332,22 +1223,22 @@
             "Pet": {}
         }
     },
-    {
+        {
         "premises": [
             "[BG] There are four seasons in a year: Spring, Summer, Fall, and Winter.",
             "All students who want to have a long vacation love summer the most.",
-            "Emma's favorite season is summer.",
-            "Mia's favorite season is not the same as Emma's. ",
+            "Emmas favorite season is summer.",
+            "Mias favorite season is not the same as Emmas. ",
             "James wants to have a long vacation."
         ],
         "premises-FOL": [
             "Season(spring) ∨ Season(summer) ∨ Season(fall) ∨ Season(winter)",
-            "∀x,(WantlongVacation(x) → Love(x, summer))",
+            "∀x,(WantLongVacation(x) → Love(x, summer))",
             "Love(emma, summer)",
             "¬Love(mia, emma)",
-            "WantlongVacation(james)"
+            "WantLongVacation(james)"
         ],
-        "conclusion": "James's favorite season is summer.",
+        "conclusion": "Jamess favorite season is summer.",
         "conclusion-FOL": "Love(james, summer)",
         "label": "True",
         "facts": {
@@ -1370,8 +1261,8 @@
         "premises": [
             "[BG] There are four seasons in a year: Spring, Summer, Fall, and Winter.",
             "All students who want to have a long vacation love summer the most.",
-            "Emma's favorite season is summer.",
-            "Mia's favorite season is not the same as Emma's. ",
+            "Emmas favorite season is summer.",
+            "Mias favorite season is not the same as Emmas. ",
             "James wants to have a long vacation."
         ],
         "premises-FOL": [
@@ -1381,22 +1272,23 @@
             "¬Love(mia, emma)",
             "WantlongVacation(james)"
         ],
-        "conclusion": "Mia's favorite season is spring.",
+        "conclusion": "Mias favorite season is spring.",
         "conclusion-FOL": "Love(mia, spring)",
         "label": "Uncertain",
         "facts": {
             "Season": {
-                "(spring)": "TRUE",
-                "(summer)": "TRUE",
-                "(fall)": "TRUE",
-                "(winter)": "TRUE"
+                "spring": "TRUE",
+                "summer": "TRUE",
+                "fall": "TRUE",
+                "winter": "TRUE"
             },
-            "WantlongVacation": {
-                "(james)": "TRUE"
+            "WantLongVacation": {
+                "james": "TRUE"
             },
             "Love": {
                 "(emma, summer)": "TRUE",
-                "(mia, emma)": "FALSE"
+                "(mia, emma)": "FALSE",
+                "(x, summer)": "TRUE"
             }
         }
     },
@@ -1423,9 +1315,9 @@
             "Analog": {},
             "PrintedText": {},
             "StreamingService": {
-                "1984": "TRUE"
+                "y1984": "UNKNOWN"
             },
-            "HardcoverBook": {}
+            "HardcoverBook": {"y1984": "UNKNOWN"}
         }
     },
     {
@@ -1451,11 +1343,9 @@
             "Analog": {},
             "PrintedText": {},
             "StreamingService": {
-                "1984": "TRUE"
+                "y1984": "UNKNOWN"
             },
-            "HardcoverBook": {
-                "1984": "TRUE"
-            }
+            "HardcoverBook": {"y1984": "UNKNOWN"}
         }
     },
     {
@@ -1481,9 +1371,9 @@
             "Analog": {},
             "PrintedText": {},
             "StreamingService": {
-                "y1984": "TRUE"
+                "y1984": "UNKNOWN"
             },
-            "HardcoverBook": {}
+            "HardcoverBook": {"y1984": "UNKNOWN"}
         }
     },
     {
@@ -1512,12 +1402,12 @@
                 "spanish": "TRUE"
             },
             "IndoEuropeanLanguage": {},
-            "memberOf": {
-                "french": "romancefamily",
-                "spanish": "romancefamily"
+            "MemberOf": {
+                "(x, romancefamily)": "TRUE"
             },
             "Related": {
-                "(german, spanish)": "TRUE"
+                "(german, spanish)": "TRUE",
+                "(basque, x)": "TRUE"
             }
         }
     },
@@ -1543,17 +1433,16 @@
         "label": "Uncertain",
         "facts": {
             "RomanceLanguage": {
-                "(french)": "TRUE",
-                "(spanish)": "TRUE"
+                "french": "TRUE",
+                "spanish": "TRUE"
             },
             "IndoEuropeanLanguage": {},
             "MemberOf": {
-                "(french, romancefamily)": "TRUE",
-                "(spanish, romancefamily)": "TRUE"
+                "(x, romancefamily)": "TRUE"
             },
             "Related": {
                 "(german, spanish)": "TRUE",
-                "(basque, x)": "FALSE for any x"
+                "(basque, x)": "TRUE"
             }
         }
     },
@@ -1578,17 +1467,17 @@
         "conclusion-FOL": "IndoEuropeanLanguage(french)",
         "label": "True",
         "facts": {
-            "IndoEuropeanLanguage": {},
             "RomanceLanguage": {
-                "(french)": "TRUE",
-                "(spanish)": "TRUE"
+                "french": "TRUE",
+                "spanish": "TRUE"
             },
+            "IndoEuropeanLanguage": {},
             "MemberOf": {
-                "(french, romancefamily)": "TRUE",
-                "(spanish, romancefamily)": "TRUE"
+                "(x, romancefamily)": "TRUE"
             },
             "Related": {
-                "(german, spanish)": "TRUE"
+                "(german, spanish)": "TRUE",
+                "(basque, x)": "TRUE"
             }
         }
     },
@@ -1614,9 +1503,8 @@
             },
             "IsSoccerPlayer": {},
             "LeftTeam": {
-                "robertLewandowski, bayernMunchen": "TRUE"
-            },
-            "PlaysForTeam": {}
+                "(robertLewandowski, bayernMunchen)": "TRUE"
+            }
         }
     },
     {
@@ -1642,8 +1530,7 @@
             "IsSoccerPlayer": {},
             "LeftTeam": {
                 "(robertLewandowski, bayernMunchen)": "TRUE"
-            },
-            "PlaysForTeam": {}
+            }
         }
     },
     {
@@ -1666,11 +1553,9 @@
             "IsStriker": {
                 "robertLewandowski": "TRUE"
             },
-            "PlaysForTeam": {
-                "robertLewandowski, bayernMunchen": "FALSE"
-            },
+            "IsSoccerPlayer": {},
             "LeftTeam": {
-                "robertLewandowski, bayernMunchen": "TRUE"
+                "(robertLewandowski, bayernMunchen)": "TRUE"
             }
         }
     },
@@ -1698,7 +1583,10 @@
                 "(butte, montana)": "TRUE",
                 "(helena, montana)": "TRUE",
                 "(missoula, montana)": "TRUE",
-                "(pierre, montana)": "FALSE"
+                "(whitesulphursprings, montana)": "TRUE",
+                "(pierre, montana)": "FALSE",
+                "(pierre, x)": "UNKNOWN",
+                "(bismarck, x)": "UNKNOWN"
             }
         }
     },
@@ -1727,7 +1615,9 @@
                 "(helena, montana)": "TRUE",
                 "(missoula, montana)": "TRUE",
                 "(whitesulphursprings, montana)": "TRUE",
-                "(pierre, montana)": "FALSE"
+                "(pierre, montana)": "FALSE",
+                "(pierre, x)": "UNKNOWN",
+                "(bismarck, x)": "UNKNOWN"
             }
         }
     },
@@ -1755,7 +1645,9 @@
                 "(butte, montana)": "TRUE",
                 "(helena, montana)": "TRUE",
                 "(missoula, montana)": "TRUE",
-                "(pierre, montana)": "FALSE"
+                "(pierre, montana)": "TRUE",
+                "(whitesulphursprings, x)": "TRUE",
+                "(butte, x)":  "TRUE"
             }
         }
     },
@@ -1779,13 +1671,12 @@
             "InternationalStudent": {
                 "mike": "TRUE"
             },
-            "F1": {},
-            "J1": {},
             "WantWorkInUS": {
                 "mike": "TRUE"
             },
             "Apply": {
-                "(mike, cpt)": "TRUE"
+                "(mike, cpt)": "TRUE", 
+                "(x, opt)": "UNKNOWN"
             }
         }
     },
@@ -1808,13 +1699,12 @@
             "InternationalStudent": {
                 "mike": "TRUE"
             },
-            "F1": {},
-            "J1": {},
             "WantWorkInUS": {
                 "mike": "TRUE"
             },
             "Apply": {
-                "(mike, cpt)": "TRUE"
+                "(mike, cpt)": "TRUE", 
+                "(x, opt)": "UNKNOWN"
             }
         }
     },
@@ -1842,7 +1732,7 @@
             "Pet": {},
             "Domesticated": {},
             "Aligator": {
-                "(ted)": "TRUE"
+                "ted": "TRUE"
             }
         }
     },
@@ -1869,7 +1759,7 @@
             "Bovine": {},
             "Domesticated": {},
             "Aligator": {
-                "(ted)": "TRUE"
+                "ted": "TRUE"
             }
         }
     },
@@ -1897,7 +1787,7 @@
             "Bovine": {},
             "Domesticated": {},
             "Aligator": {
-                "(ted)": "TRUE"
+                "ted": "TRUE"
             }
         }
     },
@@ -1905,7 +1795,7 @@
         "premises": [
             "Yale University is a private Ivy League research university.",
             "Yale University moved to New Haven in 1716.",
-            "Yale university's endowment was valued at $42.3 billion.",
+            "Yale universitys endowment was valued at $42.3 billion.",
             "Yale University has been organized into 27 constituent colleges and schools: the residential colleges, the Yale Graduate School of Arts and Sciences, and twelve professional schools.",
             "A list of residential colleges at Yale: Benjamin Franklin College, Berkeley College, Branford College, Davenport College, Ezra Stiles College, Grace Hopper College, Jonathan Edwards College, Morse College, Pauli Murray College, Pierson College, Saybrook College, Silliman College, Timothy Dwight College, and Trumbull College."
         ],
@@ -1937,54 +1827,12 @@
                 "(yale, y1716)": "TRUE"
             },
             "MovedTo": {
-                "(yale, newhaven)": "TRUE"
+                "(yale, newhaven)": "TRUE",
+                "(x, newhaven)": "UNKNOWN"
             },
             "PrivateIvyLeagueResearchUniversity": {
-                "yale": "TRUE"
-            },
-            "ResidentialCollege": {
-                "(benjaminfranklincollege)": "TRUE",
-                "(berkeleycollege)": "TRUE",
-                "(branfordcollege)": "TRUE",
-                "(davenportcollege)": "TRUE",
-                "(ezrastilescollege)": "TRUE",
-                "(gracehoppercollege)": "TRUE",
-                "(jonathanedwardscollege)": "TRUE",
-                "(morsecollege)": "TRUE",
-                "(paulimurraycollege)": "TRUE",
-                "(piersoncollege)": "TRUE",
-                "(saybrookcollege)": "TRUE",
-                "(sillimancollege)": "TRUE",
-                "(timothydwightcollege)": "TRUE",
-                "(trumbullcollege)": "TRUE"
-            },
-            "AtYale": {
-                "(benjaminfranklincollege)": "TRUE",
-                "(berkeleycollege)": "TRUE",
-                "(branfordcollege)": "TRUE",
-                "(davenportcollege)": "TRUE",
-                "(ezrastilescollege)": "TRUE",
-                "(gracehoppercollege)": "TRUE",
-                "(jonathanedwardscollege)": "TRUE",
-                "(morsecollege)": "TRUE",
-                "(paulimurraycollege)": "TRUE",
-                "(piersoncollege)": "TRUE",
-                "(saybrookcollege)": "TRUE",
-                "(sillimancollege)": "TRUE",
-                "(timothydwightcollege)": "TRUE",
-                "(trumbullcollege)": "TRUE"
-            },
-            "GraduateSchool": {
-                "(yale, yaleschool)": "TRUE"
-            },
-            "ProfessionalSchool": {
-                "(yale, yaleschool)": "TRUE"
-            },
-            "ValuedAt": {
-                "(yalesendowment, y42.3billion)": "TRUE"
-            },
-            "OrganizedInto": {
-                "(yale, yaleschool)": "TRUE"
+                "yale": "TRUE",
+                "x": "UNKNOWN"
             }
         }
     },
@@ -1992,7 +1840,7 @@
         "premises": [
             "Yale University is a private Ivy League research university.",
             "Yale University moved to New Haven in 1716.",
-            "Yale university's endowment was valued at $42.3 billion.",
+            "Yale universitys endowment was valued at $42.3 billion.",
             "Yale University has been organized into 27 constituent colleges and schools: the residential colleges, the Yale Graduate School of Arts and Sciences, and twelve professional schools.",
             "A list of residential colleges at Yale: Benjamin Franklin College, Berkeley College, Branford College, Davenport College, Ezra Stiles College, Grace Hopper College, Jonathan Edwards College, Morse College, Pauli Murray College, Pierson College, Saybrook College, Silliman College, Timothy Dwight College, and Trumbull College."
         ],
@@ -2033,10 +1881,10 @@
                 "(yalesendowment, y42.3billion)": "TRUE"
             },
             "OrganizedInto": {
-                "(yale, x)": "TRUE"
+                "(yale, x)": "UNKNOWN"
             },
             "ConstituentCollegesandSchools": {
-                "x": "TRUE"
+                "x": "UNKNOWN"
             },
             "ResidentialCollege": {
                 "benjaminfranklincollege": "TRUE",
@@ -2074,7 +1922,7 @@
                 "yalegraduatschoolofartandsciences": "TRUE"
             },
             "ProfessionalSchool": {
-                "x": "TRUE"
+                "x": "UNKNOWN"
             }
         }
     },
@@ -2082,7 +1930,7 @@
         "premises": [
             "Yale University is a private Ivy League research university.",
             "Yale University moved to New Haven in 1716.",
-            "Yale university's endowment was valued at $42.3 billion.",
+            "Yale universitys endowment was valued at $42.3 billion.",
             "Yale University has been organized into 27 constituent colleges and schools: the residential colleges, the Yale Graduate School of Arts and Sciences, and twelve professional schools.",
             "A list of residential colleges at Yale: Benjamin Franklin College, Berkeley College, Branford College, Davenport College, Ezra Stiles College, Grace Hopper College, Jonathan Edwards College, Morse College, Pauli Murray College, Pierson College, Saybrook College, Silliman College, Timothy Dwight College, and Trumbull College."
         ],
@@ -2123,10 +1971,10 @@
                 "(yalesendowment, y42.3billion)": "TRUE"
             },
             "OrganizedInto": {
-                "(yale, x)": "TRUE"
+                "(yale, x)": "UNKNOWN"
             },
             "ConstituentCollegesandSchools": {
-                "x": "TRUE"
+                "x": "UNKNOWN"
             },
             "ResidentialCollege": {
                 "benjaminfranklincollege": "TRUE",
@@ -2144,8 +1992,6 @@
                 "timothydwightcollege": "TRUE",
                 "trumbullcollege": "TRUE"
             },
-            "GraduateSchool": {},
-            "ProfessionalSchool": {},
             "AtYale": {
                 "benjaminfranklincollege": "TRUE",
                 "berkeleycollege": "TRUE",
@@ -2161,12 +2007,18 @@
                 "sillimancollege": "TRUE",
                 "timothydwightcollege": "TRUE",
                 "trumbullcollege": "TRUE"
+            },
+            "GraduateSchool": {
+                "yalegraduatschoolofartandsciences": "TRUE"
+            },
+            "ProfessionalSchool": {
+                "x": "UNKNOWN"
             }
         }
     },
     {
         "premises": [
-            "Badults is a British Sitcom series, starring members of Pappy's.",
+            "Badults is a British Sitcom series, starring members of Pappys.",
             "Badults piloted in July 2013 on BBC Three.",
             "The Working title \"The Secret Dude Society\" was used for Badults.",
             "Andrew Collins was the script editor for Badults"
@@ -2181,36 +2033,39 @@
         "conclusion-FOL": "∃x,(ScriptEditorFor(andrewcollins, x) ∧ Series(x) ∧ WorkingTitle(thesecretdudesociety, x))",
         "label": "True",
         "facts": {
-            "MemberOf": {},
+            "MemberOf": {"(x, pappys)": "UNKNOWN"},
             "BritishSitcom": {
-                "badults": "TRUE"
+                "badults": "UNKNOWN"
             },
             "Series": {
-                "badults": "TRUE"
+                "badults": "UNKNOWN",
+                "x": "UNKNOWN"
             },
             "Starring": {
                 "(badults, x)": "UNKNOWN"
             },
             "PilotedIn": {
-                "badults": "july2013"
+                "(badults, july2013)": "TRUE"
             },
             "PilotedOn": {
-                "badults": "bbcthree"
+                "(badults, bbcthree)": "TRUE"
             },
             "WorkingTitle": {
-                "(thesecretdudesociety, badults)": "TRUE"
+                "(thesecretdudesociety, badults)": "TRUE",
+                "(thesecretdudesociety, x)": "UNKNOWN"
             },
-            "ScriptEditor": {
+            "ScriptEditors": {
                 "andrewcollins": "TRUE"
             },
             "ScriptEditorFor": {
-                "(andrewcollins, badults)": "TRUE"
+                "(andrewcollins, badults)": "TRUE",
+                "(andrewcollins, x)": "UNKNOWN"
             }
         }
     },
     {
         "premises": [
-            "Badults is a British Sitcom series, starring members of Pappy's.",
+            "Badults is a British Sitcom series, starring members of Pappys.",
             "Badults piloted in July 2013 on BBC Three.",
             "The Working title \"The Secret Dude Society\" was used for Badults.",
             "Andrew Collins was the script editor for Badults"
@@ -2221,8 +2076,8 @@
             "WorkingTitle(thesecretdudesociety, badults)",
             "ScriptEditor(andrewcollins) ∧ ScriptEditorFor(andrewcollins, badults)"
         ],
-        "conclusion": "No members of Pappy's have starred for a show piloting on BBC Two or BBC Three.",
-        "conclusion-FOL": "∀x, y, (MemberOf(x, pappys) ∧ Starring(y, x) → ¬(PilotedOn(y, bbctwo) ∨ PilotedOn(y, bbcthree)))",
+        "conclusion": "No members of Pappys have starred for a show piloting on BBC Two or BBC Three.",
+        "conclusion-FOL": "∀x, y, (MemberOf(x, pappys) ∧ Starring(y, x) → ¬PilotedOn(y, bbctwo) ∧ ¬PilotedOn(y, bbcthree))",
         "label": "False",
         "facts": {
             "BritishSitcom": {
@@ -2231,117 +2086,100 @@
             "Series": {
                 "badults": "TRUE"
             },
-            "MemberOf": {},
+            "MemberOf": {"(x, pappys)": "TRUE"},
             "Starring": {
-                "(badults, x)": "TRUE"
-            },
-            "PilotedIn": {
-                "badults": "july2013"
+                "(badults, x)": "TRUE",
+                "(x, y)": "TRUE"
             },
             "PilotedOn": {
-                "badults": "bbcthree"
-            },
-            "WorkingTitle": {
-                "(thesecretdudesociety, badults)": "TRUE"
-            },
-            "ScriptEditor": {
-                "andrewcollins": "TRUE"
-            },
-            "ScriptEditorFor": {
-                "(andrewcollins, badults)": "TRUE"
+                "(y, bbctwo)":  "TRUE",
+                "(y, bbcthree)": "TRUE"
             }
         }
     },
     {
         "premises": [
-            "All growth companies’ stocks are volatile.",
+            "All growth companies stocks are volatile.",
             "If the stock price is volatile, then it is not suitable for a retirement fund.",
-            "Some companies’ stocks are growth companies’ stocks.",
-            "All mature companies’ stocks are suitable for a retirement fund.",
-            "KO is a mature company’s stock."
+            "Some companies stocks are growth companies stocks.",
+            "All mature companies stocks are suitable for a retirement fund.",
+            "KO is a mature companys stock."
         ],
         "premises-FOL": [
-            "∀x,(GrowthCompanies’Stocks(x) → PriceVolatile(x))",
+            "∀x,(GrowthCompaniesStocks(x) → PriceVolatile(x))",
             "∀x,(PriceVolatile(x) → ¬SuitableForRetirementRund(x))",
-            "∃x,(Companies’Stocks(x) ∧ GrowthCompanies’Stocks(x))",
-            "∀x,(MatureCompanies’Stocks(x) → SuitableForRetirementRund(x))",
-            "MatureCompanies’Stocks(kO)"
+            "∃x,(CompaniesStocks(x) ∧ GrowthCompaniesStocks(x))",
+            "∀x,(MatureCompaniesStocks(x) → SuitableForRetirementRund(x))",
+            "CompaniesStocks(kO)"
         ],
         "conclusion": "KO is a company stock.",
-        "conclusion-FOL": "Companies’Stocks(kO)",
+        "conclusion-FOL": "CompaniesStocks(kO)",
         "label": "Uncertain",
         "facts": {
-            "GrowthCompanies'Stocks": {},
-            "PriceVolatile": {},
-            "SuitableForRetirementRund": {},
-            "Companies'Stocks": {},
-            "MatureCompanies'Stocks": {
+            "CompaniesStocks": {
                 "kO": "TRUE"
             }
         }
     },
     {
         "premises": [
-            "All growth companies’ stocks are volatile.",
+            "All growth companies stocks are volatile.",
             "If the stock price is volatile, then it is not suitable for a retirement fund.",
-            "Some companies’ stocks are growth companies’ stocks.",
-            "All mature companies’ stocks are suitable for a retirement fund.",
-            "KO is a mature company’s stock."
+            "Some companies stocks are growth companies stocks.",
+            "All mature companies stocks are suitable for a retirement fund.",
+            "KO is a mature companys stock."
         ],
         "premises-FOL": [
-            "∀x,(GrowthCompanies’Stocks(x) → PriceVolatile(x))",
+            "∀x,(GrowthCompaniesStocks(x) → PriceVolatile(x))",
             "∀x,(PriceVolatile(x) → ¬SuitableForRetirementRund(x))",
-            "∃x,(Companies’Stocks(x) ∧ GrowthCompanies’Stocks(x))",
-            "∀x,(MatureCompanies’Stocks(x) → SuitableForRetirementRund(x))",
-            "MatureCompanies’Stocks(kO)"
+            "∃x,(CompaniesStocks(x) ∧ GrowthCompaniesStocks(x))",
+            "∀x,(MatureCompaniesStocks(x) → SuitableForRetirementRund(x))",
+            "CompaniesStocks(kO)"
         ],
-        "conclusion": "KO is a company stock and a growth company’s stock.",
-        "conclusion-FOL": "Companies’Stocks(kO) ∧ GrowthCompanies’Stocks(kO)",
+        "conclusion": "KO is a company stock and a growth companys stock.",
+        "conclusion-FOL": "CompaniesStocks(kO) ∧ GrowthCompaniesStocks(kO)",
         "label": "False",
         "facts": {
-            "GrowthCompanies’Stocks": {},
-            "PriceVolatile": {},
-            "SuitableForRetirementRund": {},
-            "Companies’Stocks": {},
-            "MatureCompanies’Stocks": {
-                "(kO)": "TRUE"
+            "CompaniesStocks": {
+                "kO": "TRUE"
             }
         }
     },
     {
         "premises": [
-            "All growth companies’ stocks are volatile.",
+            "All growth companies stocks are volatile.",
             "If the stock price is volatile, then it is not suitable for a retirement fund.",
-            "Some companies’ stocks are growth companies’ stocks.",
-            "All mature companies’ stocks are suitable for a retirement fund.",
-            "KO is a mature company’s stock."
+            "Some companies stocks are growth companies stocks.",
+            "All mature companies stocks are suitable for a retirement fund.",
+            "KO is a mature companys stock."
         ],
         "premises-FOL": [
-            "∀x,(GrowthCompanies’Stocks(x) → PriceVolatile(x))",
+            "∀x,(GrowthCompaniesStocks(x) → PriceVolatile(x))",
             "∀x,(PriceVolatile(x) → ¬SuitableForRetirementRund(x))",
-            "∃x,(Companies’Stocks(x) ∧ GrowthCompanies’Stocks(x))",
-            "∀x,(MatureCompanies’Stocks(x) → SuitableForRetirementRund(x))",
-            "MatureCompanies’Stocks(kO)"
+            "∃x,(CompaniesStock(x) ∧ GrowthCompaniesStocks(x))",
+            "∀x,(MatureCompaniesStocks(x) → SuitableForRetirementRund(x))",
+            "MatureCompaniesStocks(kO)"
         ],
-        "conclusion": "If KO is a growth company’s stock or if its price is volatile, then KO is neither a company’s stock nor is its price volatile.",
-        "conclusion-FOL": "(GrowthCompanies’Stocks(kO) ∨ PriceVolatile(kO)) → (¬Companies’Stocks(kO) ∨ ¬PriceVolatile(kO))",
+        "conclusion": "If KO is a growth companys stock or if its price is volatile, then KO is neither a companys stock nor is its price volatile.",
+        "conclusion-FOL": "GrowthCompaniesStocks(kO) ∨ PriceVolatile(kO) → ¬CompaniesStock(kO) ∨ ¬PriceVolatile(kO)",
         "label": "True",
         "facts": {
-            "GrowthCompanies'Stocks": {},
-            "Companies'Stocks": {},
-            "PriceVolatile": {},
-            "SuitableForRetirementFund": {},
-            "MatureCompanies'Stocks": {
+            "MatureCompaniesStocks": {
                 "kO": "TRUE"
+            },
+            "GrowthCompaniesStocks":{
+                "kO": "FALSE"
+            },
+            "PriceVolatile": {
+                "kO": "FALSE"
             }
-        }
     },
     {
         "premises": [
             "All vehicle registration plates in Istanbul begin with the number 34.",
             "Plates that do not begin with the number 34 are not from Istanbul. ",
-            "Joe's vehicle registration plate is from Istanbul. ",
-            "Tom's license plate begins with the number 35. ",
+            "Joes vehicle registration plate is from Istanbul. ",
+            "Toms license plate begins with the number 35. ",
             "[BG] If a license plate begins with the number 35, then it does not begin with the number 34."
         ],
         "premises-FOL": [
@@ -2351,15 +2189,19 @@
             "Beginwith(tom, number35)",
             "∀x,(Beginwith(x, number35) → ¬Beginwith(x, number34))"
         ],
-        "conclusion": "Joe's license plate begins with the number 34.",
+        "conclusion": "Joes license plate begins with the number 34.",
         "conclusion-FOL": "Beginwith(joe, number34)",
         "label": "True",
         "facts": {
             "Vehicleregistrationplate": {
-                "(joe, istanbul)": "TRUE"
+                "(joe, istanbul)": "TRUE",
+                "(x, istanbul)": "UNKNOWN"
             },
             "Beginwith": {
-                "(tom, number35)": "TRUE"
+                "(tom, number35)": "TRUE",
+                "(x, number34)": "UNKNOWN",
+                "(x, number35)": "UNKNOWN",
+                "(joe, number34)": "UNKNOWN"
             }
         }
     },
@@ -2367,8 +2209,8 @@
         "premises": [
             "All vehicle registration plates in Istanbul begin with the number 34.",
             "Plates that do not begin with the number 34 are not from Istanbul. ",
-            "Joe's vehicle registration plate is from Istanbul. ",
-            "Tom's license plate begins with the number 35. ",
+            "Joes vehicle registration plate is from Istanbul. ",
+            "Toms license plate begins with the number 35. ",
             "[BG] If a license plate begins with the number 35, then it does not begin with the number 34."
         ],
         "premises-FOL": [
@@ -2378,17 +2220,20 @@
             "Beginwith(tom, number35)",
             "∀x,(Beginwith(x, number35) → ¬Beginwith(x, number34))"
         ],
-        "conclusion": "Tom's license plate is from Istanbul.",
+        "conclusion": "Toms license plate is from Istanbul.",
         "conclusion-FOL": "Vehicleregistrationplate(tom, istanbul)",
         "label": "False",
         "facts": {
             "Vehicleregistrationplate": {
-                "(joe, istanbul)": "TRUE"
+                "(joe, istanbul)": "TRUE",
+                "(x, istanbul)": "UNKNOWN",
+                "(tom, istanbul)": "UNKNOWN"
             },
             "Beginwith": {
-                "(tom, number35)": "TRUE"
-            },
-            "FromIstanbul": {}
+                "(tom, number35)": "TRUE",
+                "(x, number34)": "UNKNOWN",
+                "(x, number35)": "UNKNOWN"
+            }
         }
     },
     {
@@ -2442,15 +2287,17 @@
         "label": "True",
         "facts": {
             "StudentJobs": {
-                "mary": "TRUE"
+                "mary": "FALSE"
             },
             "Tuition": {
                 "mary": "TRUE"
             },
-            "Takeout": {},
-            "DiningHall": {},
-            "NotPicky": {},
-            "Eating": {}
+            "NotPicky":{
+                "mary": "UNKNOWN"
+            },
+            "Eating":{
+                "mary": "UNKNOWN"
+            }
         }
     },
     {
@@ -2471,19 +2318,15 @@
             "(StudentJobs(mary) ∧ Tuition(mary) → ¬(NotPicky(mary) ∨ Tuition(mary)))"
         ],
         "conclusion": "Mary either is not a picky eater or, if she is, then she spends a lot of her time eating and catching up with friends in the campus dining halls.",
-        "conclusion-FOL": "(NotPicky(mary) ⊕ Eating(mary))",
+        "conclusion-FOL": "NotPicky(mary) ⊕ Eating(mary)",
         "label": "False",
         "facts": {
             "StudentJobs": {
-                "(mary)": "TRUE"
+                "mary": "FALSE"
             },
             "Tuition": {
-                "(mary)": "TRUE"
-            },
-            "Takeout": {},
-            "DiningHall": {},
-            "NotPicky": {},
-            "Eating": {}
+                "mary": "FALSE"
+            }
         }
     },
     {
@@ -2505,11 +2348,12 @@
         "conclusion-FOL": "ProductsOfBakedByMelissa(driedThaiChilies)",
         "label": "False",
         "facts": {
-            "Bakery": {},
-            "Cupcakes": {},
-            "Hotpot": {},
-            "ProductsOfBakedByMelissa": {},
+            "Bakery": {"driedThaiChilies": "FALSE"},
+            "Hotpot": {"driedThaiChilies": "UNKNOWN"},
             "Spicy": {
+                "driedThaiChilies": "TRUE"
+            },
+            "ProductsOfBakedByMelissa":{
                 "driedThaiChilies": "UNKNOWN"
             }
         }
@@ -2533,16 +2377,14 @@
         "conclusion-FOL": "¬ProductsOfBakedByMelissa(driedThaiChilies)",
         "label": "True",
         "facts": {
-            "BakedByMelissa": {},
-            "Bakery": {},
-            "Cupcakes": {},
-            "DriedThaiChilies": {
-                "Spicy": "UNKNOWN",
-                "Bakery": "UNKNOWN"
+            "Bakery": {"driedThaiChilies": "FALSE"},
+            "Hotpot": {"driedThaiChilies": "UNKNOWN"},
+            "Spicy": {
+                "driedThaiChilies": "TRUE"
             },
-            "Hotpot": {},
-            "ProductsOfBakedByMelissa": {},
-            "Spicy": {}
+            "ProductsOfBakedByMelissa":{
+                "driedThaiChilies": "UNKNOWN"
+            }
         }
     },
     {
@@ -2564,17 +2406,11 @@
         "conclusion-FOL": "Hotpot(driedThaiChilies)",
         "label": "Uncertain",
         "facts": {
+            "Bakery": {"driedThaiChilies": "TRUE"},
+            "Hotpot": {"driedThaiChilies": "UNKNOWN"},
             "Spicy": {
-                "(driedThaiChilies)": "UNKNOWN"
-            },
-            "Bakery": {
-                "(driedThaiChilies)": "UNKNOWN"
-            },
-            "Hotpot": {
-                "(driedThaiChilies)": "UNKNOWN"
-            },
-            "Cupcakes": {},
-            "ProductsOfBakedByMelissa": {}
+                "driedThaiChilies": "FALSE"
+            }
         }
     },
     {
@@ -2590,17 +2426,17 @@
             "∀x,(Cupcakes(x) → Bakery(x))",
             "∀x,(Hotpot(x) → Spicy(x))",
             "∀x,(ProductsOfBakedByMelissa(x) → Cupcakes(x))",
-            "(Spicy(driedThaiChilies) ∨ Bakery(driedThaiChilies)) → (Hotpot(driedThaiChilies) ∨ Spicy(driedThaiChilies))"
+            "Spicy(driedThaiChilies) ∨ Bakery(driedThaiChilies) → Hotpot(driedThaiChilies) ∨ Spicy(driedThaiChilies)"
         ],
         "conclusion": "Dried Thai chilies are neither a product of Baked by Melissa nor a bakery.",
         "conclusion-FOL": "¬ProductsOfBakedByMelissa(driedThaiChilies) ∧ ¬Bakery(driedThaiChilies)",
         "label": "True",
         "facts": {
-            "Bakery": {},
-            "Cupcakes": {},
-            "Hotpot": {},
-            "ProductsOfBakedByMelissa": {},
-            "Spicy": {}
+            "Bakery": {"driedThaiChilies": "TRUE"},
+            "Hotpot": {"driedThaiChilies": "UNKNOWN"},
+            "Spicy": {
+                "driedThaiChilies": "FALSE"
+            }
         }
     },
     {
@@ -2616,23 +2452,26 @@
             "∀x,(Cupcakes(x) → Bakery(x))",
             "∀x,(Hotpot(x) → Spicy(x))",
             "∀x,(ProductsOfBakedByMelissa(x) → Cupcakes(x))",
-            "(Spicy(driedThaiChilies) ∨ Bakery(driedThaiChilies) → Hotpot(driedThaiChilies) ∨ Spicy(driedThaiChilies))"
+            "Spicy(driedThaiChilies) ∨ Bakery(driedThaiChilies) → Hotpot(driedThaiChilies) ∨ Spicy(driedThaiChilies)"
         ],
         "conclusion": "Dried Thai chilies are cupcakes and a product of Baked by Melissa.",
         "conclusion-FOL": "Cupcake(driedThaiChilies) ∧ ProductsOfBakedByMelissa(driedThaiChilies)",
         "label": "False",
         "facts": {
-            "Bakery": {},
-            "Cupcakes": {},
-            "Hotpot": {},
-            "ProductsOfBakedByMelissa": {},
-            "Spicy": {}
+            "Bakery": {"driedThaiChilies": "FALSE"},
+            "Hotpot": {"driedThaiChilies": "UNKNOWN"},
+            "Spicy": {
+                "driedThaiChilies": "TRUE"
+            },
+            "ProductsOfBakedByMelissa":{
+                "driedThaiChilies": "UNKNOWN"
+            }
         }
     },
     {
         "premises": [
-            "If the restaurant is listed in Yelp’s recommendations, then the restaurant does not receive many negative reviews.",
-            "All restaurants with a rating greater than 9 are listed in Yelp’s recommendations.",
+            "If the restaurant is listed in Yelps recommendations, then the restaurant does not receive many negative reviews.",
+            "All restaurants with a rating greater than 9 are listed in Yelps recommendations.",
             "Some restaurants that do not provide take-out service receive many negative reviews.",
             "All restaurants that are popular among local residents have ratings greater than 9.",
             "Subway has a rating greater than 9 or is popular among local residents."
@@ -2642,27 +2481,24 @@
             "∀x,(RatingGreaterThan9(x) → YelpRecommendation(x))",
             "∃x,(NoTakeOutService(x) ∧ NegativeReview(x))",
             "∀x,(PopularAmongLocalResidents(x) → RatingGreaterThan9(x))",
-            "(RatingGreaterThan9(subway) ⊕ PopularAmongLocalResidents(subway))"
+            "RatingGreaterThan9(subway) ⊕ PopularAmongLocalResidents(subway)"
         ],
         "conclusion": "If Subway provides take-out service and receives many negative reviews, then its rating is greater than 9 and it does not provide take-out service.",
         "conclusion-FOL": "NoTakeOutService(subway)",
         "label": "Uncertain",
         "facts": {
-            "YelpRecommendation": {},
-            "NegativeReview": {},
             "RatingGreaterThan9": {
-                "(subway)": "TRUE"
+                "subway": "UNKNOWN"
             },
-            "NoTakeOutService": {},
             "PopularAmongLocalResidents": {
-                "(subway)": "TRUE"
+                "subway": "UNKNOWN"
             }
         }
     },
     {
         "premises": [
-            "If the restaurant is listed in Yelp’s recommendations, then the restaurant does not receive many negative reviews.",
-            "All restaurants with a rating greater than 9 are listed in Yelp’s recommendations.",
+            "If the restaurant is listed in Yelps recommendations, then the restaurant does not receive many negative reviews.",
+            "All restaurants with a rating greater than 9 are listed in Yelps recommendations.",
             "Some restaurants that do not provide take-out service receive many negative reviews.",
             "All restaurants that are popular among local residents have ratings greater than 9.",
             "Subway has a rating greater than 9 or is popular among local residents."
@@ -2675,24 +2511,27 @@
             "RatingGreaterThan9(subway) ⊕ PopularAmongLocalResidents(subway)"
         ],
         "conclusion": "Subway provides take-out service and does not receive many negative reviews.",
-        "conclusion-FOL": "¬(NoTakeOutService(subway) ∧ NegativeReview(subway))",
+        "conclusion-FOL": "¬NoTakeOutService(subway) ∨ ¬NegativeReview(subway)",
         "label": "True",
         "facts": {
-            "YelpRecommendation": {},
-            "NegativeReview": {},
             "RatingGreaterThan9": {
-                "(subway)": "TRUE"
+                "subway": "TRUE"
             },
-            "NoTakeOutService": {},
             "PopularAmongLocalResidents": {
-                "(subway)": "TRUE"
+                "subway": "TRUE"
+            },
+            "NoTakeOutService":{
+                "subway": "UNKNOWN"
+            },
+            "NegativeReview": {
+                "subway": "UNKNOWN"
             }
         }
     },
     {
         "premises": [
-            "If the restaurant is listed in Yelp’s recommendations, then the restaurant does not receive many negative reviews.",
-            "All restaurants with a rating greater than 9 are listed in Yelp’s recommendations.",
+            "If the restaurant is listed in Yelps recommendations, then the restaurant does not receive many negative reviews.",
+            "All restaurants with a rating greater than 9 are listed in Yelps recommendations.",
             "Some restaurants that do not provide take-out service receive many negative reviews.",
             "All restaurants that are popular among local residents have ratings greater than 9.",
             "Subway has a rating greater than 9 or is popular among local residents."
@@ -2702,29 +2541,23 @@
             "∀x,(RatingGreaterThan9(x) → YelpRecommendation(x))",
             "∃x,(NoTakeOutService(x) ∧ NegativeReview(x))",
             "∀x,(PopularAmongLocalResidents(x) → RatingGreaterThan9(x))",
-            "(RatingGreaterThan9(subway) ⊕ PopularAmongLocalResidents(subway))"
+            "RatingGreaterThan9(subway) ⊕ PopularAmongLocalResidents(subway)"
         ],
         "conclusion": "Subway does not provide take-out service.",
-        "conclusion-FOL": "¬(NoTakeOutService(subway) ∧ NegativeReview(subway)) → (PopularAmongLocalResidents(subway) ∧ NoTakeOutService(subway))",
+        "conclusion-FOL": "¬NoTakeOutService(subway) ∨ ¬NegativeReview(subway) → PopularAmongLocalResidents(subway) ∧ NoTakeOutService(subway)",
         "label": "False",
         "facts": {
-            "Restaurant": {
-                "Subway": "TRUE"
-            },
-            "YelpRecommendation": {
-                "Restaurant": "TRUE"
-            },
             "RatingGreaterThan9": {
-                "Restaurant": "TRUE"
+                "subway": "UNKNOWN"
             },
             "NegativeReview": {
-                "Restaurant": "FALSE"
+                "subway": "UNKNOWN"
             },
             "NoTakeOutService": {
-                "Restaurant": "FALSE"
+                "Restaurant": "UNKNOWN"
             },
             "PopularAmongLocalResidents": {
-                "Restaurant": "TRUE"
+                "subway": "UNKNOWN"
             }
         }
     },
@@ -2733,7 +2566,7 @@
             "[BG] Books contain tons of knowledge.",
             "[BG] When a person reads a book, that person gains knowledge. ",
             "[BG] If a person gains knowledge, they become smarter.",
-            "Harry read the book “Walden” by Henry Thoreau."
+            "Harry read the book Walden by Henry Thoreau."
         ],
         "premises-FOL": [
             "∀x,(Book(x) → Knowledge(x))",
@@ -2758,7 +2591,7 @@
             "[BG] Books contain tons of knowledge.",
             "[BG] When a person reads a book, that person gains knowledge. ",
             "[BG] If a person gains knowledge, they become smarter.",
-            "Harry read the book “Walden” by Henry Thoreau."
+            "Harry read the book Walden by Henry Thoreau."
         ],
         "premises-FOL": [
             "∀x,(Book(x) → Knowledge(x))",
@@ -2783,7 +2616,7 @@
             "[BG] Books contain tons of knowledge.",
             "[BG] When a person reads a book, that person gains knowledge. ",
             "[BG] If a person gains knowledge, they become smarter.",
-            "Harry read the book “Walden” by Henry Thoreau."
+            "Harry read the book Walden by Henry Thoreau."
         ],
         "premises-FOL": [
             "∀x,(Book(x) → Knowledge(x))",
@@ -2796,10 +2629,10 @@
         "label": "Uncertain",
         "facts": {
             "Book": {
-                "walden": "TRUE"
+            "walden": "TRUE"
             },
             "ReadBook": {
-                "(harry, walden)": "TRUE"
+            "(harry, walden)": "TRUE"
             }
         }
     },
@@ -2823,8 +2656,6 @@
             "NLP": {
                 "machineTranslation": "TRUE"
             },
-            "NLG": {},
-            "NLU": {},
             "OutputSequence": {
                 "machineTranslation": "TRUE"
             }
@@ -2859,8 +2690,8 @@
         "premises": [
             "Pets are allowed in some managed buildings.",
             "[BG] A deposit is required to rent an apartment in a managed building.",
-            "The security deposit can be either equal to one month's rent or more.",
-            "Fluffy is Tom's cat.",
+            "The security deposit can be either equal to one months rent or more.",
+            "Fluffy is Toms cat.",
             "Cats are pets.",
             "The Olive Garden is a managed building.",
             "The monthly rent at the Olive Garden is $2000.",
@@ -2876,7 +2707,7 @@
             "∀x,(Cat(x) → Pet(x))",
             "ManagedBuilding(oliveGarden)",
             "Rent2000(oliveGarden)",
-            "∀x,(TomRent(x) ↔ (ManagedBuilding(x) ∧ AllowPet(x) ∧ DepositNoMoreThan1500(x)))"
+            "∀x,(TomRent(x) ↔ ManagedBuilding(x) ∧ AllowPet(x) ∧ DepositNoMoreThan1500(x))"
         ],
         "conclusion": "Tom will rent an apartment in The Olive Garden.",
         "conclusion-FOL": "TomRent(oliveGarden)",
@@ -2886,27 +2717,20 @@
             "ManagedBuilding": {
                 "oliveGarden": "TRUE"
             },
-            "AllowPet": {
-                "oliveGarden": "TRUE"
-            },
-            "RequireDeposit": {
-                "oliveGarden": "TRUE"
-            },
             "Rent2000": {
                 "oliveGarden": "TRUE"
             },
             "Cat": {
                 "fluffy": "TRUE"
-            },
-            "TomRent": {}
+            }
         }
     },
     {
         "premises": [
             "Pets are allowed in some managed buildings.",
             "[BG] A deposit is required to rent an apartment in a managed building.",
-            "The security deposit can be either equal to one month's rent or more.",
-            "Fluffy is Tom's cat.",
+            "The security deposit can be either equal to one months rent or more.",
+            "Fluffy is Toms cat.",
             "Cats are pets.",
             "The Olive Garden is a managed building.",
             "The monthly rent at the Olive Garden is $2000.",
@@ -2922,16 +2746,14 @@
             "∀x,(Cat(x) → Pet(x))",
             "ManagedBuilding(oliveGarden)",
             "Rent2000(oliveGarden)",
-            "∀x,(TomRent(x) ↔ (ManagedBuilding(x) ∧ AllowPet(x) ∧ DepositNoMoreThan1500(x)))"
+            "∀x,(TomRent(x) ↔ ManagedBuilding(x) ∧ AllowPet(x) ∧ DepositNoMoreThan1500(x))"
         ],
         "conclusion": "Tom is allowed to move in an apartment in The Olive Garden with Fluffy.",
         "conclusion-FOL": "AllowPet(oliveGarden)",
         "label": "Uncertain",
         "facts": {
+            "Pet": {},
             "ManagedBuilding": {
-                "oliveGarden": "TRUE"
-            },
-            "AllowPet": {
                 "oliveGarden": "TRUE"
             },
             "Rent2000": {
@@ -2946,8 +2768,8 @@
         "premises": [
             "Pets are allowed in some managed buildings.",
             "[BG] A deposit is required to rent an apartment in a managed building.",
-            "The security deposit can be either equal to one month's rent or more.",
-            "Fluffy is Tom's cat.",
+            "The security deposit can be either equal to one months rent or more.",
+            "Fluffy is Toms cat.",
             "Cats are pets.",
             "The Olive Garden is a managed building.",
             "The monthly rent at the Olive Garden is $2000.",
@@ -2963,33 +2785,31 @@
             "∀x,(Cat(x) → Pet(x))",
             "ManagedBuilding(oliveGarden)",
             "Rent2000(oliveGarden)",
-            "∀x,(TomRent(x) ↔ (ManagedBuilding(x) ∧ AllowPet(x) ∧ DepositNoMoreThan1500(x)))"
+            "∀x,(TomRent(x) ↔ ManagedBuilding(x) ∧ AllowPet(x) ∧ DepositNoMoreThan1500(x))"
         ],
         "conclusion": "The security deposit at the Olive Garden is either $2000 or more.",
         "conclusion-FOL": "DepositNoLessThan2000(oliveGarden)",
         "label": "True",
         "facts": {
-            "AllowPet": {
-                "(oliveGarden)": "TRUE"
-            },
+            "Pet": {},
             "ManagedBuilding": {
-                "(oliveGarden)": "TRUE"
+                "oliveGarden": "TRUE"
             },
             "Rent2000": {
-                "(oliveGarden)": "TRUE"
+                "oliveGarden": "TRUE"
             },
             "Cat": {
-                "(fluffy)": "TRUE"
+                "fluffy": "TRUE"
             }
         }
     },
     {
         "premises": [
-            "If animals are loved by tourists, then they are Max's favorite animals. ",
+            "If animals are loved by tourists, then they are Maxs favorite animals. ",
             "All animals from Australia are loved by tourists. ",
             "All quokka are animals from Australia. ",
-            "All of Max's favorite animals are very fluffy.",
-            "All of Max's favorite animals love to sleep. ",
+            "All of Maxs favorite animals are very fluffy.",
+            "All of Maxs favorite animals love to sleep. ",
             "If a koala is very fluffy, then the koala is not a quokka."
         ],
         "premises-FOL": [
@@ -3004,23 +2824,24 @@
         "conclusion-FOL": "LoveToSleep(koala)",
         "label": "Uncertain",
         "facts": {
-            "AnimalsLovedByTourists": {},
-            "AnimalsFromAustralia": {},
-            "Quokka": {},
-            "MaxFavoriteAnimals": {},
-            "VeryFluffy": {
-                "(koala)": "TRUE"
+            "ManagedBuilding": {
+                "oliveGarden": "TRUE"
             },
-            "LoveToSleep": {}
+            "Rent2000": {
+                "oliveGarden": "TRUE"
+            },
+            "Cat": {
+                "fluffy": "TRUE"
+            }
         }
     },
     {
         "premises": [
-            "If animals are loved by tourists, then they are Max's favorite animals. ",
+            "If animals are loved by tourists, then they are Maxs favorite animals. ",
             "All animals from Australia are loved by tourists. ",
             "All quokka are animals from Australia. ",
-            "All of Max's favorite animals are very fluffy.",
-            "All of Max's favorite animals love to sleep. ",
+            "All of Maxs favorite animals are very fluffy.",
+            "All of Maxs favorite animals love to sleep. ",
             "If a koala is very fluffy, then the koala is not a quokka."
         ],
         "premises-FOL": [
@@ -3035,23 +2856,20 @@
         "conclusion-FOL": "LoveToSleep(koala) ∧ Quokka(koala)",
         "label": "False",
         "facts": {
-            "AnimalsLovedByTourists": {},
-            "AnimalsFromAustralia": {},
-            "Quokka": {},
-            "MaxFavoriteAnimals": {},
+            "Quokka": {"koala": "UNKNOWN"},
             "VeryFluffy": {
                 "koala": "TRUE"
             },
-            "LoveToSleep": {}
+            "LoveToSleep": {"koala": "UNKNOWN"}
         }
     },
     {
         "premises": [
-            "If animals are loved by tourists, then they are Max's favorite animals. ",
+            "If animals are loved by tourists, then they are Maxs favorite animals. ",
             "All animals from Australia are loved by tourists. ",
             "All quokka are animals from Australia. ",
-            "All of Max's favorite animals are very fluffy.",
-            "All of Max's favorite animals love to sleep. ",
+            "All of Maxs favorite animals are very fluffy.",
+            "All of Maxs favorite animals love to sleep. ",
             "If a koala is very fluffy, then the koala is not a quokka."
         ],
         "premises-FOL": [
@@ -3066,18 +2884,12 @@
         "conclusion-FOL": "Quokka(koala) → LoveToSleep(koala) ⊕ VeryFluffy(koala)",
         "label": "True",
         "facts": {
-            "AnimalsLovedByTourists": {},
-            "AnimalsFromAustralia": {
-                "(x)": "TRUE"
-            },
             "Quokka": {
-                "(x)": "TRUE"
+                "koala": "UNKNOWN"
             },
-            "MaxFavoriteAnimals": {},
             "VeryFluffy": {
-                "(koala)": "TRUE"
-            },
-            "LoveToSleep": {}
+                "koala": "FALSE"
+            }
         }
     },
     {
@@ -3090,25 +2902,21 @@
             "Harry is a gentleman."
         ],
         "premises-FOL": [
-            "∀x,(Kind(x) ⊕ Evil(x))",
-            "∀x,(Ugly(x) → ¬Handsome(x))",
-            "∀x,(Evil(x) → Ugly(x))",
-            "∀x,(Gentleman(x) → Handsome(x))",
-            "∀x,(CEO(x) → Gentleman(x))",
+            "∀x ,(Gentleman(x) → Handsome(x))",
+            "∀x ,(CEO(x) → Gentleman(x))",
+            "∀x ,(Man(x) → (Kind(x) ∨ Evil(x)))",
+            "∀x ,(Ugly(x) → ¬Handsome(x))",
+            "∀x ,(Evil(x) → Ugly(x))",
             "Gentleman(harry)"
         ],
         "conclusion": "Harry is a CEO.",
         "conclusion-FOL": "CEO(harry)",
         "label": "Uncertain",
         "facts": {
-            "Kind": {},
-            "Evil": {},
-            "Ugly": {},
-            "Handsome": {},
             "Gentleman": {
                 "harry": "TRUE"
             },
-            "CEO": {}
+            "CEO": {"harry": "UNKNOWN"}
         }
     },
     {
@@ -3121,25 +2929,21 @@
             "Harry is a gentleman."
         ],
         "premises-FOL": [
-            "∀x,(Kind(x) ⊕ Evil(x))",
-            "∀x,(Ugly(x) → ¬Handsome(x))",
-            "∀x,(Evil(x) → Ugly(x))",
-            "∀x,(Gentleman(x) → Handsome(x))",
-            "∀x,(CEO(x) → Gentleman(x))",
+            "∀x ,(Gentleman(x) → Handsome(x))",
+            "∀x ,(CEO(x) → Gentleman(x))",
+            "∀x ,(Man(x) → (Kind(x) ∨ Evil(x)))",
+            "∀x ,(Ugly(x) → ¬Handsome(x))",
+            "∀x ,(Evil(x) → Ugly(x))",
             "Gentleman(harry)"
         ],
         "conclusion": "Harry is kind or a CEO.",
         "conclusion-FOL": "Kind(harry) ∨ CEO(harry)",
         "label": "True",
         "facts": {
-            "Kind": {},
-            "Evil": {},
-            "Ugly": {},
-            "Handsome": {},
             "Gentleman": {
                 "harry": "TRUE"
             },
-            "CEO": {}
+            "CEO": {"harry": "UNKNOWN"}
         }
     },
     {
@@ -3163,14 +2967,10 @@
         "conclusion-FOL": "(Evil(harry) ∧ Ugly(harry)) ⊕ (¬Evil(harry) ∧ ¬Ugly(harry)) → ¬Kind(harry) ∧ ¬CEO(harry)",
         "label": "False",
         "facts": {
-            "Kind": {},
-            "Evil": {},
-            "Ugly": {},
-            "Handsome": {},
             "Gentleman": {
                 "harry": "TRUE"
             },
-            "CEO": {}
+            "CEO": {"harry": "UNKNOWN"}
         }
     },
     {
@@ -3195,7 +2995,7 @@
         "label": "Uncertain",
         "facts": {
             "TwinTriplet": {
-                "(luke)": "UNKNOWN"
+                "luke": "UNKNOWN"
             },
             "Playing": {
                 "(luke)": "UNKNOWN"
@@ -3210,7 +3010,7 @@
                 "(luke)": "UNKNOWN"
             },
             "StrongBonds": {
-                "(luke)": "UNKNOWN"
+                "luke": "UNKNOWN"
             }
         }
     },
@@ -3236,13 +3036,12 @@
         "label": "False",
         "facts": {
             "TwinTriplet": {
-                "luke": "UNKNOWN"
+                "luke": "FALSE"
             },
-            "Playing": {},
-            "SameAge": {},
-            "Complain": {},
-            "NotHome": {},
             "StrongBonds": {
+                "luke": "FALSE"
+            },
+            "Complain": {
                 "luke": "UNKNOWN"
             }
         }
@@ -3265,19 +3064,18 @@
             "(TwinTriplet(luke) ∧ StrongBonds(luke)) ⊕ (¬TwinTriplet(luke) ∧ ¬StrongBonds(luke))"
         ],
         "conclusion": "Luke is neither a twin nor triplet nor complains often about annoying siblings.",
-        "conclusion-FOL": "¬(TwinTriplet(luke) ∨ Complain(luke))",
+        "conclusion-FOL": "¬TwinTriplet(luke) ∧ ¬Complain(luke)",
         "label": "True",
         "facts": {
             "TwinTriplet": {
-                "luke": "TRUE"
+                "luke": "FALSE"
             },
             "StrongBonds": {
-                "luke": "TRUE"
+                "luke": "FALSE"
             },
-            "Playing": {},
-            "SameAge": {},
-            "Complain": {},
-            "NotHome": {}
+            "Complain": {
+                "luke": "UNKNOWN"
+            }
         }
     },
     {
@@ -3293,9 +3091,8 @@
         "conclusion-FOL": "∃x,(Evergreen(x) ∧ ¬ObjectOfWorship(x))",
         "label": "Uncertain",
         "facts": {
-            "Evergreen": {},
-            "FirTree": {},
-            "ObjectOfWorship": {}
+            "Evergreen": {"x": "UNKNOWN"},
+            "ObjectOfWorship": {"x": "UNKNOWN"}
         }
     },
     {
@@ -3316,21 +3113,17 @@
         "label": "Uncertain",
         "facts": {
             "MountainRange": {
-                "picurismountains": "TRUE"
+                "picurismountains": "TRUE",
+                "x": "UNKNOWN"
             },
             "In": {
-                "picurismountains": {
-                    "newmexico": "TRUE",
-                    "texas": "TRUE"
-                },
-                "hardingpegmatitemine": {
-                    "picurismountains": "TRUE"
-                }
+                "(hardingpegmatitemine, picurismountains)": "TRUE",
+                "(picurismountains, newmexico)": "UNKNOWN",
+                "(picurismountains, texas)": "UNKNOWN"
             },
             "Visited": {
-                "juandeonate": {
-                    "picurismountains": "TRUE"
-                }
+                "(juandeonate, x)": "UNKNOWN",
+                "(juandeonate, picurismountains)": "TRUE"
             },
             "Mine": {
                 "hardingpegmatitemine": "TRUE"
@@ -3342,12 +3135,12 @@
     },
     {
         "premises": [
-            "If a man is taller than another man, the taller one can block the other's shooting.",
+            "If a man is taller than another man, the taller one can block the others shooting.",
             "Michael is a man who is taller than everyone else in his class.",
             "If person x is taller than person y, and person y is taller than person z, than x is taller than z",
             "Peter is a man who is taller than Michael.",
             "Michael can block any shooting from a person as long as the person does not jump when shooting.",
-            "Michael cannot block Windy's shooting.",
+            "Michael cannot block Windys shooting.",
             "Every shooter who can jump when shooting is a great shooter."
         ],
         "premises-FOL": [
@@ -3359,7 +3152,7 @@
             "¬CanBlock(michael, windy)",
             "∀x,(JumpWhenShooting(x) → GreatShooter(x))"
         ],
-        "conclusion": "Peter is shorter than a man in Michael's class.",
+        "conclusion": "Peter is shorter than a man in Michaels class.",
         "conclusion-FOL": "∃x,(IsMan(x) ∧ SameClass(x, michael) ∧ ¬Be(x, michael) ∧ ¬Taller(peter, x))",
         "label": "False",
         "facts": {
@@ -3394,12 +3187,12 @@
     },
     {
         "premises": [
-            "If a man is taller than another man, the taller one can block the other's shooting.",
+            "If a man is taller than another man, the taller one can block the others shooting.",
             "Michael is a man who is taller than everyone else in his class.",
             "If person x is taller than person y, and person y is taller than person z, than x is taller than z",
             "Peter is a man who is taller than Michael.",
             "Michael can block any shooting from a person as long as the person does not jump when shooting.",
-            "Michael cannot block Windy's shooting.",
+            "Michael cannot block Windys shooting.",
             "Every shooter who can jump when shooting is a great shooter."
         ],
         "premises-FOL": [
@@ -3442,12 +3235,12 @@
     },
     {
         "premises": [
-            "If a man is taller than another man, the taller one can block the other's shooting.",
+            "If a man is taller than another man, the taller one can block the others shooting.",
             "Michael is a man who is taller than everyone else in his class.",
             "If person x is taller than person y, and person y is taller than person z, than x is taller than z",
             "Peter is a man who is taller than Michael.",
             "Michael can block any shooting from a person as long as the person does not jump when shooting.",
-            "Michael cannot block Windy's shooting.",
+            "Michael cannot block Windys shooting.",
             "Every shooter who can jump when shooting is a great shooter."
         ],
         "premises-FOL": [
@@ -3459,29 +3252,32 @@
             "¬CanBlock(michael, windy)",
             "∀x,(JumpWhenShooting(x) → GreatShooter(x))"
         ],
-        "conclusion": "Peter can block Windy's shooting.",
+        "conclusion": "Peter can block Windys shooting.",
         "conclusion-FOL": "CanBlock(peter, windy)",
         "label": "Uncertain",
         "facts": {
             "IsMan": {
                 "michael": "TRUE",
                 "peter": "TRUE",
-                "windy": "FALSE"
+                "windy": "UNKNOWN"
             },
             "SameClass": {
-                "(peter, michael)": "TRUE"
-            },
-            "Be": {
-                "(michael, michael)": "FALSE"
+                "(michael, michael)": "TRUE"
             },
             "Taller": {
-                "(michael, peter)": "TRUE"
+                "(michael, michael)": "FALSE",
+                "(peter, michael)": "TRUE",
+                "(michael, windy)": "FALSE"
+            },
+            "CanBlock": {
+                "(michael, michael)": "TRUE",
+                "(michael, windy)": "FALSE"
             },
             "JumpWhenShooting": {
                 "windy": "TRUE"
             },
-            "CanBlock": {
-                "(michael, windy)": "FALSE"
+            "GreatShooter": {
+                "windy": "TRUE"
             }
         }
     },
@@ -3508,14 +3304,16 @@
                 "barutin": "TRUE"
             },
             "NameAfter": {
-                "(barutin, settlement)": "TRUE"
+                "(barutin, settlement)": "TRUE",
+                "(barutin, x)": "UNKNOWN"
             },
             "Locate": {
                 "(barutin, snow)": "TRUE",
                 "(snow, shetland)": "TRUE",
                 "(greenwich, shetland)": "TRUE",
                 "(deception, shetland)": "TRUE",
-                "(shetland, antarctica)": "TRUE"
+                "(shetland, antarctica)": "TRUE",
+                "(x, antarctica)": "UNKNOWN"
             }
         }
     },
@@ -3539,10 +3337,12 @@
         "label": "True",
         "facts": {
             "Cove": {
-                "barutin": "TRUE"
+                "barutin": "TRUE",
+                "x": "UNKNOWN"
             },
             "NameAfter": {
-                "(barutin, settlement)": "TRUE"
+                "(barutin, settlement)": "TRUE",
+                "(x, y)": "UNKNOWN"
             },
             "Locate": {
                 "(settlement, bulgaria)": "TRUE",
@@ -3550,7 +3350,8 @@
                 "(snow, shetland)": "TRUE",
                 "(greenwich, shetland)": "TRUE",
                 "(deception, shetland)": "TRUE",
-                "(shetland, antarctica)": "TRUE"
+                "(shetland, antarctica)": "TRUE",
+                "(y, bulgaria)": "UNKNOWN"
             }
         }
     },
@@ -3601,9 +3402,9 @@
         "conclusion-FOL": "∃x,(Affection(x) ∧ Positive(x))",
         "label": "Uncertain",
         "facts": {
-            "Affection": {},
+            "Affection": {"x": "UNKNOWN"},
             "Love": {},
-            "Positive": {}
+            "Positive": {"x": "UNKNOWN"}
         }
     },
     {
@@ -3619,16 +3420,16 @@
             "∀x,(Airline(x) → TransportMultiplePassengers(x))",
             "∀x,(Plane(x) → Empty(x))",
             "∀x,(Boeing707(x) → Plane(x))",
-            "(¬Airline(greyhound) → ¬(Airline(greyhound) ∨ Plane(greyhound)))"
+            "¬Airline(greyhound) → ¬Airline(greyhound) ∧ ¬Plane(greyhound)"
         ],
         "conclusion": "Greyhound is an airline.",
         "conclusion-FOL": "Airline(greyhound)",
         "label": "Uncertain",
         "facts": {
-            "TransportMultiplePassengers": {},
+            "TransportMultiplePassengers": {"greyhound": "UNKNOWN"},
             "Empty": {},
-            "Airline": {},
-            "Plane": {},
+            "Airline": {"greyhound": "UNKNOWN"},
+            "Plane": {"greyhound": "UNKNOWN"},
             "Boeing707": {}
         }
     },
@@ -3651,11 +3452,9 @@
         "conclusion-FOL": "Boeing707(greyhound)",
         "label": "False",
         "facts": {
-            "Airline": {},
-            "Plane": {},
-            "Boeing707": {},
-            "TransportMultiplePassengers": {},
-            "Empty": {}
+            "Airline": {"greyhound": "TRUE"},
+            "Plane": {"greyhound": "UNKNOWN"},
+            "Boeing707": {"greyhound": "UNKNOWN"}
         }
     },
     {
@@ -3671,17 +3470,15 @@
             "∀x,(Airline(x) → TransportMultiplePassengers(x))",
             "∀x,(Plane(x) → Empty(x))",
             "∀x,(Boeing707(x) → Plane(x))",
-            "(¬Airline(greyhound) → ¬(Airline(greyhound) ∨ Plane(greyhound)))"
+            "¬Airline(greyhound) → ¬Airline(greyhound) ∧ ¬Plane(greyhound)"
         ],
         "conclusion": "A Greyhound is not a Boeing 707.",
         "conclusion-FOL": "¬Boeing707(greyhound)",
         "label": "True",
         "facts": {
-            "TransportMultiplePassengers": {},
-            "Airline": {},
-            "Empty": {},
-            "Plane": {},
-            "Boeing707": {}
+            "Airline": {"greyhound": "TRUE"},
+            "Plane": {"greyhound": "UNKNOWN"},
+            "Boeing707": {"greyhound": "UNKNOWN"}
         }
     },
     {
@@ -3695,31 +3492,30 @@
             "If Rock is neither a fly nor a bird, then Rock neither flies nor breathes."
         ],
         "premises-FOL": [
-            "∀x,(Mammal (x)→  Animal (x))",
-            "∀x,(Monkey (x)→  Mammal (x))",
-            "∀x,(Monkey (x) ∨  Bird (x))",
-            "∀x,(Bird (x)→  Fly (x))",
-            "∀x,(Animal (x)→  Breathe (x))",
-            "∀x,(Fly (x)→  HaveWings (x))",
-            "¬Fly (rock) ∧ ¬Bird (rock) → ¬Fly (rock) ∧ ¬Breathe (rock)"
+            "∀x,(Mammal(x) →  Animal (x))",
+            "∀x,(Monkey(x) →  Mammal (x))",
+            "∀x,(Monkey(x) ∨  Bird (x))",
+            "∀x,(Bird(x) →  Fly (x))",
+            "∀x,(Animal(x) →  Breathe (x))",
+            "∀x,(Fly(x) →  HaveWings (x))",
+            "¬Fly(rock) ∧ ¬Bird(rock) → ¬Fly(rock) ∧ ¬Breathe(rock)"
         ],
         "conclusion": "Rock is a monkey.",
         "conclusion-FOL": "Monkey(rock)",
         "label": "Uncertain",
         "facts": {
-            "Mammal": {},
-            "Animal": {},
-            "Monkey": {},
             "Bird": {
-                "Rock": "FALSE"
+                "Rock": "UNKNOWN"
             },
             "Fly": {
-                "Rock": "FALSE"
+                "Rock": "UNKNOWN"
             },
             "Breathe": {
                 "Rock": "UNKNOWN"
             },
-            "HaveWings": {}
+            "Monkey": {
+                "Rock": "UNKNOWN"
+            }
         }
     },
     {
@@ -3733,26 +3529,30 @@
             "If Rock is neither a fly nor a bird, then Rock neither flies nor breathes."
         ],
         "premises-FOL": [
-            "∀x,(Mammal(x)→Animal(x))",
-            "∀x,(Monkey(x)→Mammal(x))",
-            "∀x,(Monkey(x) ∨ Bird(x))",
-            "∀x,(Bird(x)→Fly(x))",
-            "∀x,(Animal(x)→Breathe(x))",
-            "∀x,(Fly(x)→HaveWings(x))",
+            "∀x,(Mammal(x) →  Animal (x))",
+            "∀x,(Monkey(x) →  Mammal (x))",
+            "∀x,(Monkey(x) ∨  Bird (x))",
+            "∀x,(Bird(x) →  Fly (x))",
+            "∀x,(Animal(x) →  Breathe (x))",
+            "∀x,(Fly(x) →  HaveWings (x))",
             "¬Fly(rock) ∧ ¬Bird(rock) → ¬Fly(rock) ∧ ¬Breathe(rock)"
         ],
         "conclusion": "Rock has wings.",
         "conclusion-FOL": "HaveWings(rock)",
         "label": "True",
         "facts": {
-            "Mammal": {},
-            "Animal": {},
-            "Monkey": {},
-            "Bird": {},
-            "Fly": {
-                "(rock)": "FALSE"
+            "Bird": {
+                "Rock": "UNKNOWN"
             },
-            "Breathe": {}
+            "Fly": {
+                "Rock": "UNKNOWN"
+            },
+            "Breathe": {
+                "Rock": "UNKNOWN"
+            },
+            "Monkey": {
+                "Rock": "UNKNOWN"
+            }
         }
     },
     {
@@ -3766,30 +3566,29 @@
             "If Rock is neither a fly nor a bird, then Rock neither flies nor breathes."
         ],
         "premises-FOL": [
-            "∀x,(Mammal (x)→ Animal (x))",
-            "∀x,(Monkey (x)→ Mammal (x))",
-            "∀x,(Monkey (x) ∨ Bird (x))",
-            "∀x,(Bird (x)→ Fly (x))",
-            "∀x,(Animal (x)→ Breathe (x))",
-            "∀x,(Fly (x)→ HaveWings (x))",
-            "¬Fly (rock) ∧ ¬Bird (rock) → ¬Fly (rock) ∧ ¬Breathe (rock)"
+            "∀x,(Mammal(x) →  Animal (x))",
+            "∀x,(Monkey(x) →  Mammal (x))",
+            "∀x,(Monkey(x) ∨  Bird (x))",
+            "∀x,(Bird(x) →  Fly (x))",
+            "∀x,(Animal(x) →  Breathe (x))",
+            "∀x,(Fly(x) →  HaveWings (x))",
+            "¬Fly(rock) ∧ ¬Bird(rock) → ¬Fly(rock) ∧ ¬Breathe(rock)"
         ],
         "conclusion": "Rock does not have wings.",
         "conclusion-FOL": "¬HaveWings(rock)",
         "label": "False",
         "facts": {
-            "Mammal": {},
-            "Animal": {},
-            "Monkey": {},
             "Bird": {
-                "Rock": "FALSE"
+                "Rock": "UNKNOWN"
             },
             "Fly": {
-                "Rock": "FALSE"
+                "Rock": "UNKNOWN"
             },
-            "HaveWings": {},
             "Breathe": {
-                "Rock": "FALSE"
+                "Rock": "UNKNOWN"
+            },
+            "Monkey": {
+                "Rock": "UNKNOWN"
             }
         }
     },
@@ -3815,13 +3614,13 @@
         "label": "False",
         "facts": {
             "Child": {
-                "john": "TRUE"
+                "john": "UNKNOWN"
             },
             "Paris": {
-                "john": "FALSE"
+                "john": "UNKNOWN"
             },
             "Wedding": {
-                "john": "FALSE"
+                "john": "UNKNOWN"
             },
             "July": {
                 "john": "UNKNOWN"
@@ -3852,16 +3651,20 @@
         "conclusion-FOL": "¬WellAttended(john)",
         "label": "True",
         "facts": {
-            "Wedding": {},
             "Child": {
-                "john": "TRUE"
+                "john": "UNKNOWN"
             },
             "Paris": {
-                "john": "FALSE"
+                "john": "UNKNOWN"
             },
-            "July": {},
+            "Wedding": {
+                "john": "UNKNOWN"
+            },
+            "July": {
+                "john": "UNKNOWN"
+            },
             "WellAttended": {
-                "john": "TRUE"
+                "john": "UNKNOWN"
             }
         }
     },
@@ -3886,11 +3689,20 @@
         "conclusion-FOL": "Child(john)",
         "label": "Uncertain",
         "facts": {
-            "WellAttended": {
-                "(john)": "TRUE"
-            },
             "Child": {
-                "(john)": "TRUE"
+                "john": "UNKNOWN"
+            },
+            "Paris": {
+                "john": "UNKNOWN"
+            },
+            "Wedding": {
+                "john": "UNKNOWN"
+            },
+            "July": {
+                "john": "UNKNOWN"
+            },
+            "WellAttended": {
+                "john": "UNKNOWN"
             }
         }
     },
@@ -3950,8 +3762,8 @@
                 "humans": "TRUE"
             },
             "Have": {
-                "(humans, teeth)": "TRUE",
-                "(platypus, teeth)": "FALSE"
+                "(humans, teeth)": "FALSE",
+                "(platypus, teeth)": "TRUE"
             }
         }
     },
@@ -3977,7 +3789,8 @@
                 "humans": "TRUE"
             },
             "Have": {
-                "(platypus, teeth)": "FALSE"
+                "(humans, teeth)": "FALSE",
+                "(platypus, teeth)": "TRUE"
             }
         }
     },
@@ -3999,11 +3812,12 @@
         "label": "Uncertain",
         "facts": {
             "Mammal": {
-                "(platypus)": "TRUE",
-                "(humans)": "TRUE"
+                "platypus": "TRUE",
+                "humans": "UNKNOWN"
             },
             "Have": {
-                "(humans, teeth)": "TRUE"
+                "(humans, teeth)": "TRUE",
+                "(platypus, teeth)": "TRUE"
             }
         }
     },
@@ -4026,15 +3840,10 @@
         "conclusion-FOL": "Suck(space)",
         "label": "True",
         "facts": {
-            "Plunger": {},
-            "Vacuum": {},
-            "Vampire": {},
-            "Suck": {},
+            "Vacuum": {"space": "TRUE"},
+            "Suck": {"duster": "TRUE"},
             "HouseHoldApp": {
                 "duster": "TRUE"
-            },
-            "Space": {
-                "space": "TRUE"
             }
         }
     },
@@ -4057,17 +3866,11 @@
         "conclusion-FOL": "Elephant(space)",
         "label": "Uncertain",
         "facts": {
-            "Vacuum": {
-                "space": "TRUE"
-            },
+            "Vacuum": {"space": "TRUE"},
+            "Suck": {"duster": "TRUE"},
             "HouseHoldApp": {
                 "duster": "TRUE"
-            },
-            "Plunger": {},
-            "Suck": {
-                "duster": "FALSE"
-            },
-            "Vampire": {}
+            }
         }
     },
     {
@@ -4089,14 +3892,11 @@
         "conclusion-FOL": "∀x, (HouseHoldApp(x) → Suck(x))",
         "label": "False",
         "facts": {
-            "Plunger": {},
-            "Vacuum": {
-                "space": "TRUE"
-            },
-            "Vampire": {},
-            "Suck": {},
+            "Vacuum": {"space": "TRUE"},
+            "Suck": {"duster": "TRUE", "x": "UNKNOWN"},
             "HouseHoldApp": {
-                "duster": "TRUE"
+                "duster": "TRUE",
+                "x": "UNKNOWN"
             }
         }
     },
@@ -4121,14 +3921,15 @@
         "conclusion-FOL": "Love(children, ben)",
         "label": "Uncertain",
         "facts": {
-            "Funny": {},
+            "Funny": {"ben": "UNKNOWN"},
             "Popular": {},
             "Ugly": {},
             "Love": {
-                "(children, x)": "TRUE"
+                "(children, x)": "TRUE",
+                "(children, ben)": "UNKNOWN"
             },
             "Simpsons": {
-                "(ben)": "TRUE"
+                "ben": "UNKNOWN"
             },
             "Yellow": {}
         }
@@ -4151,19 +3952,19 @@
             "(Simpsons(ben) ⊕ Funny(ben))"
         ],
         "conclusion": "Ben is ugly or yellow.",
-        "conclusion-FOL": "(Ugly(ben) ∨ Yellow(ben))",
+        "conclusion-FOL": "Ugly(ben) ∨ Yellow(ben)",
         "label": "False",
         "facts": {
-            "Funny": {},
+            "Funny": {"ben": "TRUE"},
             "Popular": {},
-            "Ugly": {},
+            "Ugly": {"ben":  "UNKNOWN"},
             "Love": {
-                "(children, x)": "TRUE"
+                "(children, x)": "UNKNOWN"
             },
             "Simpsons": {
-                "(ben)": "TRUE"
+                "ben": "FALSE"
             },
-            "Yellow": {}
+            "Yellow": {"ben":  "UNKNOWN"}
         }
     },
     {
@@ -4184,16 +3985,16 @@
             "(Simpsons(ben) ⊕ Funny(ben))"
         ],
         "conclusion": "Ben is either yellow and ugly or neither yellow nor ugly.",
-        "conclusion-FOL": "((Yellow(ben) ∧ Ugly(ben)) ⊕ (¬Yellow(ben) ∧ ¬Ugly(ben)))",
+        "conclusion-FOL": "((Yellow(ben) ∧ Ugly(ben)) ∨ (¬Yellow(ben) ∧ ¬Ugly(ben)))",
         "label": "True",
         "facts": {
-            "Funny": {},
+            "Funny": {"ben": "TRUE"},
             "Popular": {},
             "Ugly": {},
             "Love": {
                 "(children, x)": "TRUE"
             },
-            "Simpsons": {},
+            "Simpsons": {"ben": "FALSE"},
             "Yellow": {}
         }
     },
@@ -4216,15 +4017,8 @@
         "conclusion-FOL": "∃x,(HeckCattle(x) ∧ ArtificiallySelect(x))",
         "label": "True",
         "facts": {
-            "BreedingBack": {},
-            "ArtificiallySelect": {},
-            "HeckCattle": {},
-            "Aurochs": {},
-            "Animal": {
-                "HeckCattle": "TRUE",
-                "Aurochs": "TRUE"
-            },
-            "Extinct": {}
+            "ArtificiallySelect": {"x": "UNKNOWN"},
+            "HeckCattle": {"x": "UNKNOWN"}
         }
     },
     {
@@ -4246,17 +4040,8 @@
         "conclusion-FOL": "∀x,(Aurochs(x) → Extinct(x))",
         "label": "Uncertain",
         "facts": {
-            "ArtificialSelect": {},
-            "BreedingBack": {
-                "(HeckCattle, Aurochs)": "TRUE"
-            },
-            "HeckCattle": {},
-            "Aurochs": {},
-            "Animal": {
-                "HeckCattle": "TRUE",
-                "Aurochs": "TRUE"
-            },
-            "Extinct": {}
+            "Aurochs": {"x": "UNKNOWN"},
+            "Extinct": {"x": "UNKNOWN"}
         }
     },
     {
@@ -4280,17 +4065,13 @@
         "conclusion-FOL": "Young(jerry)",
         "label": "Uncertain",
         "facts": {
-            "Human": {},
-            "Student": {},
-            "Study": {},
+            "Student": {"rose": "UNKNOWN"},
             "Teach": {
                 "jerry": "FALSE"
             },
             "Young": {
-                "rose": "TRUE"
-            },
-            "Manager": {
-                "jerry": "FALSE"
+                "rose": "UNKNOWN",
+                "jerry": "UNKNOWN"
             }
         }
     },
@@ -4315,17 +4096,13 @@
         "conclusion-FOL": "¬Young(jerry)",
         "label": "Uncertain",
         "facts": {
-            "Student": {},
-            "Human": {},
-            "Study": {},
+            "Student": {"rose": "UNKNOWN"},
             "Teach": {
                 "jerry": "FALSE"
             },
             "Young": {
-                "rose": "TRUE"
-            },
-            "Manager": {
-                "jerry": "FALSE"
+                "rose": "UNKNOWN",
+                "jerry": "UNKNOWN"
             }
         }
     },
@@ -4352,17 +4129,16 @@
         "conclusion-FOL": "Human(rose) ∨ Manager(rose)",
         "label": "True",
         "facts": {
-            "Student": {},
-            "Human": {},
-            "Study": {},
+            "Student": {"rose": "TRUE"},
             "Teach": {
-                "(jerry)": "FALSE"
-            },
-            "Manager": {
-                "(jerry)": "FALSE"
+                "jerry": "FALSE"
             },
             "Young": {
-                "(rose)": "TRUE"
+                "rose": "TRUE",
+                "jerry": "UNKNOWN"
+            },
+            "Manager": {
+                "jerry": "FALSE"
             }
         }
     },
@@ -4387,17 +4163,16 @@
         "conclusion-FOL": "Human(rose) ∨ Manager(jerry)",
         "label": "True",
         "facts": {
-            "Student": {},
-            "Human": {},
-            "Study": {},
+            "Student": {"rose": "UNKNOWN"},
             "Teach": {
-                "(jerry)": "FALSE"
-            },
-            "Manager": {
-                "(jerry)": "FALSE"
+                "jerry": "FALSE"
             },
             "Young": {
-                "(rose)": "TRUE"
+                "rose": "UNKNOWN",
+                "jerry": "UNKNOWN"
+            },
+            "Manager":{
+                "jerry": "TRUE"
             }
         }
     },
@@ -4415,31 +4190,26 @@
             "∀x,(Study(x) → Student(x))",
             "∀x,(Study(x) ∨ Teach(x))",
             "∀x,(Young(x) → ¬Teach(x))",
-            "¬Teach(jerry), ¬Manager(jerry)",
-            "Young(rose), Student(rose)"
+            "Young(rose) ∨ Student(rose)"
         ],
         "conclusion": "It is not true that Rose is a student and Jerry is a human.",
-        "conclusion-FOL": "~(Student(rose) ∧ Human(jerry))",
+        "conclusion-FOL": "¬Student(rose) ∨ ¬Human(jerry)",
         "label": "False",
         "facts": {
-            "Human": {},
-            "Student": {},
-            "Study": {},
+            "Student": {"rose": "UNKNOWN"},
             "Teach": {
                 "jerry": "FALSE"
             },
-            "Manager": {
-                "jerry": "FALSE"
-            },
             "Young": {
-                "rose": "TRUE"
+                "rose": "UNKNOWN",
+                "jerry": "UNKNOWN"
             }
         }
     },
     {
         "premises": [
             "New Vessel Press is a publishing house which specializes in translating foreign literature into English.",
-            "All of New Vessel Press's published books are in English.",
+            "All of New Vessel Presss published books are in English.",
             "Neapolitan Chronicles is a book published by New Vessel Press.",
             "Neapolitan Chronicles was translated from Italian.",
             "Palace of Flies is a book published by New Vessel Press."
@@ -4480,7 +4250,7 @@
     {
         "premises": [
             "New Vessel Press is a publishing house which specializes in translating foreign literature into English.",
-            "All of New Vessel Press's published books are in English.",
+            "All of New Vessel Presss published books are in English.",
             "Neapolitan Chronicles is a book published by New Vessel Press.",
             "Neapolitan Chronicles was translated from Italian.",
             "Palace of Flies is a book published by New Vessel Press."
@@ -4510,18 +4280,18 @@
                 "(neapolitanchronicles, newvesselpress)": "TRUE",
                 "(palaceofflies, newvesselpress)": "TRUE"
             },
-            "In": {
-                "(neapolitanchronicles, english)": "TRUE"
-            },
             "TranslatedFrom": {
                 "(neapolitanchronicles, italian)": "TRUE"
+            },
+            "In": {
+                "(neapolitanchronicles, english)": "TRUE"
             }
         }
     },
     {
         "premises": [
             "New Vessel Press is a publishing house which specializes in translating foreign literature into English.",
-            "All of New Vessel Press's published books are in English.",
+            "All of New Vessel Presss published books are in English.",
             "Neapolitan Chronicles is a book published by New Vessel Press.",
             "Neapolitan Chronicles was translated from Italian.",
             "Palace of Flies is a book published by New Vessel Press."
@@ -4551,11 +4321,11 @@
                 "(neapolitanchronicles, newvesselpress)": "TRUE",
                 "(palaceofflies, newvesselpress)": "TRUE"
             },
-            "In": {
-                "(neapolitanchronicles, english)": "TRUE"
-            },
             "TranslatedFrom": {
                 "(neapolitanchronicles, italian)": "TRUE"
+            },
+            "In": {
+                "(neapolitanchronicles, english)": "TRUE"
             }
         }
     },
@@ -4583,9 +4353,11 @@
             "Desktop": {},
             "HomeOffice": {},
             "WorkHome": {},
-            "Tidying": {},
-            "OfficeStore": {},
-            "Late": {}
+            "Tidying": {"remy": "UNKNOWN"},
+            "OfficeStore": {"remy": "UNKNOWN"},
+            "Late": {
+                "remy": "UNKNOWN"
+        }
         }
     },
     {
@@ -4612,9 +4384,11 @@
             "Desktop": {},
             "HomeOffice": {},
             "WorkHome": {},
-            "Tidying": {},
-            "OfficeStore": {},
-            "Late": {}
+            "OfficeStore": {"remy": "UNKNOWN"},
+            "Tidying": {"remy": "FALSE"},
+            "Late": {
+                "remy": "TRUE"
+        }
         }
     },
     {
@@ -4641,10 +4415,10 @@
             "Desktop": {},
             "HomeOffice": {},
             "WorkHome": {},
-            "Tidying": {},
-            "OfficeStore": {},
+            "Tidying": {"remy": "FALSE"},
+            "OfficeStore": {"remy": "UNKNOWN"},
             "Late": {
-                "remy": "UNKNOWN"
+                "remy": "TRUE"
             }
         }
     },
@@ -4662,8 +4436,8 @@
         "label": "Uncertain",
         "facts": {
             "Human": {},
-            "Greek": {},
-            "Mortal": {}
+            "Greek": {"x": "UNKNOWN"},
+            "Mortal": {"x": "UNKNOWN"}
         }
     },
     {
@@ -4698,10 +4472,7 @@
             "WorkInLab": {
                 "james": "TRUE",
                 "jack": "FALSE"
-            },
-            "ProfessorDavid": {},
-            "Database": {},
-            "ComputerScience": {}
+            }
         }
     },
     {
@@ -4734,12 +4505,9 @@
                 "jack": "FALSE"
             },
             "WorkInLab": {
-                "jack": "FALSE",
-                "james": "TRUE"
-            },
-            "ProfessorDavid": {},
-            "Database": {},
-            "ComputerScience": {}
+                "james": "TRUE",
+                "jack": "FALSE"
+            }
         }
     },
     {
@@ -4765,16 +4533,8 @@
         "conclusion-FOL": "Database(james) ⊕ PartTime(james)",
         "label": "True",
         "facts": {
-            "ComputerScience": {},
-            "WorkLibrary": {
-                "james": "TRUE"
-            },
             "PartTime": {
                 "jack": "FALSE"
-            },
-            "Database": {},
-            "ProfessorDavid": {
-                "james": "TRUE"
             },
             "WorkInLab": {
                 "james": "TRUE",
@@ -4806,14 +4566,14 @@
         "label": "Uncertain",
         "facts": {
             "WorkLibrary": {
-                "(james)": "TRUE"
+                "james": "TRUE"
             },
             "PartTime": {
-                "(jack)": "FALSE"
+                "jack": "FALSE"
             },
             "WorkInLab": {
-                "(james)": "TRUE",
-                "(jack)": "FALSE"
+                "james": "TRUE",
+                "jack": "FALSE"
             }
         }
     },
@@ -4865,19 +4625,19 @@
         "label": "Uncertain",
         "facts": {
             "LikesMusic": {
-                "george": "TRUE"
-            },
-            "WantsToCompose": {
-                "george": "TRUE"
+                "george": "UNKNOWN"
             },
             "AccesstoProgram": {
-                "george": "TRUE"
+                "george": "UNKNOWN"
+            },
+            "WantsToCompose": {
+                "george": "UNKNOWN"
             },
             "CanCompose": {
-                "george": "TRUE"
+                "george": "UNKNOWN"
             },
             "WillCompose": {
-                "george": "TRUE"
+                "george": "UNKNOWN"
             }
         }
     },
@@ -4895,13 +4655,13 @@
         "label": "False",
         "facts": {
             "Lands": {
-                "x": "FALSE"
+                "x": "UNKNOWN"
             },
             "Bird": {
-                "x": "TRUE"
+                "x": "UNKNOWN"
             },
             "Hawk": {
-                "x": "TRUE"
+                "x": "UNKNOWN"
             }
         }
     },
@@ -4924,12 +4684,9 @@
         "conclusion-FOL": "Mondayat8(breakingbad)",
         "label": "Uncertain",
         "facts": {
-            "Mondayat8": {},
-            "RoseGivenOutOnTv": {},
-            "OnBachelor": {},
-            "PortrayLiveOfRealPeople": {},
+            "Mondayat8": {"breakingbad": "UNKNOWN"},
             "RealityTVShow": {
-                "(breakingbad)": "FALSE"
+                "breakingbad": "FALSE"
             }
         }
     },
@@ -4952,12 +4709,9 @@
         "conclusion-FOL": "Mondayat8(breakingbad) ∧ RoseGivenOutOnTv(breakingbad)",
         "label": "False",
         "facts": {
-            "Mondayat8": {},
-            "RoseGivenOutOnTv": {},
-            "OnBachelor": {},
-            "PortrayLiveOfRealPeople": {},
+            "Mondayat8": {"breakingbad": "UNKNOWN"},
             "RealityTVShow": {
-                "(breakingbad)": "FALSE"
+                "breakingbad": "FALSE"
             }
         }
     },
@@ -4980,13 +4734,12 @@
         "conclusion-FOL": "RoseGivenOutOnTv(breakingbad) → Mondayat8(breakingbad)",
         "label": "True",
         "facts": {
-            "Mondayat8": {},
-            "RoseGivenOutOnTv": {},
-            "OnBachelor": {},
-            "PortrayLiveOfRealPeople": {},
-            "RealityTVShow": {},
-            "breakingbad": {
-                "RealityTVShow": "FALSE"
+            "Mondayat8": {"breakingbad": "UNKNOWN"},
+            "RealityTVShow": {
+                "breakingbad": "FALSE"
+            },
+            "RoseGivenOutOnTv" :{
+                "breakingbad": "UNKNOWN"
             }
         }
     },
@@ -5004,10 +4757,11 @@
         "label": "True",
         "facts": {
             "From": {
-                "(heinrichScmidt, naziGermany)": "TRUE"
+                "(heinrichScmidt, naziGermany)": "TRUE",
+                "(heinrichScmidt, russia)": "UNKNOWN"
             },
             "Politician": {
-                "(heinrichScmidt)": "TRUE"
+                "heinrichScmidt": "TRUE"
             },
             "Member": {
                 "(heinrichScmidt, prussianStateParliament)": "TRUE",
@@ -5029,14 +4783,18 @@
         "label": "True",
         "facts": {
             "From": {
-                "(heinrichScmidt, naziGermany)": "TRUE"
+                "(heinrichScmidt, naziGermany)": "TRUE",
+                "(x, naziGermany)": "UNKNOWN"
             },
             "Politician": {
-                "(heinrichScmidt)": "TRUE"
+                "(heinrichScmidt)": "TRUE",
+                "x": "UNKNOWN"
             },
             "Member": {
                 "(heinrichScmidt, prussianStateParliament)": "TRUE",
-                "(heinrichScmidt, naziReichstag)": "TRUE"
+                "(heinrichScmidt, naziReichstag)": "TRUE",
+                "(x, prussianStateParliament)": "UNKNOWN",
+                "(x, naziReichstag)": "UNKNOWN"
             }
         }
     },
@@ -5054,17 +4812,13 @@
         "label": "False",
         "facts": {
             "Politician": {
-                "heinrichScmidt": "TRUE"
+                "heinrichScmidt": "TRUE",
+                "x": "UNKNOWN"
             },
             "Member": {
                 "(heinrichScmidt, prussianStateParliament)": "TRUE",
-                "(heinrichScmidt, naziReichstag)": "TRUE"
-            },
-            "Nazi": {
-                "heinrichScmidt": "TRUE"
-            },
-            "German": {
-                "heinrichScmidt": "TRUE"
+                "(heinrichScmidt, naziReichstag)": "TRUE",
+                "(x, naziReichstag)": "UNKNOWN"
             }
         }
     },
@@ -5090,10 +4844,10 @@
         "label": "Uncertain",
         "facts": {
             "DeadlyDiseases": {},
-            "SurvivalRateIsLow": {},
+            "SurvivalRateIsLow": {"colorectalCancer": "UNKNOWN"},
             "SevereCancer": {},
             "BileDuctCancer": {
-                "(colorectalCancer)": "TRUE"
+                "colorectalCancer": "UNKNOWN"
             },
             "Cholangiocarcinoma": {},
             "MildFlu": {}
@@ -5116,17 +4870,17 @@
             "∀x,(MildFlu(x) → ¬SurvivalRateIsLow(x))"
         ],
         "conclusion": "If colorectal cancer is a bile duct cancer or a Cholangiocarcinoma, then colorectal cancer is a bile duct cancer and a mild flu.",
-        "conclusion-FOL": "(BileDuctCancer(colorectalCancer) ∨ SurvivalRateIsLow(colorectalCancer) → ¬BileDuctCancer(colorectalCancer))",
+        "conclusion-FOL": "BileDuctCancer(colorectalCancer) ∨ SurvivalRateIsLow(colorectalCancer) → ¬BileDuctCancer(colorectalCancer)",
         "label": "True",
         "facts": {
             "DeadlyDiseases": {},
+            "SurvivalRateIsLow": {"colorectalCancer": "TRUE"},
             "SevereCancer": {},
-            "MildFlu": {},
-            "SurvivalRateIsLow": {},
             "BileDuctCancer": {
-                "(colorectalCancer)": "TRUE"
+                "colorectalCancer": "FALSE"
             },
-            "Cholangiocarcinoma": {}
+            "Cholangiocarcinoma": {},
+            "MildFlu": {}
         }
     },
     {
@@ -5150,14 +4904,13 @@
         "conclusion-FOL": "¬MildFlu(colorectalCancer) ∨ ¬Cholangiocarcinoma(colorectalCancer) → BileDuctCancer(colorectalCancer) ∨ Cholangiocarcinoma(colorectalCancer)",
         "label": "False",
         "facts": {
-            "DeadlyDiseases": {},
-            "SurvivalRateIsLow": {},
+            "MildFlu": {"colorectalCancer": "FALSE"},
+            "SurvivalRateIsLow": {"colorectalCancer": "TRUE"},
             "SevereCancer": {},
             "BileDuctCancer": {
-                "colorectalCancer": "TRUE"
+                "colorectalCancer": "FALSE"
             },
-            "Cholangiocarcinoma": {},
-            "MildFlu": {}
+            "Cholangiocarcinoma": {}
         }
     },
     {
@@ -5176,13 +4929,13 @@
         "label": "Uncertain",
         "facts": {
             "SportingEvent": {
-                "(olympics)": "TRUE"
+                "olympics": "TRUE"
             },
             "LastOlympics": {
-                "(tokyo)": "TRUE"
+                "tokyo": "TRUE"
             },
             "MostMedals": {
-                "(unitedStates, tokyo )": "TRUE"
+                "(unitedStates, tokyo)": "TRUE"
             }
         }
     },
@@ -5202,10 +4955,10 @@
         "label": "False",
         "facts": {
             "SportingEvent": {
-                "(olympics)": "TRUE"
+                "olympics": "TRUE"
             },
             "LastOlympics": {
-                "(tokyo)": "TRUE"
+                "tokyo": "TRUE"
             },
             "MostMedals": {
                 "(unitedStates, tokyo)": "TRUE"
@@ -5231,10 +4984,12 @@
                 "olympics": "TRUE"
             },
             "LastOlympics": {
-                "tokyo": "TRUE"
+                "tokyo": "TRUE",
+                "x": "UNKNOWN"
             },
             "MostMedals": {
-                "(unitedStates, tokyo)": "TRUE"
+                "(unitedStates, tokyo)": "TRUE",
+                "(unitedStates, x)": "UNKNOWN"
             }
         }
     },
@@ -5250,15 +5005,15 @@
         "conclusion": "Some humans are horses.",
         "conclusion-FOL": "∃x,(Human(x) ∧ Horse(x))",
         "label": "False",
-        "facts": {
+        "facts": { 
             "Hooves": {
-                "(x)": "TRUE"
+                "x": "UNKNOWN"
             },
             "Horse": {
-                "(x)": "TRUE"
+                "x": "UNKNOWN"
             },
             "Human": {
-                "(x)": "TRUE"
+                "x": "UNKNOWN"
             }
         }
     },
@@ -5327,12 +5082,8 @@
         "conclusion-FOL": "Grumpy(tom)",
         "label": "Uncertain",
         "facts": {
-            "Nice": {},
-            "Mean": {},
-            "Grumpy": {},
-            "AnimalLover": {},
             "PetOwner": {
-                "(tom)": "TRUE"
+                "tom": "TRUE"
             }
         }
     },
@@ -5352,15 +5103,17 @@
             "PetOwner(tom)"
         ],
         "conclusion": "Tom is not a grumpy person and mean to animals.",
-        "conclusion-FOL": "¬(Grumpy(tom) ∧ Mean(tom))",
+        "conclusion-FOL": "¬Grumpy(tom) ∨ ¬Mean(tom)",
         "label": "True",
         "facts": {
-            "Nice": {},
-            "Mean": {},
-            "Grumpy": {},
-            "AnimalLover": {},
             "PetOwner": {
                 "tom": "TRUE"
+            },
+            "Grumpy": {
+                "tom": "UNKNOWN"
+            },
+            "Mean": {
+                "tom": "UNKNOWN"
             }
         }
     },
@@ -5383,12 +5136,14 @@
         "conclusion-FOL": "¬(Grumpy(tom) ∧ Mean(tom)) → ¬(Grumpy(tom) ∨ AnimalLover(tom))",
         "label": "False",
         "facts": {
-            "Nice": {},
-            "Mean": {},
-            "Grumpy": {},
-            "AnimalLover": {},
             "PetOwner": {
                 "tom": "TRUE"
+            },
+            "Grumpy": {
+                "tom": "UNKNOWN"
+            },
+            "Mean": {
+                "tom": "UNKNOWN"
             }
         }
     },
@@ -5418,23 +5173,23 @@
         "label": "True",
         "facts": {
             "IsPodcast": {
-                "(family_Secrets)": "TRUE"
+                "family_Secrets": "TRUE"
             },
             "IsNovel": {
-                "(family_History)": "TRUE"
+                "family_History": "TRUE"
             },
             "WrittenBy": {
                 "(family_History, dani_Shapiro)": "TRUE"
             },
             "IsAmerican": {
-                "(dani_Shapiro)": "TRUE",
-                "(boston)": "TRUE"
+                "dani_Shapiro": "TRUE",
+                "boston": "TRUE"
             },
             "IsWriter": {
-                "(dani_Shapiro)": "TRUE"
+                "dani_Shapiro": "TRUE"
             },
             "IsCity": {
-                "(boston)": "TRUE"
+                "boston": "TRUE"
             },
             "WrittenIn": {
                 "(family_History, 2003)": "TRUE"
@@ -5471,33 +5226,31 @@
         "label": "False",
         "facts": {
             "IsPodcast": {
-                "(family_Secrets)": "TRUE"
+                "family_Secrets": "TRUE"
             },
             "IsNovel": {
-                "(family_History)": "TRUE"
+                "family_History": "TRUE"
             },
             "WrittenBy": {
                 "(family_History, dani_Shapiro)": "TRUE"
             },
-            "WrittenIn": {
-                "(family_History, y2003)": "TRUE"
-            },
             "IsAmerican": {
-                "(dani_Shapiro)": "TRUE",
-                "(boston)": "TRUE"
+                "dani_Shapiro": "TRUE",
+                "boston": "TRUE"
             },
             "IsWriter": {
-                "(dani_Shapiro)": "TRUE"
+                "dani_Shapiro": "TRUE"
             },
             "IsCity": {
-                "(boston)": "TRUE"
+                "boston": "TRUE"
+            },
+            "WrittenIn": {
+                "(family_History, 2003)": "TRUE"
             },
             "CreatedBy": {
                 "(family_Secrets, dani_Shapiro)": "TRUE"
             },
-            "BornIn": {
-                "(dani_Shapiro, boston)": "UNKNOWN"
-            }
+            "BornIn": {}
         }
     },
     {
@@ -5526,32 +5279,31 @@
         "label": "Uncertain",
         "facts": {
             "IsPodcast": {
-                "(family_Secrets)": "TRUE"
+                "family_Secrets": "TRUE"
             },
             "IsNovel": {
-                "(family_History)": "TRUE"
+                "family_History": "TRUE"
             },
             "WrittenBy": {
                 "(family_History, dani_Shapiro)": "TRUE"
             },
             "IsAmerican": {
-                "(dani_Shapiro)": "TRUE",
-                "(boston)": "TRUE"
-            },
-            "WrittenIn": {
-                "(family_History, y2003)": "TRUE"
+                "dani_Shapiro": "TRUE",
+                "boston": "TRUE"
             },
             "IsWriter": {
-                "(dani_Shapiro)": "TRUE"
+                "dani_Shapiro": "TRUE"
+            },
+            "IsCity": {
+                "boston": "TRUE"
+            },
+            "WrittenIn": {
+                "(family_History, 2003)": "TRUE"
             },
             "CreatedBy": {
                 "(family_Secrets, dani_Shapiro)": "TRUE"
             },
-            "IsCity": {
-                "(boston)": "TRUE"
-            },
-            "BornIn": {},
-            "WritesNovel": {}
+            "BornIn": {}
         }
     },
     {
@@ -5578,7 +5330,7 @@
             "Tall": {},
             "WearLargeShoes": {},
             "WearLargeClothes": {
-                "(yuri)": "FALSE"
+                "yuri": "FALSE"
             }
         }
     },
@@ -5598,7 +5350,7 @@
             "¬WearLargeClothes(yuri)"
         ],
         "conclusion": "Yuri is not an American basketball player.",
-        "conclusion-FOL": "¬(American(yuri) ∧ BasketballPlayer(yuri))",
+        "conclusion-FOL": "¬American(yuri) ∨ ¬BasketballPlayer(yuri)",
         "label": "True",
         "facts": {
             "BasketballPlayer": {},
@@ -5606,7 +5358,7 @@
             "Tall": {},
             "WearLargeShoes": {},
             "WearLargeClothes": {
-                "(yuri)": "FALSE"
+                "yuri": "FALSE"
             }
         }
     },
@@ -5629,12 +5381,12 @@
         "conclusion-FOL": "American(yuri) ∧ BasketballPlayer(yuri)",
         "label": "False",
         "facts": {
-            "BasketballPlayer": {},
-            "American": {},
+            "BasketballPlayer": {"yuri": "UNKNOWN"},
+            "American": {"yuri": "UNKNOWN"},
             "Tall": {},
             "WearLargeShoes": {},
             "WearLargeClothes": {
-                "(yuri)": "FALSE"
+                "yuri": "FALSE"
             }
         }
     },
@@ -5657,12 +5409,11 @@
         "conclusion-FOL": "¬WearLargeShoes(yuri) → (American(yuri) ∧ BasketballPlayer(yuri))",
         "label": "False",
         "facts": {
-            "BasketballPlayer": {},
-            "American": {},
-            "Tall": {},
-            "WearLargeShoes": {},
+            "BasketballPlayer": {"yuri": "UNKNOWN"},
+            "American": {"yuri": "UNKNOWN"},
+            "WearLargeShoes": {"yuri": "UNKNOWN"},
             "WearLargeClothes": {
-                "(yuri)": "FALSE"
+                "yuri": "UNKNOWN"
             }
         }
     },
@@ -5682,7 +5433,7 @@
             "¬(WearLargeClothes(yuri))"
         ],
         "conclusion": "If Yuri is not an American basketball player, then Yuri is a basketball player.",
-        "conclusion-FOL": "¬(American(yuri) ∧ BasketballPlayer(yuri)) → BasketballPlayer(yuri)",
+        "conclusion-FOL": "¬American(yuri) ∨ ¬BasketballPlayer(yuri) → BasketballPlayer(yuri)",
         "label": "False",
         "facts": {
             "BasketballPlayer": {},
@@ -5697,8 +5448,7 @@
             },
             "WearLargeClothes": {
                 "yuri": "FALSE"
-            },
-            "Japanese": {}
+            }
         }
     },
     {
@@ -5740,10 +5490,12 @@
                 "(maurier, steinhauer)": "TRUE"
             },
             "Participate": {
-                "(maurier, steinhauer)": "TRUE"
+                "(maurier, steinhauer)": "TRUE",
+                "(maurier, x)": "UNKNOWN"
             },
             "LeaderBoard": {
-                "(maurier, descampe)": "TRUE"
+                "(maurier, descampe)": "TRUE",
+                "(maurier, x)": "UNKNOWN"
             },
             "Belgium": {
                 "descampe": "TRUE"
@@ -5774,17 +5526,17 @@
                 "(maurier, steinhauer)": "TRUE"
             },
             "Participate": {
-                "(maurier, steinhauer)": "TRUE"
+                "(maurier, steinhauer)": "TRUE",
+                "(maurier, x)": "UNKNOWN"
             },
             "LeaderBoard": {
-                "(maurier, descampe)": "TRUE"
-            },
-            "SixWayTie": {
-                "(x)": "TRUE"
+                "(maurier, descampe)": "TRUE",
+                "(maurier, x)": "UNKNOWN"
             },
             "Belgium": {
                 "descampe": "TRUE"
-            }
+            },
+            "SixWayTie": {}
         }
     },
     {
@@ -5802,7 +5554,7 @@
             "∀x,(Jump(x) → Like(jane, x))",
             "∀x,(HaveLegs(x) → Jump(x))",
             "∀x,(Terricolous(x) → HaveLegs(x))",
-            "(¬Jump(kiki) ∧ ¬HaveLegs(kiki)) → (Terricolous(kiki) ∨ HaveLegs(kiki))"
+            "¬Jump(kiki) ∧ ¬HaveLegs(kiki) → Terricolous(kiki) ∨ HaveLegs(kiki)"
         ],
         "conclusion": "KiKi is terricolous.",
         "conclusion-FOL": "Terricolous(kiki)",
@@ -5812,19 +5564,19 @@
                 "(jane, x)": "FALSE"
             },
             "Bark": {
-                "(x)": "TRUE"
+                "x": "UNKNOWN"
             },
             "Dog": {
-                "(x)": "TRUE"
+                "x": "UNKNOWN"
             },
             "Jump": {
-                "(kiki)": "FALSE"
+                "kiki": "UNKNOWN"
             },
             "HaveLegs": {
-                "(kiki)": "FALSE"
+                "kiki": "UNKNOWN"
             },
             "Terricolous": {
-                "(kiki)": "TRUE"
+                "kiki": "UNKNOWN"
             }
         }
     },
@@ -5843,32 +5595,29 @@
             "∀x,(Jump(x) → Like(jane, x))",
             "∀x,(HaveLegs(x) → Jump(x))",
             "∀x,(Terricolous(x) → HaveLegs(x))",
-            "(¬Jump(kiki) ∧ ¬HaveLegs(kiki)) → (Terricolous(kiki) ∨ HaveLegs(kiki))"
+            "¬Jump(kiki) ∧ ¬HaveLegs(kiki) → Terricolous(kiki) ∨ HaveLegs(kiki)"
         ],
         "conclusion": "KiKi barks and is a dog.",
         "conclusion-FOL": "Bark(kiki) ∧ Dog(kiki)",
-        "label": "False",
+        "label": "Uncertain",
         "facts": {
-            "Animal": {
-                "kiki": "TRUE"
+            "Like": {
+                "(jane, x)": "UNKNOWN"
             },
             "Bark": {
-                "kiki": "FALSE"
+                "x": "UNKNOWN"
             },
             "Dog": {
-                "kiki": "TRUE"
+                "x": "UNKNOWN"
             },
             "Jump": {
-                "kiki": "FALSE"
-            },
-            "Like": {
-                "(jane, kiki)": "FALSE"
-            },
-            "Terricolous": {
-                "kiki": "TRUE"
+                "kiki": "UNKNOWN"
             },
             "HaveLegs": {
-                "kiki": "FALSE"
+                "kiki": "UNKNOWN"
+            },
+            "Terricolous": {
+                "kiki": "UNKNOWN"
             }
         }
     },
@@ -5887,24 +5636,30 @@
             "∀x,(Jump(x) → Like(jane, x))",
             "∀x,(HaveLegs(x) → Jump(x))",
             "∀x,(Terricolous(x) → HaveLegs(x))",
-            "(¬Jump(kiki) ∧ ¬HaveLegs(kiki)) → (Terricolous(kiki) ∨ HaveLegs(kiki))"
+            "¬Jump(kiki) ∧ ¬HaveLegs(kiki) → Terricolous(kiki) ∨ HaveLegs(kiki)"
         ],
         "conclusion": "KiKi neither barks nor is a dog.",
         "conclusion-FOL": "¬Bark(kiki) ∧ ¬Dog(kiki)",
         "label": "True",
         "facts": {
-            "Bark": {},
-            "Dog": {},
-            "Jump": {
-                "(kiki)": "FALSE"
-            },
             "Like": {
-                "(jane, kiki)": "FALSE"
+                "(jane, x)": "UNKNOWN"
+            },
+            "Bark": {
+                "x": "UNKNOWN"
+            },
+            "Dog": {
+                "x": "UNKNOWN"
+            },
+            "Jump": {
+                "kiki": "TRUE"
             },
             "HaveLegs": {
-                "(kiki)": "FALSE"
+                "kiki": "TRUE"
             },
-            "Terricolous": {}
+            "Terricolous": {
+                "kiki": "UNKNOWN"
+            }
         }
     },
     {
@@ -6132,3 +5887,4 @@
         }
     }
 ]
+ 

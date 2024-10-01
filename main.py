@@ -22,7 +22,7 @@ def process_json_elements(data, sample_size, output_file):
     results_list = []
     labels_list = []
     for i, item in enumerate(data[:sample_size]):
-        print(f"********  Processing element {i}  ***************")
+        print(f"********  Processing element {i + 1}  ***************")
         rules = item.get("premises-FOL", [])
         facts = item.get("facts", [])
         questions = item.get("conclusion-FOL", [])
@@ -41,9 +41,6 @@ def process_json_elements(data, sample_size, output_file):
         elif label == "False":
             label == "FALSE"
 
-        if result_value != label:
-            count = count + 1
-
         questions_list.append(questions)
         results_list.append(result_value)
         labels_list.append(label)
@@ -60,7 +57,7 @@ def process_json_elements(data, sample_size, output_file):
 
 
 def main_improve_reasoning():
-    file_test = "data/FOLIO/test_folio.jsonl"
+    file_test = "data/FOLIO/folio-validation.jsonl"
     path_output = "data/FOLIO/Inference_results.xlsx"
     sample_size = None
     data = load_json(file_test)
@@ -82,4 +79,5 @@ def main():
 
 
 if __name__ == "__main__":
+    # main_improve_reasoning()
     main()

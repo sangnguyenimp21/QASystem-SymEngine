@@ -51,11 +51,14 @@ class Inference:
                 # Thêm {} quanh mỗi biểu thức và chuyển vào danh sách
                 transformed_premise = eval(premise)
                 if (
-                    premise_type == TypePremise.FOL
+                    premise_type == TypePremise.FOL_FORALL
                     or premise_type == TypePremise.PROPOSITIONAL_IMPLICATION
                 ):
                     self.model.add_knowledge(transformed_premise, world=World.AXIOM)
-                elif premise_type == TypePremise.PROPOSITIONAL_LOGIC:
+                elif (
+                    premise_type == TypePremise.PROPOSITIONAL_LOGIC
+                    or premise_type == TypePremise.FOL_EXISTS
+                ):
                     self.model.add_knowledge(transformed_premise)
                 elif (
                     premise_type == TypeQuestion.PROPOSITIONAL_LOGIC
