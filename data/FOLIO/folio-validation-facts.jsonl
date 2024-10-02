@@ -942,7 +942,7 @@
             }
         }
     },
-    {
+        {
         "premises": [
             "Symphony No. 9 is a music piece.",
             "Composers write music pieces.",
@@ -953,10 +953,10 @@
             "Orchestras are led by conductors."
         ],
         "premises-FOL": [
-            "MusicPiece(symphony9)",
-            "∀x,y,(MusicPiece(x) ∧ Writtenby(x, y) → Composer(y))",
-            "Writtenby(symphony9, beethoven)",
-            "Premiered(viennamusicsociety, symphony9)",
+            "MusicPiece(symphony)",
+            "∀x,y,(MusicPiece(x) ∧ WrittenBy(x, y) → Composer(y))",
+            "WrittenBy(symphony, beethoven)",
+            "Premiered(viennamusicsociety, symphony)",
             "Orchestra(viennamusicsociety)",
             "Lead(beethoven, viennamusicsociety)",
             "∀x,y,(Orchestra(x) ∧ Lead(y, x) → Conductor(y))"
@@ -1006,7 +1006,7 @@
         "label": "True",
         "facts": {}
     },
-    {
+        {
         "premises": [
             "Symphony No. 9 is a music piece.",
             "Composers write music pieces.",
@@ -1017,13 +1017,13 @@
             "Orchestras are led by conductors."
         ],
         "premises-FOL": [
-            "MusicPiece(symphony9)",
-            "∀x, y,(MusicPiece(x) ∧ Writtenby(x, y)) → Composer(y)",
-            "Writtenby(symphony9, beethoven)",
-            "Premiered(viennamusicsociety, symphony9)",
+            "MusicPiece(symphony)",
+            "∀x,y,(MusicPiece(x) ∧ WrittenBy(x, y) → Composer(y))",
+            "WrittenBy(symphony, beethoven)",
+            "Premiered(viennamusicsociety, symphony)",
             "Orchestra(viennamusicsociety)",
             "Lead(beethoven, viennamusicsociety)",
-            "∀x, y,(Orchestra(x) ∧ Lead(y, x)) → Conductor(y)"
+            "∀x,y,(Orchestra(x) ∧ Lead(y, x) → Conductor(y))"
         ],
         "conclusion": "Beethoven is not a conductor.",
         "conclusion-FOL": "¬Conductor(beethoven)",
