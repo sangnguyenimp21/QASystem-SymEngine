@@ -732,7 +732,7 @@ class Model(nn.Module):
         numbering: bool = True,
     ):
         n = header_len
-        print("\n" + "*" * n + f"\n\n  Welcome to the Symbolic Engine.\n")
+        print("\n ***  Welcome to the Symbolic Engine. *** \n")
         data_graph = self._traverse_execute_graph(
             "get_data_graph",
             Direction.DOWNWARD,
@@ -741,7 +741,7 @@ class Model(nn.Module):
             roundoff=roundoff,
             numbering=numbering,
         )
-        print("*" * n)
+        # print("*" * n)
 
         return data_graph
 

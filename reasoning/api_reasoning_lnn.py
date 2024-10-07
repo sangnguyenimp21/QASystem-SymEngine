@@ -110,6 +110,6 @@ class QuestionHandler:
 
 
 def lnn_infer_from_facts_rules(facts, rules, question: str, explain=False):
-    print_model = True
+    print_model = False
     handler = QuestionHandler(facts, rules)
     return handler.handle(question, explain, print_model)

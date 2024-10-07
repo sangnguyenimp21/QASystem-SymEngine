@@ -57,7 +57,7 @@ def process_json_elements(data, sample_size, output_file):
 
 
 def main_improve_reasoning():
-    file_test = "data/FOLIO/folio-validation.jsonl"
+    file_test = "data/FOLIO/folio-validation-facts-human.jsonl"
     path_output = "data/FOLIO/Inference_results.xlsx"
     sample_size = None
     data = load_json(file_test)
